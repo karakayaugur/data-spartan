@@ -9,8 +9,7 @@
 } @else if (film(); as selected) {
 <article>
   <header class="film-header">
-    <span class="eyebrow">EPISODE {{ selected.episodeId }}</span>
-    <h1>{{ selected.episodeId }} - {{ selected.title }}</h1>
+    <h1>{{ selected.title }}</h1>
     <p class="film-meta">
       {{ selected.releaseDate | date:'longDate' }} <span aria-hidden="true">·</span> Directed by {{
       selected.director }}
