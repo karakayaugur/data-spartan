@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "ts-cacheable": "^1.0.19"
+  }
+}

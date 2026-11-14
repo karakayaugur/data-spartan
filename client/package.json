@@ -26,6 +26,7 @@
     "ng2-charts": "^9.0.0",
     "open-props": "^1.7.23",
     "rxjs": "~7.8.0",
+    "ts-cacheable": "^1.0.19",
     "tslib": "^2.3.0",
     "typescript": "~5.9.2",
     "xlsx": "^0.18.5",
