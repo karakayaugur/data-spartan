@@ -1,0 +1,50 @@
+@if (mobile().matches && mobileOpen()) {
+  <div class="sidebar-backdrop" (click)="closeMenu.emit()" aria-hidden="true"></div>
+}
+@if (!mobile().matches || mobileOpen()) {
+  <aside class="sidebar" id="film-sidebar"
+    [attr.role]="mobile().matches ? 'dialog' : null"
+    [attr.aria-modal]="mobile().matches ? 'true' : null" aria-label="Film navigation"
+    [cdkTrapFocus]="mobile().matches" [cdkTrapFocusAutoCapture]="mobile().matches">
+    <div class="sidebar-header">
+      <a class="brand" routerLink="/dashboard" aria-label="DataSpartan home" (click)="closeMenu.emit()">
+        <img class="brand-logo" src="/assets/images/data-spartan-logo.png" alt="DataSpartan" width="1851" height="498">
+      </a>
+      @if (mobile().matches) {
+        <button class="sidebar-toggle close-button" type="button" aria-label="Close menu" (click)="closeMenu.emit()" cdkFocusInitial><svg lucideIcon="x" [size]="20" aria-hidden="true"></svg></button>
+      }
+    </div>
+    <div aria-live="polite">
+      @if (loading()) { <p class="nav-message" role="status">Loading films…</p> }
+      @if (failed()) {
+        <p class="nav-message" role="alert">We couldn't load the films.</p>
+        <button class="retry" type="button" (click)="retry.emit()">Try again</button>
+      }
+    </div>
+    <nav id="film-navigation" aria-label="Films">
+      <div class="nav-caption"><span>Films</span><span class="count-badge">{{ films().length }}</span></div>
+      @for (film of films(); track film.id) {
+        <div class="film-row" [class.active-row]="activeFilm.isActive">
+          <a class="film-link" [routerLink]="['/films', film.id]" routerLinkActive="active" #activeFilm="routerLinkActive" (click)="closeMenu.emit()"
+            [attr.aria-label]="film.title" [title]="film.title" ariaCurrentWhenActive="page">
+            <svg class="film-icon" lucideIcon="film" [size]="20" [strokeWidth]="1.75" aria-hidden="true"></svg>
+            <span class="film-title">{{ film.title }}</span>
+          </a>
+          <button class="viewing-button" type="button" (click)="openViewingLog(film)"
+            [attr.aria-label]="'Viewing log for ' + film.title + ', ' + viewingCount(film.id) + ' viewings'"
+            [title]="film.title + ' · Viewing log · ' + viewingCount(film.id) + ' viewings'" aria-haspopup="dialog">
+            <svg lucideIcon="clock" [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg>
+            @if (viewingCount(film.id) > 0) { <span class="viewing-badge" aria-hidden="true">{{ viewingCount(film.id) }}</span> }
+          </button>
+        </div>
+      } @empty {
+        @if (!loading() && !failed()) { <p class="nav-message">No films available.</p> }
+      }
+    </nav>
+    <div class="sidebar-footer">
+      <app-button label="Test HTTP error" variant="ghost" size="small" (clicked)="testHttpError()"></app-button>
+      <app-button label="Test client error" variant="ghost" size="small" (clicked)="testClientError()"></app-button>
+      <app-theme-toggle></app-theme-toggle>
+    </div>
+  </aside>
+}

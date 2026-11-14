@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.input-wrap {
+  align-items: flex-start;
+}
+
+.input-wrap .error-icon {
+  top: 0.75rem;
+}
+
+.char-counter {
+  display: block;
+  text-align: right;
+  font-size: 0.75rem;
+  color: var(--input-placeholder);
+  margin-top: 0.25rem;
+}
+
+.char-counter.at-limit {
+  color: var(--destructive-1);
+}

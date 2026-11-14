@@ -1,0 +1,99 @@
+<div class="input-container">
+  <label class="label" [for]="inputId()">
+    {{ label() }}
+    @if (required()) { <span class="required-indicator" aria-hidden="true">*</span> }
+  </label>
+  @if (open()) {
+    <button type="button" class="date-backdrop" aria-label="Close picker" (click)="close()"></button>
+  }
+  <div class="picker-wrap" [class.picker-wrap--open]="open()">
+    <button type="button" class="date-trigger" [class.input-invalid]="error()" [id]="inputId()"
+      [attr.aria-expanded]="open()" [attr.aria-controls]="open() ? inputId() + '-picker' : null"
+      [attr.aria-invalid]="!!error()" [attr.aria-describedby]="error() ? inputId() + '-error' : null"
+      aria-haspopup="dialog" (click)="toggle($event)">
+      @if (displayValue()) { <span class="date-value">{{ displayValue() }}</span> }
+      @else { <span class="date-placeholder">{{ type() === 'time' ? 'hh : mm' : 'dd / mm / yyyy' }}</span> }
+      <svg class="date-icon" [lucideIcon]="type() === 'time' ? 'clock' : 'calendar'" [size]="18" [strokeWidth]="1.75" aria-hidden="true"></svg>
+    </button>
+    @if (open()) {
+      <div class="date-dropdown" [class.time-dropdown]="type() === 'time'" role="dialog"
+        [id]="inputId() + '-picker'" [attr.aria-label]="type() === 'time' ? 'Choose time' : 'Choose date'">
+        @if (type() === 'time') {
+          <div class="time-columns">
+            <div class="time-column">
+              <h3 [id]="inputId() + '-hours'">Hour</h3>
+              <div class="time-options" role="group" [attr.aria-labelledby]="inputId() + '-hours'">
+                @for (hour of hours; track hour) {
+                  <button type="button" class="time-option" [class.selected]="selectedHour() === hour"
+                    [attr.aria-pressed]="selectedHour() === hour" (click)="selectTime('hour', hour)">{{ hour }}</button>
+                }
+              </div>
+            </div>
+            <div class="time-column">
+              <h3 [id]="inputId() + '-minutes'">Minute</h3>
+              <div class="time-options" role="group" [attr.aria-labelledby]="inputId() + '-minutes'">
+                @for (minute of minutes; track minute) {
+                  <button type="button" class="time-option" [class.selected]="selectedMinute() === minute"
+                    [attr.aria-pressed]="selectedMinute() === minute" (click)="selectTime('minute', minute)">{{ minute }}</button>
+                }
+              </div>
+            </div>
+          </div>
+        } @else {
+        <div class="calendar-header">
+          <select
+            class="month-select"
+            [value]="viewMonth()"
+            aria-label="Month"
+            (change)="onMonthChange($event)"
+          >
+            @for (month of months; track month; let index = $index) {
+              <option [value]="index">{{ month }}</option>
+            }
+          </select>
+
+          <select
+            class="year-select"
+            [value]="viewYear()"
+            aria-label="Year"
+            (change)="onYearChange($event)"
+          >
+            @for (year of years(); track year) {
+              <option [value]="year">{{ year }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="weekdays" aria-hidden="true">
+          @for (weekday of weekdays; track weekday) {
+            <span class="weekday">{{ weekday }}</span>
+          }
+        </div>
+
+        <div class="days" role="grid">
+          @for (day of calendarDays(); track day.iso) {
+            <button
+              type="button"
+              class="day"
+              role="gridcell"
+              [class.day--muted]="!day.inMonth"
+              [class.day--selected]="isSelected(day)"
+              [class.day--today]="isToday(day)"
+              (click)="selectDay(day)"
+            >
+              {{ day.date.getDate() }}
+            </button>
+          }
+        </div>
+        }
+      </div>
+    }
+  </div>
+  @if (error()) {
+    <div class="feedback">
+      <svg class="error-icon" lucideIcon="x" [size]="16" [strokeWidth]="2" aria-hidden="true"></svg>
+      <p role="alert" [id]="inputId() + '-error'">{{ error() }}</p>
+    </div>
+  }
+  <input type="hidden" [name]="name()" [value]="value()">
+</div>

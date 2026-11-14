@@ -1,0 +1,12 @@
+node_modules/
+client/dist/
+client/.angular/
+client/out-tsc/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+.idea/
+.vscode/

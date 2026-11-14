@@ -1,0 +1,23 @@
+button svg {
+  flex-shrink: 0;
+}
+
+.label {
+  line-height: 1;
+}
+
+.spinner {
+  animation: button-spinner 0.8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 1.6s;
+  }
+}
+
+@keyframes button-spinner {
+  to {
+    transform: rotate(1turn);
+  }
+}

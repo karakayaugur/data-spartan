@@ -1,0 +1,42 @@
+<div class="input-container">
+  <label class="label" [for]="inputId()"
+    >{{ label() }}
+    @if (required()) {
+      <span class="required-indicator">*</span>
+    }
+  </label>
+  <div class="input-wrap">
+    <input
+      [class.input-invalid]="hasError() || error()"
+      type="text"
+      [id]="inputId()"
+      [name]="name()"
+      [value]="value()"
+      [placeholder]="placeholder()"
+      [readonly]="readonly()"
+      [autocomplete]="autocomplete()"
+      (input)="onInput($event)"
+    />
+    @if (error()) {
+      <svg
+        class="error-icon"
+        lucideIcon="circle-alert"
+        [size]="20"
+        [strokeWidth]="2"
+        aria-hidden="true"
+      ></svg>
+    }
+  </div>
+  @if (error()) {
+    <div class="feedback">
+      <svg
+        class="error-icon"
+        lucideIcon="x"
+        [size]="16"
+        [strokeWidth]="2"
+        aria-hidden="true"
+      ></svg>
+      <p role="alert">{{ error() }}</p>
+    </div>
+  }
+</div>

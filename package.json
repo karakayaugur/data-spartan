@@ -1,0 +1,31 @@
+{
+  "name": "data-spartan",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Data Spartan \u2014 Angular client + Express BFF",
+  "scripts": {
+    "dev": "concurrently -k \"nodemon\" \"npm run watch:client\"",
+    "watch:client": "npm --prefix client run watch",
+    "build": "NODE_ENV=production npm --prefix client run build",
+    "install-packages": "npm ci && npm --prefix client ci && npm --prefix server ci",
+    "start": "node server/index.js",
+    "debug": "concurrently -k \"node --inspect server/index.js\" \"npm run watch:client\"",
+    "test": "npm --prefix client test -- --watch=false --browsers=ChromeHeadless",
+    "test:server": "npm --prefix server test"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.4.7",
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "@auth0/angular-jwt": "^5.2.0"
+  },
+  "volta": {
+    "node": "24.18.0"
+  },
+  "private": true
+}

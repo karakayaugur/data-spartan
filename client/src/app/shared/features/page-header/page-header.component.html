@@ -1,0 +1,51 @@
+<header class="page-header">
+  <div class="header-row">
+    <div class="title-group">
+      <div class="title-row">
+        <h2>{{ title() }}</h2>
+        <!-- @if (description()) {
+          /
+          <p>{{ description() }}</p>
+        } -->
+      </div>
+      @if (breadcrumbs().length > 0) {
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          @for (crumb of breadcrumbs(); track crumb.url) {
+            <a [routerLink]="crumb.url" class="crumb">
+              @if (crumb.icon) {
+                <svg
+                  [lucideIcon]="crumb.icon"
+                  [size]="12"
+                  [strokeWidth]="1.5"
+                  aria-hidden="true"
+                ></svg>
+              }
+              {{ crumb.label }}
+            </a>
+            <svg
+              class="separator"
+              lucideIcon="chevron-right"
+              [size]="12"
+              [strokeWidth]="2"
+              aria-hidden="true"
+            ></svg>
+          }
+          <span class="crumb current">
+            @if (icon()) {
+              <svg
+                [lucideIcon]="icon()"
+                [size]="12"
+                [strokeWidth]="1.5"
+                aria-hidden="true"
+              ></svg>
+            }
+            {{ title() }}
+          </span>
+        </nav>
+      }
+    </div>
+    <div class="actions">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</header>

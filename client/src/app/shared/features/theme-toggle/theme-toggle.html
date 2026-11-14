@@ -1,0 +1,26 @@
+<div
+  class="theme-segmented"
+  role="group"
+  aria-label="Appearance"
+>
+  <button
+    type="button"
+    class="theme-option"
+    [class.active]="isLight()"
+    [attr.aria-pressed]="isLight()"
+    (click)="setTheme('light', $event)"
+  >
+    <svg lucideIcon="sun" [size]="14" [strokeWidth]="2" aria-hidden="true"></svg>
+    <span>Light</span>
+  </button>
+  <button
+    type="button"
+    class="theme-option"
+    [class.active]="isDark()"
+    [attr.aria-pressed]="isDark()"
+    (click)="setTheme('dark', $event)"
+  >
+    <svg lucideIcon="moon" [size]="14" [strokeWidth]="2" aria-hidden="true"></svg>
+    <span>Dark</span>
+  </button>
+</div>

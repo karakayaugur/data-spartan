@@ -1,0 +1,21 @@
+<header class="dialog-header"><div><h2 id="viewing-title">{{ film.title }}</h2></div><app-button-icon class="close" icon="x" ariaLabel="Close viewing log" size="small" (clicked)="ref.close()"></app-button-icon></header>
+<p class="note">Record when you watched this film. Records are kept for this browser tab’s session, including page reloads.</p>
+<form class="form" (submit)="onSubmit(); $event.preventDefault()" novalidate>
+  <div class="date-time">
+    <app-input-date inputId="viewing-date" label="Date" type="date" [(value)]="form.date"></app-input-date>
+    <app-input-date inputId="viewing-time" name="time" label="Time" type="time" [(value)]="form.time"></app-input-date>
+  </div>
+  <app-input-textarea inputId="viewing-description" label="Description" [required]="false" [rows]="2" [(value)]="form.description"></app-input-textarea>
+  <button class="add" type="submit">Add viewing</button>
+</form>
+<section aria-labelledby="history-title">
+  <h3 id="history-title">Recorded viewings ({{ viewings().length }})</h3>
+  <div aria-live="polite">
+    @for (viewing of viewings(); track viewing.id) {
+      <article class="viewing">
+        <div class="viewing-copy"><time [attr.datetime]="viewing.date + 'T' + viewing.time">{{ viewing.date }} · {{ viewing.time }}</time>@if (viewing.description) { <p>{{ viewing.description }}</p> }</div>
+        <app-button class="delete" label="Delete" icon="trash-2" variant="danger" size="small" [ariaLabel]="'Delete viewing on ' + viewing.date + ' at ' + viewing.time" (clicked)="remove(viewing.id)"></app-button>
+      </article>
+    } @empty { <p class="empty">No viewings recorded yet.</p> }
+  </div>
+</section>

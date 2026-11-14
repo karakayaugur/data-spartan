@@ -1,0 +1,35 @@
+<button
+  [attr.type]="type()"
+  [attr.aria-label]="ariaLabel()"
+  [attr.data-variant]="variant()"
+  [attr.data-size]="size()"
+  [attr.data-loading]="loading() ? true : null"
+  [disabled]="loading() || disabled()"
+  (click)="onClick()"
+>
+  @if (loading()) {
+    <svg
+      class="spinner"
+      lucideIcon="loader-circle"
+      [size]="iconSize"
+      [strokeWidth]="2"
+      aria-hidden="true"
+    ></svg>
+  } @else if (icon() && iconPosition() === "start") {
+    <svg
+      [lucideIcon]="icon()!"
+      [size]="iconSize"
+      [strokeWidth]="2"
+      aria-hidden="true"
+    ></svg>
+  }
+  <span class="label">{{ displayLabel() }}</span>
+  @if (!loading() && icon() && iconPosition() === "end") {
+    <svg
+      [lucideIcon]="icon()!"
+      [size]="iconSize"
+      [strokeWidth]="2"
+      aria-hidden="true"
+    ></svg>
+  }
+</button>

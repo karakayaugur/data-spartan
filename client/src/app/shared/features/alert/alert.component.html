@@ -1,0 +1,49 @@
+@if (isRootContainer()) {
+  <div class="popup-container">
+    @for (notice of popupNotices(); track notice.id) {
+      <div
+        class="alert-box"
+        [attr.data-type]="notice.type"
+        [class.slide-out]="notice.isClosing"
+        role="alert"
+        aria-live="assertive"
+      >
+        <div class="progress-bar"></div>
+        <div class="alert-content">
+          <span class="alert-icon" [attr.data-type]="notice.type">
+            <svg
+              [lucideIcon]="getIcon(notice.type)"
+              [size]="18"
+              [strokeWidth]="2"
+              aria-hidden="true"
+            ></svg>
+          </span>
+          <p class="alert-message">{{ truncateMessage(notice.message) }}</p>
+        </div>
+      </div>
+    }
+  </div>
+} @else if (scope()) {
+  <div class="inline-container">
+    @for (notice of inlineNotices(); track notice.id) {
+      <div
+        class="alert-box inline-box"
+        [attr.data-type]="notice.type"
+        [class.slide-out]="notice.isClosing"
+        role="alert"
+      >
+        <div class="alert-content">
+          <span class="alert-icon" [attr.data-type]="notice.type">
+            <svg
+              [lucideIcon]="getIcon(notice.type)"
+              [size]="18"
+              [strokeWidth]="2"
+              aria-hidden="true"
+            ></svg>
+          </span>
+          <p class="alert-message">{{ truncateMessage(notice.message) }}</p>
+        </div>
+      </div>
+    }
+  </div>
+}

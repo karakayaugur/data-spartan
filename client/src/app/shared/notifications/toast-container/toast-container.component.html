@@ -1,0 +1,12 @@
+<section class="toast-stack" aria-label="Notifications">
+  @for (toast of service.notifications(); track toast.id) {
+    <div class="toast" [attr.data-variant]="toast.variant" [attr.role]="toast.variant === 'error' ? 'alert' : 'status'">
+      <svg class="toast-icon" [lucideIcon]="icons[toast.variant]" [size]="20" aria-hidden="true"></svg>
+      <div class="toast-content">
+        @if (toast.title) { <p class="toast-title">{{ toast.title }}</p> }
+        <p class="toast-message">{{ toast.message }}</p>
+      </div>
+      <app-button-icon class="toast-close" icon="x" size="small" ariaLabel="Dismiss notification" (clicked)="service.dismiss(toast.id)"></app-button-icon>
+    </div>
+  }
+</section>

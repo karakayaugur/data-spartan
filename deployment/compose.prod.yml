@@ -1,0 +1,17 @@
+name: data-spartan
+services:
+  app:
+    build:
+      context: ..
+    restart: unless-stopped
+    init: true
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: "3001"
+      SWAPI_BASE_URL: ${SWAPI_BASE_URL:-https://swapi.dev/api/}
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3001/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
