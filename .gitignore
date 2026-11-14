@@ -10,3 +10,13 @@ coverage/
 .DS_Store
 .idea/
 .vscode/
+
+# Additional generated Angular files
+/dist/
+/out-tsc/
+/tmp/
+/e2e/test-output/
+.angular/
+/.angular-cli.json
+/.ng/
+*.tsbuildinfo
