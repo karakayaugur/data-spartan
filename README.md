@@ -1,25 +1,25 @@
 # Data Spartan
 
-`fe-berlin-admin` yapısı temel alınarak oluşturulmuş Angular 20 + Express 5 başlangıç projesi. Node.js 24 kullanılır; kaynak projenin paket sürümleri ve kilit dosyaları korunmuştur.
+An Angular 20 + Express 5 project based on the structure of `fe-berlin-admin`. It uses Node.js 24 and retains the original project's package versions and lockfiles.
 
 ```text
 client/
   src/app/
-    core/        # HTTP, interceptor, guard, servis ve signal store katmanları
-    shared/      # Ortak UI, filtre, tablo, pipe, directive ve validator'lar
-    layouts/     # app ve overlay yerleşimleri
-    pages/       # Route üzerinden yüklenen sayfalar
-  src/assets/    # Font, ikon, görsel, i18n ve stil sistemi
-  public/        # Statik genel dosyalar
+    core/        # HTTP services, interceptors, guards, services, and signal stores
+    shared/      # Reusable UI, filters, tables, pipes, directives, and validators
+    layouts/     # Application and overlay layouts
+    pages/       # Routed pages
+  src/assets/    # Fonts, icons, images, translations, and styles
+  public/        # Public static files
 server/
-  index.js       # Express, Helmet, health ve SPA sunumu
-  routes/        # API proxy ve istemci hata raporu
+  index.js       # Express, Helmet, health checks, and SPA hosting
+  routes/        # BFF endpoints and client error reporting
   lib/           # HTTP logger
- deployment/     # Docker Compose
- docs/           # Mimari notları
+deployment/      # Docker Compose configuration
+docs/            # Architecture notes
 ```
 
-## Geliştirme
+## Development
 
 ```sh
 npm run install-packages
@@ -27,11 +27,11 @@ cp .env.example .env
 npm run dev
 ```
 
-İstemci: http://localhost:4201 — Express: http://localhost:3001
+Client: http://localhost:4200 — Express: http://localhost:3000
 
-`/proxyUrl` istekleri Angular geliştirme sunucusundan Express BFF'e aktarılır. Express, `SWAPI_BASE_URL` değerini kullanır; varsayılan `https://swapi.dev/api/` adresidir. Angular dış API'ye doğrudan erişmez. BFF uçları ve cevap sözleşmeleri için `docs/bff.md` dosyasına bakın.
+The Angular development server forwards `/proxyUrl` requests to the Express BFF. Express uses `SWAPI_BASE_URL`, which defaults to `https://swapi.dev/api/`. Angular does not access the external API directly. See `docs/bff.md` for the BFF endpoints and response contracts.
 
-## Doğrulama ve üretim
+## Validation and production
 
 ```sh
 npm run build
@@ -40,24 +40,26 @@ npm run test:server
 npm start
 ```
 
-`npm test` için Chrome/Chromium gerekir. `npm start`, derlenmiş istemciyi 3001 portunda sunar. `/health` sağlık kontrolüdür. Docker için `make build` ve `make run` kullanılır. Compose API adresi `SWAPI_BASE_URL` ortam değişkeninden alınır.
+`npm test` requires Chrome or Chromium. `npm start` serves the compiled client on port 3000. The health check is available at `/health`. For Docker, use `make build` and `make run`. Docker Compose reads the upstream API address from the `SWAPI_BASE_URL` environment variable.
 
-## Kaynaktan taşınan yapı
+## Project foundations
 
-Katmanlar, TypeScript alias'ları (`@core`, `@shared`, `@app`), ayrı HTML/CSS dosyaları, signal tabanlı UI, tema/dil store'ları, stil token'ları, ortak bileşenler ve BFF düzeni korunmuştur. Form kuralları `.instructions.md` dosyasındadır.
+The project retains the original layered architecture, TypeScript aliases (`@core`, `@shared`, `@app`), separate HTML and CSS files, signal-based UI, theme and locale stores, style tokens, shared components, and BFF structure. Form conventions are documented in `.instructions.md`.
 
-Bu bir temiz başlangıçtır. Berlin'in ödeme/banka/merchant ekranları, bunlara özel API servisleri ve API'ye bağlı seçim bileşenleri taşınmadı. Kimlik doğrulama henüz uygulanmadığı için dashboard açıktır; auth guard ve interceptor eklemek için `core/guards` ve `core/http` katmanları hazırdır. Berlin `.env`, Git geçmişi, agent/editor ayarları ve canlı AWS dağıtım hedefleri kopyalanmadı. AWS yerine yerel Docker Compose tanımı eklendi.
+This project started as a clean foundation. Berlin's payment, banking, and merchant screens, their API services, and API-specific selection components were not copied. Authentication has not been implemented, so the dashboard is publicly accessible. Authentication guards and HTTP interceptors can be added through the core layers. Berlin's `.env`, Git history, agent/editor settings, and production AWS deployment targets were not copied. Local Docker Compose configuration is provided instead.
 
-## Film ekranı ve izleme geçmişi
+## Film browsing and viewing history
 
-Sol menüde film listesi ve her film için ayrı `Viewing log` düğmesi bulunur. Film seçildiğinde üstte film adı ve açılış metni, altta solda kadro listesi ve sağda seçilen karakterin bilgileri gösterilir. Küçük ekranlarda kadro ve karakter paneli alt alta yerleşir. Sidebar ayrı `layouts/app/sidebar` bileşenindedir. KISS admin örneğindeki gibi 640px ve altında hamburger düğmesinden açılan sol panel, karartılmış arka plan ve kapatma düğmesi kullanılır; Escape, film seçimi ve masaüstüne geçiş menüyü kapatır. Mobil menü açıkken klavye odağı panelde tutulur.
+The sidebar lists films and provides a separate viewing history action for each film. Selecting a film displays its title and opening crawl above the cast list. The selected character's details appear beside the cast list. On smaller screens, the cast and character panels are stacked vertically.
 
-İzleme geçmişi modalında tarih ve saat zorunlu, açıklama isteğe bağlıdır. Aynı filme birden fazla kayıt eklenebilir; kayıtlar modal yeniden açıldığında listelenir ve tek tek silinebilir. Her filmin kayıtları ayrıdır. Kayıtlar `data-spartan.films` anahtarı altında film listesiyle birlikte `sessionStorage` içinde tutulur; sayfa yenilenince geri yüklenir. Sekme oturumu sona erdiğinde silinir ve BFF'e gönderilmez.
+The sidebar is a separate component under `layouts/app/sidebar`. It has a fixed width of 256px on desktop, with no collapse or icon-rail mode. At widths of 640px and below, a hamburger button opens a full-width mobile panel. The close button, Escape key, film selection, or switching to desktop closes the panel. Keyboard focus stays inside the mobile panel while it is open. Film navigation, viewing history actions, and theme controls share the same sidebar component. The visual reference is implemented with Angular and CSS; React and Tailwind are not used.
 
-SWAPI robotlar için ayrı üretim yılı sağlamadığından `birth_year` alanı üretim yılı olarak gösterilir. Tür bağlantısı olmayan karakterlerde tür/sınıflandırma `Unknown` gösterilir; eksik veri tahmin edilmez. PDF çizimlerindeki temel yerleşim korunurken mevcut projenin tema ve stil token'ları kullanılır.
+The viewing history modal requires a date and time; the description is optional. Multiple entries can be added for the same film, listed when the modal is reopened, and deleted individually. Each film has its own history. Entries are stored together with the film list in `sessionStorage` under the `data-spartan.films` key and restored after a page reload. They last for the browser tab's session and are not sent to the BFF.
 
-## Film state yönetimi
+SWAPI does not provide a separate manufacturing year for robots, so `birth_year` is displayed as the manufacturing year. Characters without species links display `Unknown` for species and classification; missing data is not inferred. The layout follows the exercise's wireframes while using the project's theme and style tokens.
 
-Örnek projenin AuthStore düzeni izlenir: `core/store/films/films.store.ts` signal state'i, `setState` / `patchState` / `clearState` işlemlerini ve sessionStorage senkronizasyonunu yönetir. `films.services.ts` içindeki `FilmsService`, film listesi ve izleme geçmişini okuma/güncelleme metotlarını sunar. Film listesi ilk HTTP cevabında store'a yazılır; modal kayıtları aynı state'in `viewings[filmId]` alanında güncellenir. Store değişiklikleri `effect` ile kaydedilir. Film listesi yenilenirken izleme kayıtları korunur.
+## Film state management
 
-Sidebar, güncel görsel referansın Angular/CSS uyarlamasıdır: masaüstünde sabit 256px genişlikte gösterilir; daraltma veya ikon şeridi modu yoktur. Mobilde tam genişlikte açılan panel, kapatma düğmesi, Escape ve film seçimiyle kapanır. Film listesi, izleme geçmişi ve tema kontrolü ortak sidebar bileşeninde korunur. React/Tailwind eklenmez.
+State management follows the reference project's AuthStore pattern. `core/store/films/films.store.ts` manages signal state, the `setState` / `patchState` / `clearState` operations, and synchronization with `sessionStorage`.
+
+`FilmsService` in `films.services.ts` provides methods to read and update the film list and viewing history. The initial HTTP response populates the film list in the store. Modal entries update the same state's `viewings[filmId]` field. An `effect` persists state changes, and refreshing the film list preserves viewing history.

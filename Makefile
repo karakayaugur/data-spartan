@@ -8,4 +8,4 @@ stop:
 logs:
 	docker compose -f deployment/compose.prod.yml logs -f
 health:
-	curl --fail http://localhost:3001/health
+	curl --fail http://localhost:3000/health

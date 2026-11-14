@@ -10,8 +10,8 @@ RUN npm run build
 FROM node:24-alpine
 WORKDIR /app
 ENV NODE_ENV=production
-ENV PORT=3001
+ENV PORT=3000
 COPY --from=build /app/server ./server
 COPY --from=build /app/client/dist ./client/dist
-EXPOSE 3001
+EXPOSE 3000
 CMD ["node", "server/index.js"]
