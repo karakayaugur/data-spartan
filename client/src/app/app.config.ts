@@ -1,18 +1,15 @@
+import { FilmLoaderService } from "@core/services/film-loader.service";
 import { provideHttpClient, withInterceptors } from "@angular/common/http";
 import {
   ApplicationConfig,
+  inject,
+  provideAppInitializer,
   ErrorHandler,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
-  LOCALE_ID,
 } from "@angular/core";
 import { provideRouter, withComponentInputBinding, withRouterConfig } from "@angular/router";
-import localeEn from "@angular/common/locales/en";
-import localeTr from "@angular/common/locales/tr";
-import { registerLocaleData } from "@angular/common";
 
-registerLocaleData(localeEn);
-registerLocaleData(localeTr);
 import {
   LucideMenu,
   LucideArrowDown,
@@ -105,6 +102,7 @@ import { routes } from "./app.routes";
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAppInitializer(() => inject(FilmLoaderService).load()),
     provideHttpClient(withInterceptors([ErrorInterceptor])),
     provideBrowserGlobalErrorListeners(),
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
@@ -116,7 +114,6 @@ export const appConfig: ApplicationConfig = {
         paramsInheritanceStrategy: "always",
       }),
     ),
-    { provide: LOCALE_ID, useValue: "en-GB" },
     provideLucideIcons(
       LucideMenu,
       LucideLandmark,

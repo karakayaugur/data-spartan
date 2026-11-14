@@ -1,14 +1,5 @@
 <div class="capsule">
-  <app-sidebar
-    [films]="films()"
-    [viewings]="viewings()"
-    [loading]="loading()"
-    [failed]="failed()"
-    [mobileOpen]="nav.open()"
-    (closeMenu)="nav.close()"
-    (retry)="loadFilms()"
-    (viewingLog)="openViewingLog($event)"
-  ></app-sidebar>
+  <app-sidebar [mobileOpen]="nav.open()" (closeMenu)="nav.close()"></app-sidebar>
   <main class="main" id="main-content" [inert]="nav.open()">
     <app-button
       class="menu-toggle"

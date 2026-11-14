@@ -1,10 +1,6 @@
 @import url("./base/reset.css");
 @import url("./base/fonts.css");
-
 @import url("./tokens/token.css");
 @import url("./theme/theme.css");
-
 @import url("./base/typography.css");
-
 @import url("./components/card.css");
-@import url("./components/page.css");

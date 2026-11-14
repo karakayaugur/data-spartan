@@ -56,7 +56,7 @@ export class FilmDetail {
       });
   }
 
-  openViewingLog(): void {
+  openViewingModal(): void {
     const film = this.film();
     if (film) this.modal.open(ViewingLog, { data: film, ariaLabel: film.title });
   }

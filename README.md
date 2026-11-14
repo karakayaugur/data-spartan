@@ -9,7 +9,7 @@ client/
     shared/      # Reusable UI, filters, tables, pipes, directives, and validators
     layouts/     # Application and overlay layouts
     pages/       # Routed pages
-  src/assets/    # Fonts, icons, images, translations, and styles
+  src/assets/    # Fonts, icons, images, and styles
   public/        # Public static files
 server/
   index.js       # Express, Helmet, health checks, and SPA hosting
@@ -50,7 +50,7 @@ Run `npm run format` to format the project, or `npm run format:check` to check f
 
 ## Project foundations
 
-The project retains the original layered architecture, TypeScript aliases (`@core`, `@shared`, `@app`), separate HTML and CSS files, signal-based UI, theme and locale stores, style tokens, shared components, and BFF structure. Form conventions are documented in `.instructions.md`.
+The project retains the original layered architecture, TypeScript aliases (`@core`, `@shared`, `@app`), separate HTML and CSS files, signal-based UI, theme store, style tokens, shared components, and BFF structure. Form conventions are documented in `.instructions.md`.
 
 This project started as a clean foundation. Berlin's payment, banking, and merchant screens, their API services, and API-specific selection components were not copied. Authentication has not been implemented, so the dashboard is publicly accessible. Authentication guards and HTTP interceptors can be added through the core layers. Berlin's `.env`, Git history, agent/editor settings, and production AWS deployment targets were not copied. Local Docker Compose configuration is provided instead.
 

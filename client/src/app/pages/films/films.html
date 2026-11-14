@@ -1,0 +1,17 @@
+<section aria-labelledby="films-title">
+  <header>
+    <h1 id="films-title">Explore the films</h1>
+    <p>Choose a film to discover its story, meet the cast and record your viewings.</p>
+  </header>
+  <nav class="film-grid" aria-label="Choose a film">
+    @for (film of films(); track film.id) {
+    <a class="film-card" [routerLink]="['/films', film.id]">
+      <span class="episode">Episode {{ film.episodeId }}</span>
+      <h2>{{ film.title }}</h2>
+      <span class="release">{{ film.releaseDate.slice(0, 4) }}</span>
+    </a>
+    } @empty {
+    <p class="empty">No films available. Use the sidebar to retry loading the films.</p>
+    }
+  </nav>
+</section>

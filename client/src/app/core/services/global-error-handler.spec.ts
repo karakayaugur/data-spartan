@@ -32,7 +32,6 @@ describe("Global client error handling", () => {
 
   it("catches a real sidebar button error, shows a generic toast, and reports technical details", () => {
     const sidebar = TestBed.createComponent(Sidebar);
-    sidebar.componentRef.setInput("films", []);
     sidebar.detectChanges();
     const toast = TestBed.createComponent(ToastContainer);
     toast.detectChanges();

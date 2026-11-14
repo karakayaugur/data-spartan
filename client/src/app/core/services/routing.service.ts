@@ -13,7 +13,7 @@ export class AppRoutingService {
   private readonly APP_PREFIX = "Data Spartan";
 
   private readonly _returnUrl = signal<string>(
-    sessionStorage.getItem(this.STORAGE_KEY) ?? "/dashboard",
+    sessionStorage.getItem(this.STORAGE_KEY) ?? "/films",
   );
 
   public readonly returnUrl = this._returnUrl.asReadonly();
@@ -25,7 +25,7 @@ export class AppRoutingService {
 
   public clearReturnUrl(): void {
     sessionStorage.removeItem(this.STORAGE_KEY);
-    this._returnUrl.set("/dashboard");
+    this._returnUrl.set("/films");
   }
 
   public initTitleWatcher(): void {

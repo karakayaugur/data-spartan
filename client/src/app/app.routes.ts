@@ -2,11 +2,16 @@ import { Routes } from "@angular/router";
 import { AppLayout } from "./layouts/app/app-layout";
 
 export const routes: Routes = [
-  { path: "", pathMatch: "full", redirectTo: "dashboard" },
+  { path: "", pathMatch: "full", redirectTo: "films" },
   {
     path: "",
     component: AppLayout,
     children: [
+      {
+        path: "films",
+        title: "Films",
+        loadComponent: () => import("./pages/films/films").then((m) => m.Films),
+      },
       {
         path: "films/:id",
         title: "Film",
@@ -22,12 +27,7 @@ export const routes: Routes = [
         title: "Buttons",
         loadComponent: () => import("./pages/buttons/buttons").then((m) => m.Buttons),
       },
-      {
-        path: "dashboard",
-        title: "Dashboard",
-        loadComponent: () => import("./pages/dashboard/dashboard").then((m) => m.Dashboard),
-      },
     ],
   },
-  { path: "**", redirectTo: "dashboard" },
+  { path: "**", redirectTo: "films" },
 ];

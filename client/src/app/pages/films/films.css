@@ -1,0 +1,51 @@
+:host {
+  display: block;
+}
+h1 {
+  margin: 0 0 12px;
+  color: var(--text-0);
+  font-size: clamp(28px, 4vw, 40px);
+}
+header p {
+  margin: 0;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+.film-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: 16px;
+  margin-top: 32px;
+}
+.film-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  border: 1px solid var(--surface-2);
+  border-radius: var(--radius-6);
+  background: var(--surface-1);
+  text-decoration: none;
+}
+.film-card:hover {
+  border-color: var(--brand);
+}
+.film-card:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+h2 {
+  margin: 0;
+  color: var(--text-0);
+  font-size: 18px;
+  line-height: 1.5;
+}
+.episode,
+.release,
+.empty {
+  color: var(--text-2);
+  font-size: 13px;
+}
+.release {
+  margin-top: auto;
+}
