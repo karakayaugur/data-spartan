@@ -1,3 +1,4 @@
+import { DatePipe } from "@angular/common";
 import { ModalComponent } from "../modal/modal.component";
 import { InputTimeComponent } from "@shared/shared-ui";
 import { Component, computed, inject, signal, viewChildren } from "@angular/core";
@@ -18,6 +19,7 @@ const initialFormState = {
 @Component({
   selector: "app-viewing-log",
   imports: [
+    DatePipe,
     ModalComponent,
     InputDateComponent,
     InputTimeComponent,

@@ -6,9 +6,18 @@
   <nav class="film-grid" aria-label="Choose a film">
     @for (film of films(); track film.id) {
     <a class="film-card" [routerLink]="['/films', film.id]">
-      <span class="episode">Episode {{ film.episodeId }}</span>
+      <span class="film-icon" aria-hidden="true"
+        ><svg lucideIcon="film" [size]="20" [strokeWidth]="1.75"></svg
+      ></span>
       <h2>{{ film.title }}</h2>
-      <span class="release">{{ film.releaseDate.slice(0, 4) }}</span>
+      <app-badge
+        class="release"
+        [label]="(film.releaseDate | date: 'MMM d, yyyy') ?? ''"
+        variant="default"
+      ></app-badge>
+      <span class="film-action"
+        >Explore film <svg lucideIcon="chevron-right" [size]="12" aria-hidden="true"></svg
+      ></span>
     </a>
     } @empty {
     <p class="empty">No films available. Use the sidebar to retry loading the films.</p>

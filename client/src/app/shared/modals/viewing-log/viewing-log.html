@@ -29,7 +29,7 @@
       <article class="viewing">
         <div class="viewing-copy">
           <time [attr.datetime]="viewing.date + 'T' + viewing.time"
-            >{{ viewing.date }} · {{ viewing.time }}</time
+            >{{ viewing.date | date: "MMM d, yyyy" }}, {{ viewing.time }}</time
           >@if (viewing.description) {
           <p>{{ viewing.description }}</p>
           }
