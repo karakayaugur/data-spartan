@@ -1,39 +1,65 @@
 @if (loading()) {
-  <div class="status" role="status">Loading film and cast…</div>
+<div class="status" role="status">Loading film and cast…</div>
 } @else if (failed()) {
-  <div class="status" role="alert"><h1>Film unavailable</h1><p>We couldn't load this film. Please try again.</p><button type="button" class="retry" (click)="retry()">Try again</button></div>
+<div class="status" role="alert">
+  <h1>Film unavailable</h1>
+  <p>We couldn't load this film. Please try again.</p>
+  <button type="button" class="retry" (click)="retry()">Try again</button>
+</div>
 } @else if (film(); as selected) {
-  <article>
-    <header class="film-header">
-      <span class="eyebrow">EPISODE {{ selected.episodeId }}</span>
-      <h1>{{ selected.episodeId }} - {{ selected.title }}</h1>
-      <p class="film-meta">{{ selected.releaseDate | date:'longDate' }} <span aria-hidden="true">·</span> Directed by {{ selected.director }}</p>
-      <p class="viewing-count" aria-live="polite">Watched {{ viewingCount() }} {{ viewingCount() === 1 ? 'time' : 'times' }}</p>
-    </header>
-    <section class="story" aria-labelledby="story-title">
-      <h2 id="story-title">The opening story</h2>
-      <p class="crawl">{{ selected.openingCrawl }}</p>
-    </section>
-    <section class="cast" aria-labelledby="cast-title">
-      <div class="section-header"><h2 id="cast-title">Meet the cast</h2><span>{{ selected.cast.length }} characters</span></div>
-      <div class="cast-layout">
-        <nav class="cast-list" aria-label="Film cast">
-          @for (character of selected.cast; track character.id) {
-            <button class="character" type="button" (click)="openCharacter(character.id)"
-              [class.selected]="selectedCharacterId() === character.id"
-              [attr.aria-pressed]="selectedCharacterId() === character.id" aria-controls="character-details">
-              {{ character.name }}
-            </button>
-          } @empty { <p>No cast information available.</p> }
-        </nav>
-        <section id="character-details" class="character-details" aria-label="Character details">
-          @if (selectedCharacterId(); as id) {
-            <app-character-panel [characterId]="id"></app-character-panel>
-          } @else {
-            <p class="selection-hint">Select a cast member to see their details.</p>
-          }
-        </section>
-      </div>
-    </section>
-  </article>
+<article>
+  <header class="film-header">
+    <span class="eyebrow">EPISODE {{ selected.episodeId }}</span>
+    <h1>{{ selected.episodeId }} - {{ selected.title }}</h1>
+    <p class="film-meta">
+      {{ selected.releaseDate | date:'longDate' }} <span aria-hidden="true">·</span> Directed by {{
+      selected.director }}
+    </p>
+    <div class="viewing-count" aria-live="polite">
+      <app-button
+        [label]="'Watched ' + viewingCount() + (viewingCount() === 1 ? ' time' : ' times')"
+        variant="neutral"
+        size="small"
+        ariaHasPopup="dialog"
+        [ariaLabel]="'Open viewing log for ' + selected.title + ', watched ' + viewingCount() + ' times'"
+        (clicked)="openViewingLog()"
+      ></app-button>
+    </div>
+  </header>
+  <section class="story" aria-labelledby="story-title">
+    <h2 id="story-title">The opening story</h2>
+    <p class="crawl">{{ selected.openingCrawl }}</p>
+  </section>
+  <section class="cast" aria-labelledby="cast-title">
+    <div class="section-header">
+      <h2 id="cast-title">Meet the cast</h2>
+      <span>{{ selected.cast.length }} characters</span>
+    </div>
+    <div class="cast-layout">
+      <nav class="cast-list" aria-label="Film cast">
+        @for (character of selected.cast; track character.id) {
+        <button
+          class="character"
+          type="button"
+          (click)="openCharacter(character.id)"
+          [class.selected]="selectedCharacterId() === character.id"
+          [attr.aria-pressed]="selectedCharacterId() === character.id"
+          aria-controls="character-details"
+        >
+          {{ character.name }}
+        </button>
+        } @empty {
+        <p>No cast information available.</p>
+        }
+      </nav>
+      <section id="character-details" class="character-details" aria-label="Character details">
+        @if (selectedCharacterId(); as id) {
+        <app-character-panel [characterId]="id"></app-character-panel>
+        } @else {
+        <p class="selection-hint">Select a cast member to see their details.</p>
+        }
+      </section>
+    </div>
+  </section>
+</article>
 }

@@ -15,8 +15,6 @@
   overflow: hidden;
 }
 
-
-
 .sidebar-header {
   display: flex;
   flex-shrink: 0;
@@ -45,18 +43,6 @@
   height: auto;
 }
 
-.nav-caption {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: space-between;
-  height: 32px;
-  margin: 0 10px 12px;
-  color: var(--text-2);
-  font-size: 11px;
-  font-weight: 500;
-}
-
 nav {
   flex: 1;
   min-height: 0;
@@ -67,7 +53,8 @@ nav {
   scrollbar-color: transparent transparent;
 }
 
-nav:hover, nav:focus-within {
+nav:hover,
+nav:focus-within {
   scrollbar-color: var(--surface-4) transparent;
 }
 
@@ -105,7 +92,8 @@ nav:hover, nav:focus-within {
   line-height: 1.5;
 }
 
-.film-link:hover, .film-link.active {
+.film-link:hover,
+.film-link.active {
   color: var(--text-0);
 }
 
@@ -155,7 +143,8 @@ nav:hover, nav:focus-within {
   color: var(--text-1);
 }
 
-.brand:focus-visible, .film-link:focus-visible {
+.brand:focus-visible,
+.film-link:focus-visible {
   outline: 2px solid var(--brand);
   outline-offset: 2px;
 }
@@ -194,7 +183,6 @@ nav:hover, nav:focus-within {
   .film-link {
     padding-block: 12px;
   }
-
 }
 
 @keyframes sidebar-in {
@@ -218,7 +206,10 @@ nav:hover, nav:focus-within {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :host, .sidebar, .sidebar-backdrop, .film-row {
+  :host,
+  .sidebar,
+  .sidebar-backdrop,
+  .film-row {
     transition: none;
     animation: none;
   }

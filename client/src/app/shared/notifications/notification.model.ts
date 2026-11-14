@@ -1,4 +1,4 @@
-export type NotificationVariant = 'success' | 'error' | 'warning' | 'info';
+export type NotificationVariant = "success" | "error" | "warning" | "info";
 
 export interface NotificationOptions {
   title?: string;

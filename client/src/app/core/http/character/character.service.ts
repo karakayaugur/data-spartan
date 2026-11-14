@@ -6,5 +6,7 @@ import { Character } from "./character.interface";
 export class CharacterService {
   private readonly api = inject(ApiService);
 
-  getById(id: number) { return this.api.get<Character>(`characters/${id}`); }
+  getById(id: number) {
+    return this.api.get<Character>(`characters/${id}`);
+  }
 }

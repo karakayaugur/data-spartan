@@ -15,15 +15,19 @@ export class GlobalErrorHandler implements ErrorHandler {
 
     console.error("Unhandled client error", original);
     try {
-
-      // We can use sentry SDK or any other error reporting tool here to report the error to a server or a monitoring service. 
+      // We can use sentry SDK or any other error reporting tool here to report the error to a server or a monitoring service.
       // For now, we will just log the error and show a notification to the user.
       // We will check client error on aws cloudwatch.
 
       this.notificationService.error("Something went wrong. Please try again.");
       this.errorReporter.report({
         source: "client",
-        message: original instanceof Error ? original.message : typeof original === "string" ? original : "Unknown client error",
+        message:
+          original instanceof Error
+            ? original.message
+            : typeof original === "string"
+              ? original
+              : "Unknown client error",
         stack: original instanceof Error ? original.stack : undefined,
         url: window.location.href,
       });

@@ -8,9 +8,9 @@ import {
   input,
   model,
   signal,
-} from '@angular/core';
-import { LucideDynamicIcon } from '@lucide/angular';
-import { Validatable, VALIDATABLE } from '@shared/models/validatable.model';
+} from "@angular/core";
+import { LucideDynamicIcon } from "@lucide/angular";
+import { Validatable, VALIDATABLE } from "@shared/models/validatable.model";
 
 interface CalendarDay {
   date: Date;
@@ -19,43 +19,43 @@ interface CalendarDay {
 }
 
 const MONTHS = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 
-const WEEKDAYS = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+const WEEKDAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
 @Component({
-  selector: 'app-input-date',
+  selector: "app-input-date",
   standalone: true,
   imports: [LucideDynamicIcon, InputFeedbackComponent],
-  templateUrl: './input-date.component.html',
-  styleUrl: './input-date.component.css',
+  templateUrl: "./input-date.component.html",
+  styleUrl: "./input-date.component.css",
   providers: [{ provide: VALIDATABLE, useExisting: InputDateComponent }],
   host: {
-    '[class.open]': 'open()',
+    "[class.open]": "open()",
   },
 })
 export class InputDateComponent implements Validatable {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-  readonly value = model('');
+  readonly value = model("");
   readonly inputId = input.required<string>();
-  readonly name = input('date');
-  readonly label = input('Date');
+  readonly name = input("date");
+  readonly label = input("Date");
   readonly required = input(true);
 
-  readonly error = signal('');
+  readonly error = signal("");
   readonly open = signal(false);
   readonly viewMonth = signal(0);
   readonly viewYear = signal(new Date().getFullYear());
@@ -64,7 +64,7 @@ export class InputDateComponent implements Validatable {
   readonly weekdays = WEEKDAYS;
   readonly displayValue = computed(() => {
     const parsed = this.parseIsoDate(this.value());
-    return parsed ? this.formatDisplay(parsed) : '';
+    return parsed ? this.formatDisplay(parsed) : "";
   });
 
   readonly years = computed(() => {
@@ -109,23 +109,21 @@ export class InputDateComponent implements Validatable {
     return days;
   });
 
-  // --- VALIDATABLE ---
-
   validate(): boolean {
     const val = this.value();
 
     if (!val) {
-      this.error.set(this.required() ? 'Please fill this field.' : '');
+      this.error.set(this.required() ? "Please fill this field." : "");
       return !this.required();
     }
 
     const date = this.parseIsoDate(val);
     if (!date) {
-      this.error.set('Enter a valid date.');
+      this.error.set("Enter a valid date.");
       return false;
     }
 
-    this.error.set('');
+    this.error.set("");
     return true;
   }
 
@@ -147,7 +145,7 @@ export class InputDateComponent implements Validatable {
 
   close(): void {
     this.open.set(false);
-    this.elementRef.nativeElement.querySelector<HTMLButtonElement>('.date-trigger')?.focus();
+    this.elementRef.nativeElement.querySelector<HTMLButtonElement>(".date-trigger")?.focus();
   }
 
   onMonthChange(event: Event): void {
@@ -180,7 +178,7 @@ export class InputDateComponent implements Validatable {
     );
   }
 
-  @HostListener('document:click', ['$event'])
+  @HostListener("document:click", ["$event"])
   onDocumentClick(event: MouseEvent): void {
     if (!this.open()) {
       return;
@@ -191,14 +189,13 @@ export class InputDateComponent implements Validatable {
     }
   }
 
-  @HostListener('keydown.escape', ['$event'])
+  @HostListener("keydown.escape", ["$event"])
   onEscape(event: Event): void {
     if (this.open()) {
       event.stopPropagation();
       this.close();
     }
   }
-
 
   private syncViewToSelection(): void {
     const selected = this.parseIsoDate(this.value());
@@ -226,11 +223,7 @@ export class InputDateComponent implements Validatable {
     const day = Number(match[3]);
     const date = new Date(year, month - 1, day);
 
-    if (
-      date.getFullYear() !== year ||
-      date.getMonth() !== month - 1 ||
-      date.getDate() !== day
-    ) {
+    if (date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) {
       return null;
     }
 
@@ -239,14 +232,14 @@ export class InputDateComponent implements Validatable {
 
   private toIsoDate(date: Date): string {
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   }
 
   private formatDisplay(date: Date): string {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
     const year = date.getFullYear();
     return `${day} / ${month} / ${year}`;
   }

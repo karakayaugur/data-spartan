@@ -48,9 +48,7 @@ export class AlertService {
   }
 
   close(id: string) {
-    this.notices.update((list) =>
-      list.map((n) => (n.id === id ? { ...n, isClosing: true } : n)),
-    );
+    this.notices.update((list) => list.map((n) => (n.id === id ? { ...n, isClosing: true } : n)));
     setTimeout(() => {
       this.notices.update((list) => list.filter((n) => n.id !== id));
     }, 200);

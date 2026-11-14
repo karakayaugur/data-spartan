@@ -57,10 +57,7 @@ function shouldLog(req) {
 }
 
 function maskUrl(req) {
-  const url = new URL(
-    req.originalUrl,
-    `http://${req.headers.host ?? "localhost"}`,
-  );
+  const url = new URL(req.originalUrl, `http://${req.headers.host ?? "localhost"}`);
   const params = new URLSearchParams(url.searchParams);
   for (const key of params.keys()) {
     params.set(key, "***");
@@ -100,8 +97,7 @@ function formatRequestLog(req, res, responseTimeMs) {
 
 function log(message, meta = {}) {
   const time = new Date().toISOString();
-  const metaLine =
-    meta && Object.keys(meta).length ? ` ${JSON.stringify(mask(meta))}` : "";
+  const metaLine = meta && Object.keys(meta).length ? ` ${JSON.stringify(mask(meta))}` : "";
 
   console.log(`${color(ANSI.blue, time)} ${message}${metaLine}`);
 }

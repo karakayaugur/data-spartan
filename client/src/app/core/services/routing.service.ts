@@ -29,24 +29,21 @@ export class AppRoutingService {
   }
 
   public initTitleWatcher(): void {
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        let route = this.activatedRoute.root;
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+      let route = this.activatedRoute.root;
 
-        while (route.firstChild) {
-          route = route.firstChild;
-        }
+      while (route.firstChild) {
+        route = route.firstChild;
+      }
 
-        const pageTitle =
-          route.snapshot.data["title"] || route.snapshot.routeConfig?.title;
+      const pageTitle = route.snapshot.data["title"] || route.snapshot.routeConfig?.title;
 
-        if (pageTitle) {
-          this.titleService.setTitle(`${this.APP_PREFIX} | ${pageTitle}`);
-        } else {
-          this.titleService.setTitle(this.APP_PREFIX);
-        }
-      });
+      if (pageTitle) {
+        this.titleService.setTitle(`${this.APP_PREFIX} | ${pageTitle}`);
+      } else {
+        this.titleService.setTitle(this.APP_PREFIX);
+      }
+    });
   }
 
   public updateTitle(customTitle: string): void {

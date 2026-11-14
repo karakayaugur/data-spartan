@@ -16,8 +16,12 @@ describe("Global client error handling", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       rethrowApplicationErrors: false,
-      providers: [provideRouter([]), provideHttpClient(withInterceptors([ErrorInterceptor])), provideHttpClientTesting(),
-        { provide: ErrorHandler, useClass: GlobalErrorHandler }],
+      providers: [
+        provideRouter([]),
+        provideHttpClient(withInterceptors([ErrorInterceptor])),
+        provideHttpClientTesting(),
+        { provide: ErrorHandler, useClass: GlobalErrorHandler },
+      ],
     });
     backend = TestBed.inject(HttpTestingController);
     notifications = TestBed.inject(NotificationService);
@@ -32,11 +36,14 @@ describe("Global client error handling", () => {
     sidebar.detectChanges();
     const toast = TestBed.createComponent(ToastContainer);
     toast.detectChanges();
-    const button = Array.from(sidebar.nativeElement.querySelectorAll('app-button button') as NodeListOf<HTMLButtonElement>)
-      .find(button => button.textContent?.includes("Test client error"))!;
+    const button = Array.from(
+      sidebar.nativeElement.querySelectorAll("app-button button") as NodeListOf<HTMLButtonElement>,
+    ).find((button) => button.textContent?.includes("Test client error"))!;
     button.click();
     toast.detectChanges();
-    expect(toast.nativeElement.querySelector('[role=alert]').textContent).toContain("Something went wrong. Please try again.");
+    expect(toast.nativeElement.querySelector("[role=alert]").textContent).toContain(
+      "Something went wrong. Please try again.",
+    );
     expect(toast.nativeElement.textContent).not.toContain("This is a test client error.");
     const request = backend.expectOne("/proxyUrl/error");
     expect(request.request.method).toBe("POST");
@@ -59,7 +66,12 @@ describe("Global client error handling", () => {
     handler.handleError({ rejection: new HttpErrorResponse({ status: 500 }) });
     expect(notifications.notifications().length).toBe(0);
     backend.expectNone("/proxyUrl/error");
-    handler.handleError(new PromiseRejectionEvent("unhandledrejection", { promise: Promise.resolve(), reason: new Error("Promise failed") }));
+    handler.handleError(
+      new PromiseRejectionEvent("unhandledrejection", {
+        promise: Promise.resolve(),
+        reason: new Error("Promise failed"),
+      }),
+    );
     const request = backend.expectOne("/proxyUrl/error");
     expect(request.request.body.message).toBe("Promise failed");
     request.flush(null);

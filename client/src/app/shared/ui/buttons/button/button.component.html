@@ -23,20 +23,12 @@
       aria-hidden="true"
     ></svg>
   } @else if (icon() && (iconOnly() || iconPosition() === "start")) {
-    <svg
-      [lucideIcon]="icon()!"
-      [size]="iconSize"
-      [strokeWidth]="2"
-      aria-hidden="true"
-    ></svg>
+    <svg [lucideIcon]="icon()!" [size]="iconSize" [strokeWidth]="2" aria-hidden="true"></svg>
   }
-  @if (!iconOnly()) { <span class="label">{{ displayLabel() }}</span> }
+  @if (!iconOnly()) {
+    <span class="label">{{ displayLabel() }}</span>
+  }
   @if (!iconOnly() && !loading() && icon() && iconPosition() === "end") {
-    <svg
-      [lucideIcon]="icon()!"
-      [size]="iconSize"
-      [strokeWidth]="2"
-      aria-hidden="true"
-    ></svg>
+    <svg [lucideIcon]="icon()!" [size]="iconSize" [strokeWidth]="2" aria-hidden="true"></svg>
   }
 </button>

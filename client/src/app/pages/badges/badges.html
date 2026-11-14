@@ -1,7 +1,10 @@
 <section class="badges-page" aria-labelledby="badges-title">
   <header>
     <h1 id="badges-title">Badges</h1>
-    <p>Shared badge variants, status dots and circular counters. Use the sidebar switch to compare themes.</p>
+    <p>
+      Shared badge variants, status dots and circular counters. Use the sidebar switch to compare
+      themes.
+    </p>
   </header>
   <section class="badge-panel" aria-labelledby="source-title">
     <h2 id="source-title">Source</h2>
@@ -31,14 +34,23 @@
     </div>
   </section>
   @for (variant of variants; track variant) {
-    <section class="badge-panel" [attr.aria-labelledby]="'variant-' + variant">
-      <h2 [id]="'variant-' + variant">{{ variant }}</h2>
-      <div class="examples">
-        <div class="example"><span>Label</span><app-badge label="Active" [variant]="variant"></app-badge></div>
-        <div class="example"><span>Icon</span><app-badge label="Completed" icon="check" [variant]="variant"></app-badge></div>
-        <div class="example"><span>Status dot</span><app-badge label="Online" [dot]="true" [variant]="variant"></app-badge></div>
-        <div class="example"><span>Number</span><app-badge type="number" [value]="6" [variant]="variant"></app-badge></div>
+  <section class="badge-panel" [attr.aria-labelledby]="'variant-' + variant">
+    <h2 [id]="'variant-' + variant">{{ variant }}</h2>
+    <div class="examples">
+      <div class="example">
+        <span>Label</span><app-badge label="Active" [variant]="variant"></app-badge>
       </div>
-    </section>
+      <div class="example">
+        <span>Icon</span><app-badge label="Completed" icon="check" [variant]="variant"></app-badge>
+      </div>
+      <div class="example">
+        <span>Status dot</span
+        ><app-badge label="Online" [dot]="true" [variant]="variant"></app-badge>
+      </div>
+      <div class="example">
+        <span>Number</span><app-badge type="number" [value]="6" [variant]="variant"></app-badge>
+      </div>
+    </div>
+  </section>
   }
 </section>

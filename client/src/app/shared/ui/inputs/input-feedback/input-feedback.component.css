@@ -1,4 +1,6 @@
-:host { display: block; }
+:host {
+  display: block;
+}
 .feedback {
   display: flex;
   align-items: flex-start;
@@ -9,7 +11,7 @@
 p {
   margin: 0;
   color: inherit;
-  font-size: var(--font-size-00, .75rem);
+  font-size: var(--font-size-00, 0.75rem);
   font-weight: var(--font-weight-3);
   line-height: 16px;
 }

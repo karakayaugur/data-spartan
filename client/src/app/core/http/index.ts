@@ -1,8 +1,5 @@
 export { ApiService } from "./api";
-export type {
-  ApiQueryValue,
-  ApiRequestOptions,
-} from "./api";
+export type { ApiQueryValue, ApiRequestOptions } from "./api";
 export { FilmService } from "./film";
 export { CharacterService } from "./character";
 

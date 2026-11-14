@@ -1,24 +1,126 @@
-.eyebrow { color: var(--text-2); letter-spacing: 2px; font-size: 11px; }
-h1 { font-size: clamp(32px, 4vw, 48px); line-height: 1.2; font-weight: 600; letter-spacing: -1px; margin: 16px 0; }
-.film-meta { color: var(--text-2); font-size: 13px; line-height: 1.8; }
-.film-meta span { margin-inline: 8px; }
-h2 { font-size: 19px; font-weight: 600; }
-.story { margin-top: 36px; padding: 28px; background: var(--surface-1); border: 1px solid var(--surface-3); border-radius: var(--radius-5); }
-.crawl { white-space: pre-line; line-height: 1.9; color: var(--text-1); max-width: 65ch; margin-top: 20px; }
-.cast { margin-top: 40px; }
-.section-header { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 20px; }
-.section-header > span { font-size: 12px; color: var(--text-2); }
-.status { padding-block: 40px; line-height: 1.8; }
-.retry { width: auto; padding: 12px 20px; margin-top: 20px; background: var(--brand); color: var(--white); }
-@media (max-width: 480px) { .story { padding: 20px; } }
-.film-header { text-align: center; }
-.crawl { margin-inline: auto; text-align: center; }
-.cast-layout { display: grid; grid-template-columns: minmax(160px, 220px) minmax(0, 1fr); gap: 16px; padding: 16px; border: 1px solid var(--surface-3); border-radius: var(--radius-6); background: var(--surface-1); align-items: start; }
-.cast-list { max-height: 520px; overflow-y: auto; border: 1px solid var(--surface-3); border-radius: var(--radius-5); padding: 8px; }
-.character { justify-content: flex-start; padding: 12px; text-align: left; color: var(--text-0); background: transparent; font-size: 13px; }
-.character:hover, .character.selected { background: var(--surface-2); }
-.character-details { min-width: 0; }
-.selection-hint { padding: 32px; color: var(--text-2); line-height: 1.8; }
-@media (max-width: 600px) { .cast-layout { grid-template-columns: 1fr; padding: 12px; } .cast-list { max-height: 200px; } }
+.eyebrow {
+  color: var(--text-2);
+  letter-spacing: 2px;
+  font-size: 11px;
+}
+h1 {
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -1px;
+  margin: 16px 0;
+}
+.film-meta {
+  color: var(--text-2);
+  font-size: 13px;
+  line-height: 1.8;
+}
+.film-meta span {
+  margin-inline: 8px;
+}
+h2 {
+  font-size: 19px;
+  font-weight: 600;
+}
+.story {
+  margin-top: 36px;
+  padding: 28px;
+  background: var(--surface-1);
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius-5);
+}
+.crawl {
+  white-space: pre-line;
+  line-height: 1.9;
+  color: var(--text-1);
+  max-width: 65ch;
+  margin-top: 20px;
+}
+.cast {
+  margin-top: 40px;
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.section-header > span {
+  font-size: 12px;
+  color: var(--text-2);
+}
+.status {
+  padding-block: 40px;
+  line-height: 1.8;
+}
+.retry {
+  width: auto;
+  padding: 12px 20px;
+  margin-top: 20px;
+  background: var(--brand);
+  color: var(--white);
+}
+@media (max-width: 480px) {
+  .story {
+    padding: 20px;
+  }
+}
+.film-header {
+  text-align: center;
+}
+.crawl {
+  margin-inline: auto;
+  text-align: center;
+}
+.cast-layout {
+  display: grid;
+  grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius-6);
+  background: var(--surface-1);
+  align-items: start;
+}
+.cast-list {
+  max-height: 520px;
+  overflow-y: auto;
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius-5);
+  padding: 8px;
+}
+.character {
+  justify-content: flex-start;
+  padding: 12px;
+  text-align: left;
+  color: var(--text-0);
+  background: transparent;
+  font-size: 13px;
+}
+.character:hover,
+.character.selected {
+  background: var(--surface-2);
+}
+.character-details {
+  min-width: 0;
+}
+.selection-hint {
+  padding: 32px;
+  color: var(--text-2);
+  line-height: 1.8;
+}
+@media (max-width: 600px) {
+  .cast-layout {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+  .cast-list {
+    max-height: 200px;
+  }
+}
 
-.viewing-count { display: inline-block; margin-top: 16px; padding: 8px 14px; border-radius: var(--radius-4); background: var(--surface-2); color: var(--text-1); font-size: 13px; }
+.viewing-count {
+  display: inline-block;
+  margin-top: 16px;
+}

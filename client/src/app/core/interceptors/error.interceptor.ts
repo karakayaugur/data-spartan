@@ -9,10 +9,13 @@ export const ErrorInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error: unknown) => {
       if (error instanceof HttpErrorResponse) {
         const message: unknown = error.error?.message;
-        const fallback = error.status === 0
-          ? "Unable to reach the server. Please check your connection and try again."
-          : "Something went wrong. Please try again.";
-        notifications.error(typeof message === "string" && message.trim() ? message.trim() : fallback);
+        const fallback =
+          error.status === 0
+            ? "Unable to reach the server. Please check your connection and try again."
+            : "Something went wrong. Please try again.";
+        notifications.error(
+          typeof message === "string" && message.trim() ? message.trim() : fallback,
+        );
       }
       return throwError(() => error);
     }),

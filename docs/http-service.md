@@ -7,7 +7,10 @@ import { inject, Injectable } from "@angular/core";
 import { ApiService } from "@core/http";
 
 // Yalnızca kullanım örneği; gerçek Data Spartan endpoint'i değildir.
-interface Item { id: number; name: string; }
+interface Item {
+  id: number;
+  name: string;
+}
 
 @Injectable({ providedIn: "root" })
 export class ExampleService {

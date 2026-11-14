@@ -18,7 +18,7 @@
 }
 
 .required-indicator {
-  margin-left: .25rem;
+  margin-left: 0.25rem;
   color: var(--destructive-1);
   font-size: var(--font-size-0);
   font-weight: var(--font-weight-5);
@@ -32,7 +32,10 @@
   box-shadow: none;
   color: var(--text-1);
   font: inherit;
-  transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .time-input:hover:not(:focus):not(.input-invalid) {
@@ -52,7 +55,7 @@
 
 .time-input {
   height: 3rem;
-  padding: .5rem .875rem;
+  padding: 0.5rem 0.875rem;
   line-height: 1.25;
 }
 
@@ -102,7 +105,7 @@
 
 .time-toggle {
   position: absolute;
-  right: .875rem;
+  right: 0.875rem;
   display: grid;
   place-items: center;
   width: 18px;
@@ -115,19 +118,18 @@
   cursor: pointer;
 }
 
-
 .time-dropdown {
   position: absolute;
-  top: calc(100% + .375rem);
+  top: calc(100% + 0.375rem);
   right: 0;
   z-index: 2;
   width: 100%;
   min-width: 18.5rem;
   max-width: 22rem;
-  padding: .875rem;
+  padding: 0.875rem;
   background: var(--surface-1);
   border: var(--border-size-1) solid var(--surface-3);
-  border-radius: .75rem;
+  border-radius: 0.75rem;
   box-shadow: var(--elevation-3);
 }
 
@@ -168,22 +170,26 @@
   background: transparent;
   color: var(--text-1);
   font-family: var(--font-body);
-  font-size: .875rem;
+  font-size: 0.875rem;
   cursor: pointer;
-  transition: background-color .15s ease, color .15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .time-option:hover {
   background: var(--surface-2);
 }
 
-.time-option.selected, .time-option.selected:hover {
+.time-option.selected,
+.time-option.selected:hover {
   background: var(--brand);
   color: #fff;
   font-weight: 600;
 }
 
-.time-toggle:focus-visible, .time-option:focus-visible {
+.time-toggle:focus-visible,
+.time-option:focus-visible {
   outline: 2px solid var(--brand);
   outline-offset: 2px;
 }

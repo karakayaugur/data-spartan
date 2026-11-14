@@ -32,12 +32,7 @@
           }
           <span class="crumb current">
             @if (icon()) {
-              <svg
-                [lucideIcon]="icon()"
-                [size]="12"
-                [strokeWidth]="1.5"
-                aria-hidden="true"
-              ></svg>
+              <svg [lucideIcon]="icon()" [size]="12" [strokeWidth]="1.5" aria-hidden="true"></svg>
             }
             {{ title() }}
           </span>

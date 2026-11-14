@@ -11,5 +11,16 @@ import { BadgeComponent, BadgeVariant } from "@shared/shared-ui";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Badges {
-  readonly variants: BadgeVariant[] = ["default", "success", "error", "info", "primary", "danger", "warning", "primary-outline", "danger-outline", "warning-outline"];
+  readonly variants: BadgeVariant[] = [
+    "default",
+    "success",
+    "error",
+    "info",
+    "primary",
+    "danger",
+    "warning",
+    "primary-outline",
+    "danger-outline",
+    "warning-outline",
+  ];
 }

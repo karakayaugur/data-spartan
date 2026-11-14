@@ -1,9 +1,11 @@
-
 :host {
   --field-bg: light-dark(#fff, rgb(255 255 255 / 5%));
 }
 
-.input-container { display: flex; flex-direction: column; }
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
 .label {
   position: relative;
   margin-bottom: var(--size-2);
@@ -14,7 +16,7 @@
   text-align: left;
 }
 .required-indicator {
-  margin-left: .25rem;
+  margin-left: 0.25rem;
   color: var(--destructive-1);
   font-size: var(--font-size-0);
   font-weight: var(--font-weight-5);
@@ -28,9 +30,14 @@
   box-shadow: none;
   color: var(--text-1);
   font: inherit;
-  transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
-.date-trigger:hover:not(:focus):not(.input-invalid) { border-color: var(--input-border-hover, var(--text-2)); }
+.date-trigger:hover:not(:focus):not(.input-invalid) {
+  border-color: var(--input-border-hover, var(--text-2));
+}
 .date-trigger:focus {
   outline: none;
   border-color: var(--input-border-focus, var(--brand));
@@ -41,7 +48,11 @@
   box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive-1) 18%, transparent);
 }
 
-.date-trigger { height: 3rem; padding: .5rem .875rem; line-height: 1.25; }
+.date-trigger {
+  height: 3rem;
+  padding: 0.5rem 0.875rem;
+  line-height: 1.25;
+}
 
 :host {
   display: block;
@@ -195,5 +206,10 @@
   font-weight: 600;
 }
 
-.day--selected:hover { background: var(--brand); }
-.day:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.day--selected:hover {
+  background: var(--brand);
+}
+.day:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}

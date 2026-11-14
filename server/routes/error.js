@@ -1,25 +1,23 @@
-import { logger } from '../lib/logger.js';
+import { logger } from "../lib/logger.js";
 
 export default function errorRoute(req, res) {
-  if (req.method !== 'POST') {
+  if (req.method !== "POST") {
     return res.status(405).json({
-      status: 'error',
-      message: 'Method not allowed',
+      status: "error",
+      message: "Method not allowed",
     });
   }
 
   const body = req.body ?? {};
   const message =
-    typeof body.message === 'string' && body.message.trim()
-      ? body.message
-      : 'Unknown client error';
+    typeof body.message === "string" && body.message.trim() ? body.message : "Unknown client error";
 
-  logger('Client error report', {
+  logger("Client error report", {
     source: body.source,
     status: body.status,
     url: body.url,
     stack: body.stack,
-    userAgent: req.get('user-agent'),
+    userAgent: req.get("user-agent"),
     clientMessage: message,
   });
 

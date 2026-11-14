@@ -20,16 +20,36 @@ export class CharacterPanel {
   readonly failed = signal(false);
 
   constructor() {
-    combineLatest([toObservable(this.characterId), this.reload.pipe(startWith(undefined))]).pipe(
-      tap(() => { this.loading.set(true); this.failed.set(false); this.character.set(null); }),
-      switchMap(([id]) => this.service.getById(id).pipe(catchError(() => { this.failed.set(true); return of(null); }))),
-      takeUntilDestroyed(this.destroyRef),
-    ).subscribe(character => { this.character.set(character); this.loading.set(false); });
+    combineLatest([toObservable(this.characterId), this.reload.pipe(startWith(undefined))])
+      .pipe(
+        tap(() => {
+          this.loading.set(true);
+          this.failed.set(false);
+          this.character.set(null);
+        }),
+        switchMap(([id]) =>
+          this.service.getById(id).pipe(
+            catchError(() => {
+              this.failed.set(true);
+              return of(null);
+            }),
+          ),
+        ),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe((character) => {
+        this.character.set(character);
+        this.loading.set(false);
+      });
   }
 
-  load(): void { this.reload.next(); }
+  load(): void {
+    this.reload.next();
+  }
 
   display(value: string, unit = ""): string {
-    return !value || ["unknown", "n/a"].includes(value.toLowerCase()) ? "Unknown" : `${value}${unit}`;
+    return !value || ["unknown", "n/a"].includes(value.toLowerCase())
+      ? "Unknown"
+      : `${value}${unit}`;
   }
 }

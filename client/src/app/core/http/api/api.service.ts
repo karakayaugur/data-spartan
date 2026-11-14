@@ -32,5 +32,4 @@ export class ApiService {
   private url(path: string): string {
     return `${this.baseUrl}/${path.replace(/^\/+/, "")}`;
   }
-
 }

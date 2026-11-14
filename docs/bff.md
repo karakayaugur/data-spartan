@@ -2,11 +2,11 @@
 
 Angular → ApiService → Express `/proxyUrl` → SWAPI.
 
-| BFF endpoint | Angular servisi | Cevap |
-| --- | --- | --- |
-| GET /proxyUrl/films | FilmService.getList() | FilmSummary[]; bölüm sırasıyla |
-| GET /proxyUrl/films/:id | FilmService.getById(id) | Film; açılış metni ve tüm oyuncu kadrosu |
-| GET /proxyUrl/characters/:id | CharacterService.getById(id) | RobotCharacter veya OrganicCharacter |
+| BFF endpoint                 | Angular servisi              | Cevap                                    |
+| ---------------------------- | ---------------------------- | ---------------------------------------- |
+| GET /proxyUrl/films          | FilmService.getList()        | FilmSummary[]; bölüm sırasıyla           |
+| GET /proxyUrl/films/:id      | FilmService.getById(id)      | Film; açılış metni ve tüm oyuncu kadrosu |
+| GET /proxyUrl/characters/:id | CharacterService.getById(id) | RobotCharacter veya OrganicCharacter     |
 
 Cevap tipleri `core/http/film/film.interface.ts` ve `core/http/character/character.interface.ts` dosyalarındadır. Kimlikler SWAPI kaynak kimliğidir; bölüm numarası film kimliği değildir.
 

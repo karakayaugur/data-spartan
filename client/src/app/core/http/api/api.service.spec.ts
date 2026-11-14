@@ -8,10 +8,9 @@ describe("ApiService", () => {
   let http: HttpTestingController;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({ providers: [
-      provideHttpClient(),
-      provideHttpClientTesting(),
-    ] });
+    TestBed.configureTestingModule({
+      providers: [provideHttpClient(), provideHttpClientTesting()],
+    });
     api = TestBed.inject(ApiService);
     http = TestBed.inject(HttpTestingController);
   });
@@ -20,10 +19,12 @@ describe("ApiService", () => {
 
   it("passes query parameters and headers and returns the response unchanged", () => {
     const response = { data: { items: [{ id: 11 }] } };
-    api.get<typeof response>("/items", {
-      params: { active: true },
-      headers: { "X-Request-ID": "test" },
-    }).subscribe(result => expect(result).toEqual(response));
+    api
+      .get<typeof response>("/items", {
+        params: { active: true },
+        headers: { "X-Request-ID": "test" },
+      })
+      .subscribe((result) => expect(result).toEqual(response));
     const req = http.expectOne("/proxyUrl/items?active=true");
     expect(req.request.headers.get("X-Request-ID")).toBe("test");
     expect(req.request.headers.has("page")).toBeFalse();
@@ -33,7 +34,7 @@ describe("ApiService", () => {
   it("preserves an API error for the caller", () => {
     api.post("items", { name: "Example" }).subscribe({
       next: () => fail("Expected an HTTP error"),
-      error: error => expect(error.status).toBe(422),
+      error: (error) => expect(error.status).toBe(422),
     });
     const req = http.expectOne("/proxyUrl/items");
     expect(req.request.method).toBe("POST");

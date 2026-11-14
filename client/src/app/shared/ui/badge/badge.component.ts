@@ -21,12 +21,12 @@ export type BadgeVariant =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgeComponent {
-  readonly label = input('');
+  readonly label = input("");
   readonly type = input<"label" | "number">("label");
   readonly value = input(0);
-  readonly displayValue = computed(() => this.type() === "number"
-    ? this.value() > 9 ? "9+" : String(this.value())
-    : this.label());
+  readonly displayValue = computed(() =>
+    this.type() === "number" ? (this.value() > 9 ? "9+" : String(this.value())) : this.label(),
+  );
   readonly variant = input<BadgeVariant>("primary");
   readonly dot = input(false);
   readonly probability = input<"low" | "mid" | "high" | null>(null);

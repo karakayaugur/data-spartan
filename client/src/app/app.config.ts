@@ -6,11 +6,7 @@ import {
   provideZoneChangeDetection,
   LOCALE_ID,
 } from "@angular/core";
-import {
-  provideRouter,
-  withComponentInputBinding,
-  withRouterConfig,
-} from "@angular/router";
+import { provideRouter, withComponentInputBinding, withRouterConfig } from "@angular/router";
 import localeEn from "@angular/common/locales/en";
 import localeTr from "@angular/common/locales/tr";
 import { registerLocaleData } from "@angular/common";

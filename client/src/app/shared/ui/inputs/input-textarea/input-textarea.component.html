@@ -26,6 +26,9 @@
     </span>
   }
   @if (error()) {
-    <app-input-feedback [message]="error()" [feedbackId]="inputId() + '-error'"></app-input-feedback>
+    <app-input-feedback
+      [message]="error()"
+      [feedbackId]="inputId() + '-error'"
+    ></app-input-feedback>
   }
 </div>

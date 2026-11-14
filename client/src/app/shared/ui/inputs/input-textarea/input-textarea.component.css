@@ -1,9 +1,11 @@
-
 :host {
   --field-bg: light-dark(#fff, rgb(255 255 255 / 5%));
 }
 
-.input-container { display: flex; flex-direction: column; }
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
 .label {
   position: relative;
   margin-bottom: var(--size-2);
@@ -14,7 +16,7 @@
   text-align: left;
 }
 .required-indicator {
-  margin-left: .25rem;
+  margin-left: 0.25rem;
   color: var(--destructive-1);
   font-size: var(--font-size-0);
   font-weight: var(--font-weight-5);
@@ -28,9 +30,14 @@ textarea {
   box-shadow: none;
   color: var(--text-1);
   font: inherit;
-  transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
-textarea:hover:not(:focus):not(.input-invalid) { border-color: var(--input-border-hover, var(--text-2)); }
+textarea:hover:not(:focus):not(.input-invalid) {
+  border-color: var(--input-border-hover, var(--text-2));
+}
 textarea:focus {
   outline: none;
   border-color: var(--input-border-focus, var(--brand));
@@ -41,10 +48,27 @@ textarea.input-invalid {
   box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive-1) 18%, transparent);
 }
 
-.input-wrap { position: relative; display: flex; align-items: flex-start; }
-textarea { min-height: 6.25rem; padding: .75rem .875rem; line-height: 1.4; resize: vertical; }
-textarea:disabled, textarea[readonly] { opacity: .72; cursor: default; }
-textarea::placeholder { color: var(--text-muted); font-weight: var(--font-weight-3); font-size: var(--font-size-0);   opacity: 1;
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+textarea {
+  min-height: 6.25rem;
+  padding: 0.75rem 0.875rem;
+  line-height: 1.4;
+  resize: vertical;
+}
+textarea:disabled,
+textarea[readonly] {
+  opacity: 0.72;
+  cursor: default;
+}
+textarea::placeholder {
+  color: var(--text-muted);
+  font-weight: var(--font-weight-3);
+  font-size: var(--font-size-0);
+  opacity: 1;
 }
 
 :host {

@@ -1,9 +1,44 @@
-:host { display: block; padding: 28px; border: 1px solid var(--surface-3); border-radius: var(--radius-6); background: var(--surface-1); color: var(--text-0); }
-h2 { font-size: 28px; font-weight: 600; margin: 20px 0 12px; }
-dl { margin-top: 24px; }
-dl div { display: flex; justify-content: space-between; gap: 24px; padding: 16px 0; border-top: 1px solid var(--surface-3); font-size: 14px; }
-dt { color: var(--text-2); }
-dd { margin: 0; text-align: right; }
-.species { display: block; }
-.status { padding-block: 24px; line-height: 1.8; }
-.retry { margin-top: 16px; padding: 12px; background: var(--surface-2); color: var(--text-0); }
+:host {
+  display: block;
+  padding: 28px;
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius-6);
+  background: var(--surface-1);
+  color: var(--text-0);
+}
+h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 20px 0 12px;
+}
+dl {
+  margin-top: 24px;
+}
+dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px 0;
+  border-top: 1px solid var(--surface-3);
+  font-size: 14px;
+}
+dt {
+  color: var(--text-2);
+}
+dd {
+  margin: 0;
+  text-align: right;
+}
+.species {
+  display: block;
+}
+.status {
+  padding-block: 24px;
+  line-height: 1.8;
+}
+.retry {
+  margin-top: 16px;
+  padding: 12px;
+  background: var(--surface-2);
+  color: var(--text-0);
+}

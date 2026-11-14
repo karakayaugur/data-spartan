@@ -1,0 +1,53 @@
+:host {
+  display: block;
+}
+.note,
+.empty {
+  color: var(--text-2);
+  font-size: 13px;
+  line-height: 1.7;
+  margin-block: 20px;
+}
+.form {
+  display: grid;
+  gap: 16px;
+}
+.date-time {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+section {
+  margin-top: 28px;
+}
+h3 {
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+.viewing {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+  padding: 16px 0;
+  border-top: 1px solid var(--surface-3);
+  font-size: 13px;
+}
+.viewing-copy {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.viewing-copy p {
+  white-space: pre-wrap;
+  color: var(--text-2);
+  line-height: 1.7;
+  margin-top: 8px;
+}
+.delete {
+  flex-shrink: 0;
+}
+@media (max-width: 400px) {
+  .date-time {
+    grid-template-columns: 1fr;
+  }
+}

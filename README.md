@@ -42,6 +42,12 @@ npm start
 
 `npm test` requires Chrome or Chromium. `npm start` serves the compiled client on port 3000. The health check is available at `/health`. For Docker, use `make build` and `make run`. Docker Compose reads the upstream API address from the `SWAPI_BASE_URL` environment variable.
 
+## Formatting
+
+Git commits automatically format staged source files with Prettier through Husky and lint-staged. Hooks are installed by the root `npm install` / `npm ci` prepare script. A formatting failure stops the commit.
+
+Run `npm run format` to format the project, or `npm run format:check` to check formatting without changing files.
+
 ## Project foundations
 
 The project retains the original layered architecture, TypeScript aliases (`@core`, `@shared`, `@app`), separate HTML and CSS files, signal-based UI, theme and locale stores, style tokens, shared components, and BFF structure. Form conventions are documented in `.instructions.md`.

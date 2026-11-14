@@ -48,7 +48,7 @@ h2 {
   min-width: 0;
 }
 
-.example>span {
+.example > span {
   color: var(--text-2);
   font-size: 13px;
   text-transform: capitalize;

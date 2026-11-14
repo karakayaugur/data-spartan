@@ -1,9 +1,4 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  computed,
-  inject,
-} from "@angular/core";
+import { Component, ChangeDetectionStrategy, computed, inject } from "@angular/core";
 import { Router, ActivatedRoute, RouterLink } from "@angular/router";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { map } from "rxjs";
@@ -30,19 +25,17 @@ export class PageHeaderComponent {
     initialValue: "",
   });
 
-  readonly description = toSignal(
-    this.route.data.pipe(map((data) => data["description"] ?? "")),
-    { initialValue: "" },
-  );
+  readonly description = toSignal(this.route.data.pipe(map((data) => data["description"] ?? "")), {
+    initialValue: "",
+  });
 
   readonly icon = toSignal(this.route.data.pipe(map(() => this.getIcon())), {
     initialValue: "",
   });
 
-  readonly breadcrumbs = toSignal(
-    this.route.data.pipe(map(() => this.buildBreadcrumbs())),
-    { initialValue: [] as Breadcrumb[] },
-  );
+  readonly breadcrumbs = toSignal(this.route.data.pipe(map(() => this.buildBreadcrumbs())), {
+    initialValue: [] as Breadcrumb[],
+  });
 
   private getTitle(): string {
     let route = this.route;
@@ -83,10 +76,7 @@ export class PageHeaderComponent {
     }
 
     // Aktif sayfanın title'ı ile aynı olan son crumb'ları kaldır
-    while (
-      crumbs.length > 0 &&
-      crumbs[crumbs.length - 1].label === currentTitle
-    ) {
+    while (crumbs.length > 0 && crumbs[crumbs.length - 1].label === currentTitle) {
       crumbs.pop();
     }
 

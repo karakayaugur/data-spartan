@@ -10,9 +10,12 @@ export class ClientErrorReporter {
   private readonly http = new HttpClient(inject(HttpBackend));
 
   report(error: ClientErrorReport): void {
-    this.http.post<void>("/proxyUrl/error", error).pipe(
-      timeout(5000),
-      catchError(() => EMPTY),
-    ).subscribe();
+    this.http
+      .post<void>("/proxyUrl/error", error)
+      .pipe(
+        timeout(5000),
+        catchError(() => EMPTY),
+      )
+      .subscribe();
   }
 }

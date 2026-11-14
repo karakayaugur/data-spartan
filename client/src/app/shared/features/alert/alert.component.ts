@@ -20,15 +20,11 @@ export class AlertComponent {
   /** When set, only inline notices with this scope are shown. */
   scope = input<string | null>(null);
 
-  popupNotices = computed(() =>
-    this.alertService.notices().filter((n) => n.isPopup === true),
-  );
+  popupNotices = computed(() => this.alertService.notices().filter((n) => n.isPopup === true));
   inlineNotices = computed(() => {
     const hostScope = this.scope();
     if (!hostScope) return [];
-    return this.alertService
-      .notices()
-      .filter((n) => !n.isPopup && n.scope === hostScope);
+    return this.alertService.notices().filter((n) => !n.isPopup && n.scope === hostScope);
   });
 
   getIcon(type: string): string {

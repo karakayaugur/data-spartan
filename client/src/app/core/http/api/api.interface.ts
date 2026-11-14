@@ -7,4 +7,3 @@ export interface ApiRequestOptions {
   headers?: HttpHeaders | Record<string, string | string[]>;
   context?: HttpContext;
 }
-
