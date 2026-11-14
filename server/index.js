@@ -17,6 +17,7 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "upgrade-insecure-requests": null,
         "script-src-attr": ["'unsafe-inline'"],
       },
     },
