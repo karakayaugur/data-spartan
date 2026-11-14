@@ -8,10 +8,4 @@
 
 @import url("./components/card.css");
 @import url("./components/form.css");
-@import url("./components/input.css");
-@import url("./components/input-select.css");
-@import url("./components/button.css");
-@import url("./components/badges.css");
 @import url("./components/page.css");
-
-@import url("./helper.css");

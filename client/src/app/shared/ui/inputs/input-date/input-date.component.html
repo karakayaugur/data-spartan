@@ -12,34 +12,12 @@
       [attr.aria-invalid]="!!error()" [attr.aria-describedby]="error() ? inputId() + '-error' : null"
       aria-haspopup="dialog" (click)="toggle($event)">
       @if (displayValue()) { <span class="date-value">{{ displayValue() }}</span> }
-      @else { <span class="date-placeholder">{{ type() === 'time' ? 'hh : mm' : 'dd / mm / yyyy' }}</span> }
-      <svg class="date-icon" [lucideIcon]="type() === 'time' ? 'clock' : 'calendar'" [size]="18" [strokeWidth]="1.75" aria-hidden="true"></svg>
+      @else { <span class="date-placeholder">dd / mm / yyyy</span> }
+      <svg class="date-icon" lucideIcon="calendar" [size]="18" [strokeWidth]="1.75" aria-hidden="true"></svg>
     </button>
     @if (open()) {
-      <div class="date-dropdown" [class.time-dropdown]="type() === 'time'" role="dialog"
-        [id]="inputId() + '-picker'" [attr.aria-label]="type() === 'time' ? 'Choose time' : 'Choose date'">
-        @if (type() === 'time') {
-          <div class="time-columns">
-            <div class="time-column">
-              <h3 [id]="inputId() + '-hours'">Hour</h3>
-              <div class="time-options" role="group" [attr.aria-labelledby]="inputId() + '-hours'">
-                @for (hour of hours; track hour) {
-                  <button type="button" class="time-option" [class.selected]="selectedHour() === hour"
-                    [attr.aria-pressed]="selectedHour() === hour" (click)="selectTime('hour', hour)">{{ hour }}</button>
-                }
-              </div>
-            </div>
-            <div class="time-column">
-              <h3 [id]="inputId() + '-minutes'">Minute</h3>
-              <div class="time-options" role="group" [attr.aria-labelledby]="inputId() + '-minutes'">
-                @for (minute of minutes; track minute) {
-                  <button type="button" class="time-option" [class.selected]="selectedMinute() === minute"
-                    [attr.aria-pressed]="selectedMinute() === minute" (click)="selectTime('minute', minute)">{{ minute }}</button>
-                }
-              </div>
-            </div>
-          </div>
-        } @else {
+      <div class="date-dropdown" role="dialog"
+        [id]="inputId() + '-picker'" aria-label="Choose date">
         <div class="calendar-header">
           <select
             class="month-select"
@@ -85,15 +63,11 @@
             </button>
           }
         </div>
-        }
       </div>
     }
   </div>
   @if (error()) {
-    <div class="feedback">
-      <svg class="error-icon" lucideIcon="x" [size]="16" [strokeWidth]="2" aria-hidden="true"></svg>
-      <p role="alert" [id]="inputId() + '-error'">{{ error() }}</p>
-    </div>
+    <app-input-feedback [message]="error()" [feedbackId]="inputId() + '-error'"></app-input-feedback>
   }
   <input type="hidden" [name]="name()" [value]="value()">
 </div>

@@ -1,0 +1,19 @@
+<span class="badge" [attr.data-variant]="variant()" [attr.data-number]="type() === 'number' ? true : null"
+  [style.--digits]="type() === 'number' ? displayValue().length : null">
+  @if (type() === 'label') {
+  @if (dot()) {
+    <span class="dot" aria-hidden="true"></span>
+  }
+  @if (probability()) {
+    <span class="probability-bars" aria-hidden="true">
+      @for (bar of [1, 2, 3]; track bar) {
+        <span [style.height.px]="bar * 4" [class.dim]="bar > (probability() === 'high' ? 3 : probability() === 'mid' ? 2 : 1)"></span>
+      }
+    </span>
+  }
+  @if (icon()) {
+    <svg [lucideIcon]="icon()!" [size]="12" [strokeWidth]="2" aria-hidden="true"></svg>
+  }
+  }
+  <span class="label">{{ displayValue() }}</span>
+</span>

@@ -1,6 +1,13 @@
 <button
+  [attr.cdkFocusInitial]="focusInitial() ? '' : null"
+  cdkMonitorElementFocus
   [attr.type]="type()"
-  [attr.aria-label]="ariaLabel()"
+  [attr.aria-controls]="ariaControls()"
+  [attr.aria-expanded]="ariaExpanded()"
+  [attr.aria-haspopup]="ariaHasPopup()"
+  [attr.aria-label]="ariaLabel() ?? (iconOnly() ? displayLabel() : null)"
+  [attr.data-icon-only]="iconOnly() ? true : null"
+  [attr.aria-busy]="loading() ? true : null"
   [attr.data-variant]="variant()"
   [attr.data-size]="size()"
   [attr.data-loading]="loading() ? true : null"
@@ -15,7 +22,7 @@
       [strokeWidth]="2"
       aria-hidden="true"
     ></svg>
-  } @else if (icon() && iconPosition() === "start") {
+  } @else if (icon() && (iconOnly() || iconPosition() === "start")) {
     <svg
       [lucideIcon]="icon()!"
       [size]="iconSize"
@@ -23,8 +30,8 @@
       aria-hidden="true"
     ></svg>
   }
-  <span class="label">{{ displayLabel() }}</span>
-  @if (!loading() && icon() && iconPosition() === "end") {
+  @if (!iconOnly()) { <span class="label">{{ displayLabel() }}</span> }
+  @if (!iconOnly() && !loading() && icon() && iconPosition() === "end") {
     <svg
       [lucideIcon]="icon()!"
       [size]="iconSize"

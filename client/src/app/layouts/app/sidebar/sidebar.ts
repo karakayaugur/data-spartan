@@ -3,16 +3,16 @@ import { BreakpointObserver } from "@angular/cdk/layout";
 import { ChangeDetectionStrategy, Component, DestroyRef, HostListener, inject, input, output } from "@angular/core";
 import { takeUntilDestroyed, toSignal } from "@angular/core/rxjs-interop";
 import { RouterLink, RouterLinkActive } from "@angular/router";
-import { LucideDynamicIcon, LucideX, LucideClock, LucideSun, LucideMoon, LucideFilm, provideLucideIcons } from "@lucide/angular";
+import { LucideDynamicIcon, LucideX, LucideEye, LucideSun, LucideMoon, LucideFilm, provideLucideIcons } from "@lucide/angular";
 import { type Viewing } from "@core/store";
 import { ThemeToggleComponent } from "@shared/shared-features";
-import { ButtonComponent } from "@shared/ui/buttons/button/button.component";
+import { BadgeComponent, ButtonComponent } from "@shared/shared-ui";
 import { ApiService, FilmSummary } from "@core/http";
 
 @Component({
   selector: "app-sidebar",
-  imports: [RouterLink, RouterLinkActive, A11yModule, LucideDynamicIcon, ThemeToggleComponent, ButtonComponent],
-  providers: [provideLucideIcons(LucideX, LucideClock, LucideSun, LucideMoon, LucideFilm)],
+  imports: [RouterLink, RouterLinkActive, A11yModule, LucideDynamicIcon, ThemeToggleComponent, ButtonComponent, BadgeComponent],
+  providers: [provideLucideIcons(LucideX, LucideEye, LucideSun, LucideMoon, LucideFilm)],
   templateUrl: "./sidebar.html",
   styleUrl: "./sidebar.css",
   changeDetection: ChangeDetectionStrategy.OnPush,

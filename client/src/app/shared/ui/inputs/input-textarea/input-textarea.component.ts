@@ -1,11 +1,11 @@
+import { InputFeedbackComponent } from "../input-feedback/input-feedback.component";
 import { Component, computed, input, model, signal } from "@angular/core";
-import { LucideDynamicIcon } from "@lucide/angular";
 import { Validatable, VALIDATABLE } from "@shared/models/validatable.model";
 
 @Component({
   selector: "app-input-textarea",
   standalone: true,
-  imports: [LucideDynamicIcon],
+  imports: [InputFeedbackComponent],
   templateUrl: "./input-textarea.component.html",
   styleUrl: "./input-textarea.component.css",
   providers: [{ provide: VALIDATABLE, useExisting: InputTextareaComponent }],

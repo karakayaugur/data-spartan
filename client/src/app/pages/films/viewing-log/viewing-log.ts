@@ -1,16 +1,16 @@
+import { InputTimeComponent } from "@shared/shared-ui";
 import { Component, computed, inject, signal, viewChildren } from "@angular/core";
 import { DIALOG_DATA, DialogRef } from "@angular/cdk/dialog";
 import { FilmSummary } from "@core/http";
 import { FilmsService } from "@core/store";
 import { ButtonComponent } from "@shared/ui/buttons/button/button.component";
-import { ButtonIconComponent } from "@shared/ui/buttons/button-icon/button-icon.component";
 import { VALIDATABLE } from "@shared/models/validatable.model";
 import { InputDateComponent } from "@shared/ui/inputs/input-date/input-date.component";
 import { InputTextareaComponent } from "@shared/ui/inputs/input-textarea/input-textarea.component";
 
 @Component({
   selector: "app-viewing-log",
-  imports: [InputDateComponent, InputTextareaComponent, ButtonIconComponent, ButtonComponent],
+  imports: [InputDateComponent, InputTimeComponent, InputTextareaComponent, ButtonComponent],
   templateUrl: "./viewing-log.html",
   styleUrl: "./viewing-log.css",
 })

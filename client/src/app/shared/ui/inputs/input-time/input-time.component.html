@@ -1,0 +1,40 @@
+<div class="input-container">
+  <label class="label" [for]="inputId()">{{ label() }} @if (required()) { <span class="required-indicator" aria-hidden="true">*</span> }</label>
+  @if (open()) { <button class="time-backdrop" type="button" aria-label="Close picker" (click)="close()"></button> }
+  <div class="time-wrap">
+    <div class="time-field">
+      <input class="time-input" [class.input-invalid]="error()" type="text" autocomplete="off" [id]="inputId()"
+        [value]="draft() ?? value()" placeholder="hh:mm" [required]="required()"
+        [attr.aria-invalid]="!!error()" [attr.aria-describedby]="error() ? inputId() + '-error' : null"
+        (input)="editTime($event)" (blur)="commitTime()" (keydown.enter)="onTimeEnter($event)">
+      <button class="time-toggle" type="button" aria-label="Choose time" aria-haspopup="dialog"
+        [attr.aria-expanded]="open()" [attr.aria-controls]="open() ? inputId() + '-picker' : null" (click)="toggle($event)">
+        <svg class="time-icon" lucideIcon="clock" [size]="18" [strokeWidth]="1.75" aria-hidden="true"></svg>
+      </button>
+    </div>
+    @if (open()) {
+      <div class="time-dropdown" role="dialog" [id]="inputId() + '-picker'" aria-label="Choose time">
+        <div class="time-columns">
+          <div class="time-column"><h3 [id]="inputId() + '-hours'">Hour</h3>
+            <div class="time-options" role="group" [attr.aria-labelledby]="inputId() + '-hours'">
+              @for (hour of hours; track hour) {
+                <button class="time-option" type="button" [class.selected]="selectedHour() === hour" [attr.aria-pressed]="selectedHour() === hour" (click)="selectTime('hour', hour)">{{ hour }}</button>
+              }
+            </div>
+          </div>
+          <div class="time-column"><h3 [id]="inputId() + '-minutes'">Minute</h3>
+            <div class="time-options" role="group" [attr.aria-labelledby]="inputId() + '-minutes'">
+              @for (minute of minutes; track minute) {
+                <button class="time-option" type="button" [class.selected]="selectedMinute() === minute" [attr.aria-pressed]="selectedMinute() === minute" (click)="selectTime('minute', minute)">{{ minute }}</button>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+  @if (error()) {
+    <app-input-feedback [message]="error()" [feedbackId]="inputId() + '-error'"></app-input-feedback>
+  }
+  <input type="hidden" [name]="name()" [value]="value()">
+</div>

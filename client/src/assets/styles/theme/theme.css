@@ -1,377 +1,55 @@
-html {
-  --white: hsl(0, 0%, 100%);
-  --black: hsl(0, 0%, 0%);
-
-  /* BRAND */
-  --brand-light: #5b0d3f;
-  --brand-dark: #15a6de;
-
-  /* SURFACE
-   * ─────────────────────────────────────────────────
-   * surface-0 → Sayfa arka planı (body)
-   * surface-1 → Kart / tablo kartı arka planı
-   * surface-2 → Input / filtre kutuları (kartların içinde)
-   * surface-3 → Sınır çizgileri, ayırıcılar
-   * surface-4 → Input border ring, daha yüksek kontrastlı kenarlar
-   */
-  --surface-0-light: #e9ecef;
-  --surface-1-light: #f8f9fa;
-  --surface-2-light: #e1e5e9;
-  --surface-3-light: #d1d5db;
-  --surface-4-light: #b8bfc7;
-
-
-  --surface-0-dark: #151516;
-  --surface-1-dark: #1f1f23;
-  --surface-2-dark: #29292e;
-  --surface-3-dark: #2c2c32;
-  --surface-4-dark: #38383f;
-
-  /* Overlay elevation (open-props shadows) */
-  --elevation-2: var(--shadow-2);
-  --elevation-3: var(--shadow-3);
-
-  /* Dropdown / popover panel shadow */
-  --overlay-shadow-light:
-    0 0 0 1px rgba(15, 23, 42, 0.06),
-    0 10px 24px rgba(15, 23, 42, 0.1);
-  --overlay-shadow-dark:
-    0 0 0 1px color-mix(in oklch, var(--text-1-dark) 6%, transparent),
-    0 12px 28px rgba(0, 0, 0, 0.45);
-
-  /* Multi-select chips inside triggers */
-  --chip-bg-light: #e5e7eb;
-  --chip-bg-dark: #3f3f46;
-
-  /* Select shell (input-select.css)
-   * --overlay-shadow → dropdown panel elevation (light soft / dark deep)
-   * --chip-bg → multi-select tags inside the trigger
-   * Trigger fill uses .input-container --bg-color / --box-shadow* from input.css
-   */
-
-  /* TYPOGRAPHY */
-  --text-0-light: #0f0f0f;
-  --text-1-light: var(--gray-9);
-  --text-2-light: var(--gray-7);
-
-  --text-muted-light: var(--gray-5);
-
-  --text-0-dark: var(--gray-1);
-  --text-1-dark: var(--gray-2);
-  --text-2-dark: var(--gray-6);
-
-  --text-muted-dark: var(--gray-7);
-  /* dark */
-
-  /* Form inputs
-   * input-label       → Alan etiketleri (text, select, color, date…)
-   * input-placeholder → Placeholder / boş durum metni
-   */
-  --input-label-light: #374151;
-  --input-label-dark: #d4d4d8;
-  --input-placeholder-light: #9ca3af;
-  --input-placeholder-dark: #a1a1aa;
-
-  /* Filter / compact control borders
-   * Visible edge on surface-1 without changing fill.
-   * focus → brand accent
-   */
-  --input-border-light: #d4d4d8;
-  --input-border-hover-light: #a3a3a3;
-  --input-border-focus-light: var(--brand-light);
-  --focus-ring-light: color-mix(in oklch, var(--brand-light) 22%, transparent);
-
-  --input-border-dark: #404040;
-  --input-border-hover-dark: #525252;
-  --input-border-focus-dark: var(--brand-dark);
-  --focus-ring-dark: color-mix(in oklch, var(--brand-dark) 28%, transparent);
-
-  /* Destructive Color Palette */
-  --destructive-0-light: var(--red-1);
-  --destructive-1-light: var(--red-8);
-  --destructive-2-light: var(--red-9);
-  --destructive-3-light: var(--red-10);
-
-  --destructive-0-dark: var(--red-1);
-  --destructive-1-dark: var(--red-8);
-  --destructive-2-dark: var(--red-9);
-  --destructive-3-dark: var(--red-10);
-
-  /* Warning Color Palette */
-  --warning-0-light: var(--yellow-1);
-  --warning-1-light: var(--yellow-4);
-  --warning-2-light: var(--yellow-5);
-  --warning-fg-light: var(--gray-9);
-  --warning-text-light: var(--yellow-9);
-
-  --warning-0-dark: var(--yellow-1);
-  --warning-1-dark: var(--yellow-4);
-  --warning-2-dark: var(--yellow-5);
-  --warning-fg-dark: var(--gray-9);
-  --warning-text-dark: var(--yellow-9);
-
-  /* Switch "on" state
-   * Semantic green in both themes: brand is maroon in light / green in dark,
-   * so binding the on state to brand would change its meaning per theme.
-   */
-  --switch-on-light: var(--green-7);
-  --switch-on-hover-light: var(--green-8);
-
-  --switch-on-dark: var(--green-6);
-  --switch-on-hover-dark: var(--green-5);
-
-  /* Borders */
-  --border-1-light: #fff;
-  --border-1-dark: #2c2c32;
-
-  
-  --table-bg-light: #ffffff;
-  --table-thead-light: #f9fafb;
-  --table-th-text-light: #4b5563;
-  --table-td-text-light: #111827;
-  --table-card-border-light: #d1d5db;
-  --table-header-border-light: #d9dee5;
-  --table-border-light: #e7ebf0;
-  --table-pagination-border-light: #e5e7eb;
-  --table-row-hover-light: #f8fafc;
-  --table-muted-light: #9ca3af;
-
-  --table-bg-dark: #1f1f23;
-  --table-thead-dark: #1f1f23;
-  --table-th-text-dark: #9ca3af;
-  --table-td-text-dark: #e5e7eb;
-  --table-card-border-dark: #3f3f48;
-  --table-header-border-dark: #3a3a44;
-  --table-border-dark: #2e2e36;
-  --table-pagination-border-dark: #2e2e36;
-  --table-row-hover-dark: #26262c;
-  --table-muted-dark: #71717a;
-
-  /* Card section titles (GENERAL / APPEARANCE …)
-   * ~neutral-500 light, ~neutral-400 dark
-   */
-  --card-title-light: #737373;
-  --card-title-dark: #a3a3a3;
-}
-
-:root {
-  color-scheme: light;
-
-  /* set defaults */
-  --brand: var(--brand-light);
-  --brand-hover: var(--brand-light-hover);
-
-  --text-0: var(--text-0-light);
-  --text-1: var(--text-1-light);
-  --text-2: var(--text-2-light);
-  --text-muted: var(--text-muted-light);
-  --input-label: var(--input-label-light);
-  --input-placeholder: var(--input-placeholder-light);
-  --input-border: var(--input-border-light);
-  --input-border-hover: var(--input-border-hover-light);
-  --input-border-focus: var(--input-border-focus-light);
-  --focus-ring: var(--focus-ring-light);
-  --surface-0: var(--surface-0-light);
-  --surface-1: var(--surface-1-light);
-  --surface-2: var(--surface-2-light);
-  --surface-3: var(--surface-3-light);
-  --surface-4: var(--surface-4-light);
-
-  --destructive-0: var(--destructive-0-light);
-  --destructive-1: var(--destructive-1-light);
-  --destructive-2: var(--destructive-2-light);
-  --destructive-3: var(--destructive-3-light);
-
-  --warning-0: var(--warning-0-light);
-  --warning-1: var(--warning-1-light);
-  --warning-2: var(--warning-2-light);
-  --warning-fg: var(--warning-fg-light);
-  --warning-text: var(--warning-text-light);
-
-  --switch-on: var(--switch-on-light);
-  --switch-on-hover: var(--switch-on-hover-light);
-
-  --border-1: var(--border-1-light);
-
-  /* Table */
-  --table-bg: var(--table-bg-light);
-  --table-thead: var(--table-thead-light);
-  --table-th-text: var(--table-th-text-light);
-  --table-td-text: var(--table-td-text-light);
-  --table-card-border: var(--table-card-border-light);
-  --table-header-border: var(--table-header-border-light);
-  --table-border: var(--table-border-light);
-  --table-pagination-border: var(--table-pagination-border-light);
-  --table-row-hover: var(--table-row-hover-light);
-  --table-muted: var(--table-muted-light);
-  --card-title: var(--card-title-light);
-  --overlay-shadow: var(--overlay-shadow-light);
-  --chip-bg: var(--chip-bg-light);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-
-    --brand: var(--brand-dark);
-    --brand-hover: var(--brand-dark-hover);
-
-    --text-0: var(--text-0-dark);
-    --text-1: var(--text-1-dark);
-    --text-2: var(--text-2-dark);
-
-    --text-muted: var(--text-muted-dark);
-    --input-label: var(--input-label-dark);
-    --input-placeholder: var(--input-placeholder-dark);
-    --input-border: var(--input-border-dark);
-    --input-border-hover: var(--input-border-hover-dark);
-    --input-border-focus: var(--input-border-focus-dark);
-    --focus-ring: var(--focus-ring-dark);
-    --surface-0: var(--surface-0-dark);
-    --surface-1: var(--surface-1-dark);
-    --surface-2: var(--surface-2-dark);
-    --surface-3: var(--surface-3-dark);
-    --surface-4: var(--surface-4-dark);
-
-    --destructive-0: var(--destructive-0-dark);
-    --destructive-1: var(--destructive-1-dark);
-    --destructive-2: var(--destructive-2-dark);
-    --destructive-3: var(--destructive-3-dark);
-
-    --warning-0: var(--warning-0-dark);
-    --warning-1: var(--warning-1-dark);
-    --warning-2: var(--warning-2-dark);
-    --warning-fg: var(--warning-fg-dark);
-    --warning-text: var(--warning-text-dark);
-
-    --switch-on: var(--switch-on-dark);
-    --switch-on-hover: var(--switch-on-hover-dark);
-
-    --border-1: var(--border-1-dark);
-
-    /* Table */
-    --table-bg: var(--table-bg-dark);
-    --table-thead: var(--table-thead-dark);
-    --table-th-text: var(--table-th-text-dark);
-    --table-td-text: var(--table-td-text-dark);
-    --table-card-border: var(--table-card-border-dark);
-    --table-header-border: var(--table-header-border-dark);
-    --table-border: var(--table-border-dark);
-    --table-pagination-border: var(--table-pagination-border-dark);
-    --table-row-hover: var(--table-row-hover-dark);
-    --table-muted: var(--table-muted-dark);
-    --card-title: var(--card-title-dark);
-    --overlay-shadow: var(--overlay-shadow-dark);
-    --chip-bg: var(--chip-bg-dark);
-  }
-}
-
+:root,
 [color-scheme="light"] {
   color-scheme: light;
 
-  --brand: var(--brand-light);
-  --brand-hover: var(--brand-light-hover);
+  --white: hsl(0, 0%, 100%);
+  --brand: var(--blue-6);
 
-  --text-0: var(--text-0-light);
-  --text-1: var(--text-1-light);
-  --text-2: var(--text-2-light);
+  --surface-0: var(--gray-2) ;
+  --surface-1: var(--gray-1);
+  --surface-2: var(--gray-3);
 
-  --text-muted: var(--text-muted-light);
-  --input-label: var(--input-label-light);
-  --input-placeholder: var(--input-placeholder-light);
-  --input-border: var(--input-border-light);
-  --input-border-hover: var(--input-border-hover-light);
-  --input-border-focus: var(--input-border-focus-light);
-  --focus-ring: var(--focus-ring-light);
-  --surface-0: var(--surface-0-light);
-  --surface-1: var(--surface-1-light);
-  --surface-2: var(--surface-2-light);
-  --surface-3: var(--surface-3-light);
-  --surface-4: var(--surface-4-light);
+  --text-0: var(--gray-11);
+  --text-1: var(--gray-9);
+  --text-2: var(--gray-7);
+  --text-muted: var(--gray-5);
 
-  --destructive-0: var(--destructive-0-light);
-  --destructive-1: var(--destructive-1-light);
-  --destructive-2: var(--destructive-2-light);
-  --destructive-3: var(--destructive-3-light);
-
-  --warning-0: var(--warning-0-light);
-  --warning-1: var(--warning-1-light);
-  --warning-2: var(--warning-2-light);
-  --warning-fg: var(--warning-fg-light);
-  --warning-text: var(--warning-text-light);
-
-  --switch-on: var(--switch-on-light);
-  --switch-on-hover: var(--switch-on-hover-light);
-
-  --border-1: var(--border-1-light);
-
-  /* Table */
-  --table-bg: var(--table-bg-light);
-  --table-thead: var(--table-thead-light);
-  --table-th-text: var(--table-th-text-light);
-  --table-td-text: var(--table-td-text-light);
-  --table-card-border: var(--table-card-border-light);
-  --table-header-border: var(--table-header-border-light);
-  --table-border: var(--table-border-light);
-  --table-pagination-border: var(--table-pagination-border-light);
-  --table-row-hover: var(--table-row-hover-light);
-  --table-muted: var(--table-muted-light);
-  --card-title: var(--card-title-light);
-  --overlay-shadow: var(--overlay-shadow-light);
-  --chip-bg: var(--chip-bg-light);
+  --destructive-0: var(--red-0);
+  --destructive-1: var(--red-6);
+  --warning-1: var(--orange-6);
+  --warning-fg: var(--gray-0);
 }
 
 [color-scheme="dark"] {
   color-scheme: dark;
 
-  --brand: var(--brand-dark);
-  --brand-hover: var(--brand-dark-hover);
+  --brand: #15a6de;
 
-  --text-0: var(--text-0-dark);
-  --text-1: var(--text-1-dark);
-  --text-2: var(--text-2-dark);
+  --surface-0: var(--gray-11);
+  --surface-1: var(--gray-10);
+  --surface-2: var(--gray-9);
 
-  --text-muted: var(--text-muted-dark);
-  --input-label: var(--input-label-dark);
-  --input-placeholder: var(--input-placeholder-dark);
-  --input-border: var(--input-border-dark);
-  --input-border-hover: var(--input-border-hover-dark);
-  --input-border-focus: var(--input-border-focus-dark);
-  --focus-ring: var(--focus-ring-dark);
-  --surface-0: var(--surface-0-dark);
-  --surface-1: var(--surface-1-dark);
-  --surface-2: var(--surface-2-dark);
-  --surface-3: var(--surface-3-dark);
-  --surface-4: var(--surface-4-dark);
+  --text-0: var(--gray-1);
+  --text-1: var(--gray-2);
+  --text-2: var(--gray-6);
+  --text-muted: var(--gray-7);
 
-  --destructive-0: var(--destructive-0-dark);
-  --destructive-1: var(--destructive-1-dark);
-  --destructive-2: var(--destructive-2-dark);
-  --destructive-3: var(--destructive-3-dark);
+}
 
-  --warning-0: var(--warning-0-dark);
-  --warning-1: var(--warning-1-dark);
-  --warning-2: var(--warning-2-dark);
-  --warning-fg: var(--warning-fg-dark);
-  --warning-text: var(--warning-text-dark);
+/* Follow the system preference when no explicit theme is selected. */
+@media (prefers-color-scheme: dark) {
+  :root:not([color-scheme]) {
+    color-scheme: dark;
 
-  --switch-on: var(--switch-on-dark);
-  --switch-on-hover: var(--switch-on-hover-dark);
+  --brand: #15a6de;
 
-  --border-1: var(--border-1-dark);
+  --surface-0: var(--gray-11);
+  --surface-1: var(--gray-10);
+  --surface-2: var(--gray-9);
 
-  /* Table */
-  --table-bg: var(--table-bg-dark);
-  --table-thead: var(--table-thead-dark);
-  --table-th-text: var(--table-th-text-dark);
-  --table-td-text: var(--table-td-text-dark);
-  --table-card-border: var(--table-card-border-dark);
-  --table-header-border: var(--table-header-border-dark);
-  --table-border: var(--table-border-dark);
-  --table-pagination-border: var(--table-pagination-border-dark);
-  --table-row-hover: var(--table-row-hover-dark);
-  --table-muted: var(--table-muted-dark);
-  --card-title: var(--card-title-dark);
-  --overlay-shadow: var(--overlay-shadow-dark);
-  --chip-bg: var(--chip-bg-dark);
+  --text-0: var(--gray-1);
+  --text-1: var(--gray-2);
+  --text-2: var(--gray-6);
+  --text-muted: var(--gray-7);
+  }
 }

@@ -1,0 +1,31 @@
+<section class="buttons-page" aria-labelledby="buttons-title">
+  <header>
+    <h1 id="buttons-title">Buttons</h1>
+    <p>Shared button variants, sizes and states. Use the sidebar switch to compare themes.</p>
+  </header>
+  <p class="action-status" role="status">{{ lastAction() }}</p>
+  @for (variant of variants; track variant) {
+    <section class="button-panel" [attr.aria-labelledby]="'variant-' + variant">
+      <h2 [id]="'variant-' + variant">{{ variant }}</h2>
+      <div class="examples">
+        @for (size of sizes; track size) {
+          <div class="example"><span>{{ size }}</span><app-button [label]="size" [variant]="variant" [size]="size" (clicked)="record(variant + ' ' + size)"></app-button></div>
+        }
+        <div class="example"><span>Start icon</span><app-button label="Add entry" icon="plus" [variant]="variant" (clicked)="record(variant + ' start icon')"></app-button></div>
+        <div class="example"><span>End icon</span><app-button label="Continue" icon="arrow-right" iconPosition="end" [variant]="variant" (clicked)="record(variant + ' end icon')"></app-button></div>
+        <div class="example"><span>Disabled</span><app-button label="Unavailable" [disabled]="true" [variant]="variant"></app-button></div>
+        <div class="example"><span>Loading</span><app-button label="Save" loadingLabel="Saving…" [loading]="true" [variant]="variant"></app-button></div>
+      </div>
+    </section>
+  }
+  <section class="button-panel" aria-labelledby="icon-title">
+    <h2 id="icon-title">Icon buttons</h2>
+    <div class="examples">
+      @for (size of sizes; track size) {
+        <div class="example"><span>{{ size }}</span><app-button [iconOnly]="true" variant="neutral" icon="plus" [size]="size" [ariaLabel]="'Add entry, ' + size" (clicked)="record('Icon ' + size)"></app-button></div>
+      }
+      <div class="example"><span>Disabled</span><app-button [iconOnly]="true" variant="neutral" icon="x" ariaLabel="Close (disabled)" [disabled]="true"></app-button></div>
+      <div class="example"><span>Loading</span><app-button [iconOnly]="true" variant="neutral" icon="check" ariaLabel="Saving" [loading]="true"></app-button></div>
+    </div>
+  </section>
+</section>

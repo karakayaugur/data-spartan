@@ -1,0 +1,23 @@
+:host { display: block; }
+.feedback {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  margin-top: 4px;
+  color: var(--destructive-1);
+}
+p {
+  margin: 0;
+  color: inherit;
+  font-size: var(--font-size-00, .75rem);
+  font-weight: var(--font-weight-3);
+  line-height: 16px;
+}
+.error-icon {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  padding: 2px;
+  border-radius: 50%;
+  background: var(--destructive-1);
+  color: var(--white, #fff);
+}

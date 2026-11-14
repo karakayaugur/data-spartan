@@ -1,8 +1,13 @@
 <div class="capsule">
-  <app-sidebar [films]="films()" [viewings]="viewings()" [loading]="loading()" [failed]="failed()" [mobileOpen]="nav.open()"
-    (closeMenu)="nav.close()" (retry)="loadFilms()" (viewingLog)="openViewingLog($event)"></app-sidebar>
+  <app-sidebar [films]="films()" [viewings]="viewings()" [loading]="loading()" [failed]="failed()"
+    [mobileOpen]="nav.open()" (closeMenu)="nav.close()" (retry)="loadFilms()"
+    (viewingLog)="openViewingLog($event)"></app-sidebar>
   <main class="main" id="main-content" [inert]="nav.open()">
-    <button class="menu-toggle" type="button" aria-label="Open menu" aria-controls="film-sidebar" [attr.aria-expanded]="nav.open()" (click)="nav.toggle()"><svg lucideIcon="menu" [size]="22" aria-hidden="true"></svg></button>
-    <div class="content"><router-outlet></router-outlet></div>
+    <app-button class="menu-toggle" icon="menu" [iconOnly]="true" variant="neutral" size="large" ariaLabel="Open menu"
+      ariaControls="film-sidebar" [ariaExpanded]="nav.open()" (clicked)="nav.toggle()">
+      </app-button>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
   </main>
 </div>

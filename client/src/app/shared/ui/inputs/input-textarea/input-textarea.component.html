@@ -8,6 +8,8 @@
   <div class="input-wrap">
     <textarea
       [class.input-invalid]="hasError() || error()"
+      [attr.aria-invalid]="!!(hasError() || error())"
+      [attr.aria-describedby]="error() ? inputId() + '-error' : null"
       [id]="inputId()"
       [name]="name()"
       [value]="value()"
@@ -17,15 +19,6 @@
       [attr.maxlength]="maxLength()"
       (input)="onInput($event)"
     ></textarea>
-    @if (error()) {
-      <svg
-        class="error-icon"
-        lucideIcon="circle-alert"
-        [size]="20"
-        [strokeWidth]="2"
-        aria-hidden="true"
-      ></svg>
-    }
   </div>
   @if (remaining() !== null) {
     <span class="char-counter" [class.at-limit]="remaining()! <= 0">
@@ -33,15 +26,6 @@
     </span>
   }
   @if (error()) {
-    <div class="feedback">
-      <svg
-        class="error-icon"
-        lucideIcon="x"
-        [size]="16"
-        [strokeWidth]="2"
-        aria-hidden="true"
-      ></svg>
-      <p role="alert">{{ error() }}</p>
-    </div>
+    <app-input-feedback [message]="error()" [feedbackId]="inputId() + '-error'"></app-input-feedback>
   }
 </div>

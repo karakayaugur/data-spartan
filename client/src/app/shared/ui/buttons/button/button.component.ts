@@ -1,27 +1,37 @@
+import { A11yModule } from "@angular/cdk/a11y";
 import { Component, computed, input, output } from "@angular/core";
 import { LucideDynamicIcon } from "@lucide/angular";
 
 export type ButtonVariant =
-  | "primary"
   | "ghost"
+  | "neutral"
+  | "primary"
   | "danger"
-  | "warning";
+  | "warning"
+  | "primary-outline"
+  | "danger-outline"
+  | "warning-outline";
 export type ButtonSize = "small" | "medium" | "large";
 
 @Component({
   selector: "app-button",
   standalone: true,
-  imports: [LucideDynamicIcon],
+  imports: [LucideDynamicIcon, A11yModule],
   templateUrl: "./button.component.html",
   styleUrl: "./button.component.css",
 })
 export class ButtonComponent {
   readonly label = input("Submit");
+  readonly ariaControls = input<string | null>(null);
+  readonly ariaExpanded = input<boolean | null>(null);
+  readonly ariaHasPopup = input<"dialog" | "menu" | null>(null);
   readonly ariaLabel = input<string | null>(null);
   readonly loadingLabel = input<string | null>(null);
   readonly variant = input<ButtonVariant>("primary");
   readonly size = input<ButtonSize>("medium");
   readonly icon = input<string | null>(null);
+  readonly iconOnly = input(false);
+  readonly focusInitial = input(false);
   readonly iconPosition = input<"start" | "end">("start");
   readonly loading = input(false);
   readonly disabled = input(false);
@@ -38,11 +48,11 @@ export class ButtonComponent {
   get iconSize(): number {
     switch (this.size()) {
       case "small":
-        return 14;
+        return 10;
       case "medium":
-        return 16;
+        return 12;
       case "large":
-        return 18;
+        return 14;
     }
   }
 

@@ -1,3 +1,4 @@
+import { InputFeedbackComponent } from "../input-feedback/input-feedback.component";
 import {
   Component,
   computed,
@@ -10,8 +11,6 @@ import {
 } from '@angular/core';
 import { LucideDynamicIcon } from '@lucide/angular';
 import { Validatable, VALIDATABLE } from '@shared/models/validatable.model';
-
-export type InputDateType = 'date' | 'time';
 
 interface CalendarDay {
   date: Date;
@@ -39,7 +38,7 @@ const WEEKDAYS = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 @Component({
   selector: 'app-input-date',
   standalone: true,
-  imports: [LucideDynamicIcon],
+  imports: [LucideDynamicIcon, InputFeedbackComponent],
   templateUrl: './input-date.component.html',
   styleUrl: './input-date.component.css',
   providers: [{ provide: VALIDATABLE, useExisting: InputDateComponent }],
@@ -55,7 +54,6 @@ export class InputDateComponent implements Validatable {
   readonly name = input('date');
   readonly label = input('Date');
   readonly required = input(true);
-  readonly type = input<InputDateType>('date');
 
   readonly error = signal('');
   readonly open = signal(false);
@@ -64,13 +62,7 @@ export class InputDateComponent implements Validatable {
 
   readonly months = MONTHS;
   readonly weekdays = WEEKDAYS;
-  readonly hours = Array.from({ length: 24 }, (_, index) => String(index).padStart(2, '0'));
-  readonly minutes = Array.from({ length: 12 }, (_, index) => String(index * 5).padStart(2, '0'));
-  readonly selectedHour = signal('00');
-  readonly selectedMinute = signal('00');
-
   readonly displayValue = computed(() => {
-    if (this.type() === 'time') return this.value();
     const parsed = this.parseIsoDate(this.value());
     return parsed ? this.formatDisplay(parsed) : '';
   });
@@ -127,12 +119,6 @@ export class InputDateComponent implements Validatable {
       return !this.required();
     }
 
-    if (this.type() === 'time') {
-      const valid = /^([01]\d|2[0-3]):[0-5]\d$/.test(val);
-      this.error.set(valid ? '' : 'Please enter a valid time.');
-      return valid;
-    }
-
     const date = this.parseIsoDate(val);
     if (!date) {
       this.error.set('Enter a valid date.');
@@ -147,19 +133,6 @@ export class InputDateComponent implements Validatable {
     this.error.set(message);
   }
 
-  selectTime(part: 'hour' | 'minute', value: string): void {
-    if (part === 'hour') this.selectedHour.set(value);
-    else this.selectedMinute.set(value);
-    this.updateTime();
-  }
-
-  private updateTime(): void {
-    this.value.set(`${this.selectedHour()}:${this.selectedMinute()}`);
-    if (this.error()) this.validate();
-  }
-
-  // --- Calendar UI ---
-
   toggle(event: Event): void {
     event.stopPropagation();
 
@@ -168,14 +141,7 @@ export class InputDateComponent implements Validatable {
       return;
     }
 
-    if (this.type() === 'time') {
-      const [hour, minute] = this.value().split(':');
-      this.selectedHour.set(this.hours.includes(hour) ? hour : '00');
-      this.selectedMinute.set(/^[0-5]\d$/.test(minute ?? '') ? minute : '00');
-      if (!this.value()) this.updateTime();
-    } else {
-      this.syncViewToSelection();
-    }
+    this.syncViewToSelection();
     this.open.set(true);
   }
 
@@ -233,7 +199,6 @@ export class InputDateComponent implements Validatable {
     }
   }
 
-  // --- Private ---
 
   private syncViewToSelection(): void {
     const selected = this.parseIsoDate(this.value());
