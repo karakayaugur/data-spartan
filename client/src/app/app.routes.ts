@@ -1,3 +1,5 @@
+import { inject } from "@angular/core";
+import { FilmFacade } from "@core/store";
 import { Routes } from "@angular/router";
 import { AppLayout } from "./layouts/app/app-layout";
 
@@ -10,12 +12,20 @@ export const routes: Routes = [
       {
         path: "films",
         title: "Films",
-        loadComponent: () => import("./pages/films/films").then((m) => m.Films),
+        loadComponent: () => import("./pages/films/film-list/film-list").then((m) => m.FilmList),
       },
       {
         path: "films/:id",
-        title: "Film",
-        loadComponent: () => import("./pages/films/film-detail").then((m) => m.FilmDetail),
+        title: (route) => {
+          const id = Number(route.paramMap.get("id"));
+          return (
+            inject(FilmFacade)
+              .films()
+              .find((film) => film.id === id)?.title ?? "Film"
+          );
+        },
+        loadComponent: () =>
+          import("./pages/films/film-detail/film-detail").then((m) => m.FilmDetail),
       },
       {
         path: "badges",

@@ -42,7 +42,7 @@
     <p class="nav-message" role="status">Loading films…</p>
     } @if (failed()) {
     <p class="nav-message" role="alert">We couldn't load the films.</p>
-    <button class="retry" type="button" (click)="retry.emit()">Try again</button>
+    <button class="retry" type="button" (click)="filmFacade.loadFilms()">Try again</button>
     }
   </div>
   <nav id="film-navigation" aria-label="Films">
@@ -111,18 +111,6 @@
       (click)="closeMenu.emit()"
       >Buttons</a
     >
-    <app-button
-      label="Test HTTP error"
-      variant="primary-outline"
-      size="small"
-      (clicked)="testHttpError()"
-    ></app-button>
-    <app-button
-      label="Test client error"
-      variant="primary-outline"
-      size="small"
-      (clicked)="testClientError()"
-    ></app-button>
     <app-theme-toggle></app-theme-toggle>
   </div>
 </aside>

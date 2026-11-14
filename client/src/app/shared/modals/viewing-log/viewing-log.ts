@@ -3,7 +3,7 @@ import { InputTimeComponent } from "@shared/shared-ui";
 import { Component, computed, inject, signal, viewChildren } from "@angular/core";
 import { DIALOG_DATA } from "@angular/cdk/dialog";
 import { FilmSummary } from "@core/http";
-import { FilmStoreService } from "@core/store";
+import { FilmFacade } from "@core/store";
 import { ButtonComponent } from "@shared/ui/buttons/button/button.component";
 import { VALIDATABLE } from "@shared/models/validatable.model";
 import { InputDateComponent } from "@shared/ui/inputs/input-date/input-date.component";
@@ -29,9 +29,9 @@ const initialFormState = {
 })
 export class ViewingLog {
   readonly film = inject<FilmSummary>(DIALOG_DATA);
-  private readonly store = inject(FilmStoreService);
+  private readonly filmFacade = inject(FilmFacade);
   private readonly validatables = viewChildren(VALIDATABLE);
-  readonly viewings = computed(() => this.store.getViewings(this.film.id));
+  readonly viewings = computed(() => this.filmFacade.getViewings(this.film.id));
 
   readonly form = {
     date: signal(initialFormState.date),
@@ -45,7 +45,7 @@ export class ViewingLog {
       .every(Boolean);
     if (!valid) return;
 
-    this.store.addViewing(this.film.id, {
+    this.filmFacade.addViewing(this.film.id, {
       date: this.form.date(),
       time: this.form.time(),
       description: this.form.description(),
@@ -61,6 +61,6 @@ export class ViewingLog {
   }
 
   remove(id: string): void {
-    this.store.removeViewing(this.film.id, id);
+    this.filmFacade.removeViewing(this.film.id, id);
   }
 }

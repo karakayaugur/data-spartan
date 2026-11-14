@@ -1,11 +1,36 @@
-import { computed, inject, Injectable } from "@angular/core";
+import { firstValueFrom } from "rxjs";
+import { FilmService } from "@core/http/film/film.service";
+import { computed, inject, Injectable, signal } from "@angular/core";
 import type { FilmSummary } from "@core/http/film/film.interface";
-import { FilmsStore } from "./film.store";
+import { FilmStore } from "./film.store";
 import { FilmsState, Viewing, ViewingPayload } from "./film.types";
 
 @Injectable({ providedIn: "root" })
-export class FilmStoreService {
-  private readonly store = inject(FilmsStore);
+export class FilmFacade {
+  private readonly store = inject(FilmStore);
+  private readonly api = inject(FilmService);
+  private readonly loadingState = signal(false);
+  private readonly failedState = signal(false);
+  private pending: Promise<void> | null = null;
+
+  readonly loading = this.loadingState.asReadonly();
+  readonly failed = this.failedState.asReadonly();
+
+  loadFilms(): Promise<void> {
+    if (this.pending) return this.pending;
+    this.loadingState.set(true);
+    this.failedState.set(false);
+    this.pending = firstValueFrom(this.api.getList())
+      .then((films) => this.setFilms(films))
+      .catch(() => {
+        this.failedState.set(true);
+      })
+      .finally(() => {
+        this.loadingState.set(false);
+        this.pending = null;
+      });
+    return this.pending;
+  }
 
   public readonly state = this.store.state;
   public readonly films = computed(() => this.state().films);

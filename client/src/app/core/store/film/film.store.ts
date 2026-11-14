@@ -1,8 +1,10 @@
 import { computed, effect, Injectable, signal, WritableSignal } from "@angular/core";
-import { FILMS_STORAGE_KEY, FilmsState, Viewing } from "./film.types";
+import { FilmsState, Viewing } from "./film.types";
+
+const FILMS_STORAGE_KEY = "data-spartan.films";
 
 @Injectable({ providedIn: "root" })
-export class FilmsStore {
+export class FilmStore {
   private readonly storage: Storage = sessionStorage;
   private readonly _state: WritableSignal<FilmsState> = signal(this.getStored());
 

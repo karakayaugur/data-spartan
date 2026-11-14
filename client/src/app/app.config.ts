@@ -1,4 +1,5 @@
-import { FilmLoaderService } from "@core/services/film-loader.service";
+import { AppTitleStrategy } from "@core/services/routing.service";
+import { FilmFacade } from "@core/store";
 import { provideHttpClient, withInterceptors } from "@angular/common/http";
 import {
   ApplicationConfig,
@@ -8,7 +9,12 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
 } from "@angular/core";
-import { provideRouter, withComponentInputBinding, withRouterConfig } from "@angular/router";
+import {
+  provideRouter,
+  TitleStrategy,
+  withComponentInputBinding,
+  withRouterConfig,
+} from "@angular/router";
 
 import {
   LucideMenu,
@@ -96,16 +102,17 @@ import {
   LucideGitBranch,
 } from "@lucide/angular";
 
-import { GlobalErrorHandler } from "@core/services/global-error-handler";
+import { AppErrorHandler } from "@core/services/app-error-handler";
 import { ErrorInterceptor } from "@core/interceptors";
 import { routes } from "./app.routes";
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAppInitializer(() => inject(FilmLoaderService).load()),
+    { provide: TitleStrategy, useClass: AppTitleStrategy },
+    provideAppInitializer(() => inject(FilmFacade).loadFilms()),
     provideHttpClient(withInterceptors([ErrorInterceptor])),
     provideBrowserGlobalErrorListeners(),
-    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    { provide: ErrorHandler, useClass: AppErrorHandler },
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(
       routes,

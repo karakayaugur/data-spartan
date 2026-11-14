@@ -1,6 +1,6 @@
 import { Component, computed, inject } from "@angular/core";
 import { LucideDynamicIcon } from "@lucide/angular";
-import { ThemeService } from "@core/store";
+import { ThemeFacade } from "@core/store";
 
 @Component({
   selector: "app-theme-toggle",
@@ -9,14 +9,14 @@ import { ThemeService } from "@core/store";
   styleUrl: "./theme-toggle.css",
 })
 export class ThemeToggleComponent {
-  private readonly themeService = inject(ThemeService);
+  private readonly themeFacade = inject(ThemeFacade);
 
-  readonly theme = this.themeService.theme;
+  readonly theme = this.themeFacade.theme;
   readonly isDark = computed(() => this.theme() === "dark");
   readonly isLight = computed(() => this.theme() !== "dark");
 
   setTheme(value: "light" | "dark", event?: Event): void {
     event?.stopPropagation();
-    this.themeService.setState(value);
+    this.themeFacade.setTheme(value);
   }
 }

@@ -6,8 +6,8 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { ActivatedRoute } from "@angular/router";
 import { catchError, combineLatest, map, of, startWith, Subject, switchMap, tap } from "rxjs";
 import { Film, FilmService } from "@core/http";
-import { FilmStoreService } from "@core/store";
-import { CharacterPanel } from "./character-panel/character-panel";
+import { FilmFacade } from "@core/store";
+import { CharacterPanel } from "./components/character-panel/character-panel";
 
 @Component({
   selector: "app-film-detail",
@@ -19,13 +19,13 @@ export class FilmDetail {
   private readonly modal = inject(ModalService);
   private readonly route = inject(ActivatedRoute);
   private readonly service = inject(FilmService);
-  private readonly filmStoreService = inject(FilmStoreService);
+  private readonly filmFacade = inject(FilmFacade);
   private readonly destroyRef = inject(DestroyRef);
   private readonly reload = new Subject<void>();
   readonly selectedCharacterId = signal<number | null>(null);
   readonly film = signal<Film | null>(null);
   readonly viewingCount = computed(() => {
-    return this.film() ? this.filmStoreService.getViewings(this.film()!.id).length : 0;
+    return this.film() ? this.filmFacade.getViewings(this.film()!.id).length : 0;
   });
   readonly loading = signal(true);
   readonly failed = signal(false);

@@ -3,13 +3,12 @@ import { BreakpointObserver } from "@angular/cdk/layout";
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
   HostListener,
   inject,
   input,
   output,
 } from "@angular/core";
-import { takeUntilDestroyed, toSignal } from "@angular/core/rxjs-interop";
+import { toSignal } from "@angular/core/rxjs-interop";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import {
   LucideDynamicIcon,
@@ -20,10 +19,11 @@ import {
   LucideFilm,
   provideLucideIcons,
 } from "@lucide/angular";
-import { type Viewing } from "@core/store";
+import { FilmFacade } from "@core/store";
+import { ModalService, ViewingLog } from "@shared/modals";
 import { ThemeToggleComponent } from "@shared/shared-features";
 import { BadgeComponent, ButtonComponent } from "@shared/shared-ui";
-import { ApiService, FilmSummary } from "@core/http";
+import { FilmSummary } from "@core/http";
 
 @Component({
   selector: "app-sidebar",
@@ -42,16 +42,14 @@ import { ApiService, FilmSummary } from "@core/http";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Sidebar {
-  private readonly api = inject(ApiService);
-  private readonly destroyRef = inject(DestroyRef);
-  readonly films = input.required<FilmSummary[]>();
-  readonly viewings = input<Record<number, readonly Viewing[]>>({});
-  readonly loading = input(false);
-  readonly failed = input(false);
+  readonly filmFacade = inject(FilmFacade);
+  private readonly modal = inject(ModalService);
+  readonly films = this.filmFacade.films;
+  readonly viewings = this.filmFacade.viewings;
+  readonly loading = this.filmFacade.loading;
+  readonly failed = this.filmFacade.failed;
   readonly mobileOpen = input(false);
   readonly closeMenu = output<void>();
-  readonly retry = output<void>();
-  readonly viewingLog = output<FilmSummary>();
   readonly mobile = toSignal(inject(BreakpointObserver).observe("(max-width: 640px)"), {
     initialValue: { matches: window.matchMedia("(max-width: 640px)").matches, breakpoints: {} },
   });
@@ -64,26 +62,16 @@ export class Sidebar {
     }
   }
 
-  testClientError(): void {
-    throw new Error("This is a test client error.");
-  }
-
-  testHttpError(): void {
-    this.api
-      .get("error-test")
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        // ErrorInterceptor displays the failure; prevent a second unhandled error.
-        error: () => {},
-      });
-  }
-
   viewingCount(filmId: number): number {
     return this.viewings()[filmId]?.length ?? 0;
   }
 
   openViewingLog(film: FilmSummary): void {
     this.closeMenu.emit();
-    this.viewingLog.emit(film);
+    this.modal.open(ViewingLog, {
+      data: film,
+      ariaLabel: film.title,
+      restoreFocus: this.mobile().matches ? ".menu-toggle button" : true,
+    });
   }
 }

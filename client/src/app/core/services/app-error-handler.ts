@@ -4,7 +4,7 @@ import { NotificationService } from "@shared/notifications";
 import { ClientErrorReporter } from "@core/http/error";
 
 @Injectable()
-export class GlobalErrorHandler implements ErrorHandler {
+export class AppErrorHandler implements ErrorHandler {
   private readonly notificationService = inject(NotificationService);
   private readonly errorReporter = inject(ClientErrorReporter);
 

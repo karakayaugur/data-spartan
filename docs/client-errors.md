@@ -1,6 +1,6 @@
 # İstemci hata yönetimi
 
-`app.config.ts`, `GlobalErrorHandler` sınıfını Angular `ErrorHandler` olarak kaydeder. `provideBrowserGlobalErrorListeners()` tarayıcıdaki yakalanmamış hataları ve Promise rejection olaylarını Angular'a aktarır. Angular tarafından yakalanan component hataları da aynı işleyiciye ulaşır.
+`app.config.ts`, `AppErrorHandler` sınıfını Angular `ErrorHandler` olarak kaydeder. `provideBrowserGlobalErrorListeners()` tarayıcıdaki yakalanmamış hataları ve Promise rejection olaylarını Angular'a aktarır. Angular tarafından yakalanan component hataları da aynı işleyiciye ulaşır.
 
 İşleyici genel bir hata toast'ı gösterir ve teknik ayrıntıları konsola yazar. `core/http/error/error.service.ts` içindeki `ClientErrorReporter` mesaj, stack ve sayfa adresini `POST /proxyUrl/error` üzerinden BFF'e gönderir. BFF mevcut logger ile raporu kaydeder ve 204 döndürür.
 

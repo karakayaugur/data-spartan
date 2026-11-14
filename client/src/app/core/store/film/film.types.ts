@@ -1,7 +1,5 @@
 import type { FilmSummary } from "@core/http/film/film.interface";
 
-export const FILMS_STORAGE_KEY = "data-spartan.films";
-
 export interface Viewing {
   id: string;
   date: string;
