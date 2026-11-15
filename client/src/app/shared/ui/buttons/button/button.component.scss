@@ -169,12 +169,12 @@
 
   &__control[data-variant="ghost"] {
     background: transparent;
-    color: var(--text-2);
+    color: var(--button-ghost-color, var(--text-2));
   }
 
   &__control[data-variant="ghost"]:hover:not(:disabled) {
     opacity: 1;
-    background: var(--surface-2);
-    color: var(--text-1);
+    background: var(--button-ghost-hover-background, var(--surface-2));
+    color: var(--button-ghost-hover-color, var(--text-1));
   }
 }

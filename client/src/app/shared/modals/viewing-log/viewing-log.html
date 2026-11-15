@@ -36,28 +36,30 @@
   <section aria-labelledby="history-title">
     <h3 id="history-title" tabindex="-1">Recorded viewings ({{ viewings().length }})</h3>
     <div aria-live="polite">
-      @for (viewing of viewings(); track viewing.id) {
-      <article class="viewing-log__viewing">
-        <div class="viewing-log__viewing-copy">
-          <time [attr.datetime]="viewing.date + 'T' + viewing.time"
-            >{{ viewing.date | date: "MMM d, yyyy" }}, {{ viewing.time }}</time
-          >@if (viewing.description) {
-          <p>{{ viewing.description }}</p>
+      <ul class="viewing-log__list" role="list">
+        @for (viewing of viewings(); track viewing.id) {
+        <li class="viewing-log__viewing">
+          <time class="viewing-log__timestamp" [attr.datetime]="viewing.date + 'T' + viewing.time">
+            <svg lucideCalendar [size]="14" [strokeWidth]="1.75" aria-hidden="true"></svg>
+            <span>{{ viewing.date | date: "MMM d, yyyy" }}, {{ viewing.time }}</span>
+          </time>
+          <app-button
+            class="viewing-log__delete"
+            label="Delete"
+            icon="trash-2"
+            variant="ghost"
+            size="small"
+            [ariaLabel]="'Delete viewing on ' + viewing.date + ' at ' + viewing.time"
+            (clicked)="remove(viewing.id)"
+          ></app-button>
+          @if (viewing.description) {
+          <p class="viewing-log__description">{{ viewing.description }}</p>
           }
-        </div>
-        <app-button
-          class="viewing-log__delete"
-          label="Delete"
-          icon="trash-2"
-          variant="danger"
-          size="small"
-          [ariaLabel]="'Delete viewing on ' + viewing.date + ' at ' + viewing.time"
-          (clicked)="remove(viewing.id)"
-        ></app-button>
-      </article>
-      } @empty {
-      <p class="viewing-log__empty">No viewings recorded yet.</p>
-      }
+        </li>
+        } @empty {
+        <li class="viewing-log__empty">No viewings recorded yet.</li>
+        }
+      </ul>
     </div>
   </section>
 </ng-template>

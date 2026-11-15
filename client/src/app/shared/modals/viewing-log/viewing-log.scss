@@ -19,30 +19,65 @@
 
 section {
   margin-top: 28px;
+
+  h3 {
+    margin: 0 0 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-1);
+  }
 }
 
 .viewing-log {
+  &__list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
   &__viewing {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.25rem 0.75rem;
+    align-items: center;
+    padding: 0.875rem 0;
+    border-bottom: 1px solid var(--surface-2);
+    font-size: 0.875rem;
+
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+  }
+  &__timestamp {
     display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    align-items: start;
-    padding: 16px 0;
-    border-top: 1px solid var(--surface-3);
-    font-size: 13px;
-  }
-  &__viewing-copy {
+    align-items: center;
+    gap: 0.5rem;
     min-width: 0;
+    color: var(--text-0);
+    font-weight: 600;
     overflow-wrap: anywhere;
+
+    svg {
+      flex-shrink: 0;
+      color: var(--text-2);
+    }
   }
-  &__viewing-copy p {
+  &__description {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding-left: calc(14px + 0.5rem);
     white-space: pre-wrap;
-    color: var(--text-2);
-    line-height: 1.7;
-    margin-top: 8px;
+    overflow-wrap: anywhere;
+    color: var(--text-1);
+    font-weight: 400;
+    line-height: 1.45;
   }
   &__delete {
-    flex-shrink: 0;
+    --button-ghost-color: var(--destructive);
+    --button-ghost-hover-color: var(--destructive);
+    --button-ghost-hover-background: color-mix(in srgb, var(--destructive) 10%, transparent);
   }
 }
 @include breakpoints.up(phone) {

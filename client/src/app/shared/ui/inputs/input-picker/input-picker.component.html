@@ -8,7 +8,14 @@
   <input
     #field
     class="input-picker__field"
-    type="text"
+    [type]="type() === 'time' && nativeTime() ? 'time' : 'text'"
+    [value]="value()"
+    [readOnly]="type() === 'time' && !nativeTime()"
+    (click)="type() === 'time' && !nativeTime() ? open() : null"
+    (input)="type() === 'time' && nativeTime() ? onNativeTime($event) : null"
+    (keydown)="onTimeKeydown($event)"
+    [attr.aria-expanded]="type() === 'time' && !nativeTime() ? timeOpen() : null"
+    [attr.aria-controls]="type() === 'time' && !nativeTime() ? inputId() + '-time-panel' : null"
     [id]="inputId()"
     [name]="inputId()"
     [placeholder]="type() === 'date' ? 'yyyy-mm-dd' : 'hh:mm'"
@@ -31,6 +38,62 @@
     ></svg>
   </button>
 </div>
+@if (type() === "time" && !nativeTime()) {
+  <div
+    #timePanel
+    popover="manual"
+    class="input-picker__time-panel"
+    (focusout)="onTimeFocusout($event)"
+    [id]="inputId() + '-time-panel'"
+    role="dialog"
+    [attr.aria-label]="'Choose ' + label()"
+  >
+    <div class="input-picker__time-columns">
+      <fieldset>
+        <legend>Hour</legend>
+        <div class="input-picker__time-list">
+          @for (hour of hours; track hour) {
+            <button
+              type="button"
+              [attr.aria-pressed]="selectedHour() === hour"
+              (click)="selectTimePart('hour', hour, $event)"
+            >
+              {{ hour }}
+            </button>
+          }
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Minute</legend>
+        <div class="input-picker__time-list">
+          @for (minute of minutes; track minute) {
+            <button
+              type="button"
+              [attr.aria-pressed]="selectedMinute() === minute"
+              (click)="selectTimePart('minute', minute, $event)"
+            >
+              {{ minute }}
+            </button>
+          }
+        </div>
+      </fieldset>
+    </div>
+    <div class="input-picker__time-actions">
+      <app-button
+        label="Cancel"
+        variant="neutral"
+        size="small"
+        (clicked)="closeTime(true)"
+      ></app-button>
+      <app-button
+        label="Apply"
+        size="small"
+        [disabled]="selectedHour() === null || selectedMinute() === null"
+        (clicked)="applyTime()"
+      ></app-button>
+    </div>
+  </div>
+}
 @if (error()) {
   <app-input-feedback [message]="error()" [feedbackId]="inputId() + '-error'"></app-input-feedback>
 }

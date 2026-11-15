@@ -14,6 +14,7 @@ import {
   viewChildren,
 } from "@angular/core";
 import { DIALOG_DATA } from "@angular/cdk/dialog";
+import { LucideCalendar } from "@lucide/angular";
 import { FilmSummary } from "@core/http";
 import { FilmFacade } from "@core/store";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
@@ -41,6 +42,7 @@ const initialFormState = {
     InputTextareaComponent,
     ButtonComponent,
     NgTemplateOutlet,
+    LucideCalendar,
   ],
   templateUrl: "./viewing-log.html",
   styleUrl: "./viewing-log.scss",
