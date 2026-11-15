@@ -11,3 +11,4 @@ server/package-lock.json
 .husky/_/
 .agents/
 .codex/
+client/storybook-static/

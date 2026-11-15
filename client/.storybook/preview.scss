@@ -1,0 +1,29 @@
+html,
+body {
+  height: auto;
+  min-height: 100%;
+  overflow: auto;
+  scroll-behavior: auto;
+}
+.storybook-preview {
+  width: 100%;
+  max-width: 720px;
+  padding: 16px;
+  box-sizing: border-box;
+  background: var(--surface-0);
+  color: var(--text-0);
+  border-radius: 8px;
+}
+.sbdocs-wrapper {
+  background: var(--surface-0) !important;
+}
+.storybook-input {
+  display: grid;
+  gap: 16px;
+  max-width: 360px;
+  padding-bottom: 24px;
+}
+.storybook-modal-copy {
+  color: var(--text-1);
+  line-height: 1.6;
+}

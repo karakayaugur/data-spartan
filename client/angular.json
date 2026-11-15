@@ -98,6 +98,34 @@
               "includePaths": ["src/assets/styles"]
             }
           }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "data-spartan:build",
+            "tsConfig": ".storybook/tsconfig.json",
+            "compodoc": false,
+            "styles": ["src/styles.scss", ".storybook/preview.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/assets/styles"]
+            },
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "data-spartan:build",
+            "tsConfig": ".storybook/tsconfig.json",
+            "compodoc": false,
+            "styles": ["src/styles.scss", ".storybook/preview.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/assets/styles"]
+            },
+            "outputDir": "storybook-static"
+          }
         }
       }
     }

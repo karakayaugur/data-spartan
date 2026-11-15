@@ -20,3 +20,7 @@ coverage/
 /.angular-cli.json
 /.ng/
 *.tsbuildinfo
+
+# Storybook generated files
+client/storybook-static/
+client/.storybook-cache/

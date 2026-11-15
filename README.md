@@ -83,3 +83,11 @@ Application styles use SCSS and component-scoped BEM names: `block__element` and
 Angular CLI generates SCSS for new components by default.
 
 Responsive styles use a mobile-first approach: base rules target small screens, with `breakpoints.up(...)` adding wider layouts (tablet: 641px, laptop: 1024px). Keep motion and theme preference queries separate from viewport breakpoints.
+
+## Storybook
+
+Run `npm run storybook` from the repository root to open the shared UI catalog at http://localhost:6006. No BFF or application startup request is required.
+
+The toolbar switches between light and dark themes using the application's real theme tokens. Stories cover Button, Badge, Date, Time, Textarea, validation feedback, and the shared modal opened through `ModalService`. Controls expose component inputs; the accessibility panel provides manual accessibility checks.
+
+Run `npm run build-storybook` to generate a standalone catalog in `client/storybook-static/`. Story files live beside components and are excluded from the application build. The existing `/buttons` and `/badges` application routes remain available.

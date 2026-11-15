@@ -14,7 +14,9 @@
     "test:server": "npm --prefix server test",
     "prepare": "husky",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "storybook": "npm --prefix client run storybook",
+    "build-storybook": "npm --prefix client run build-storybook"
   },
   "engines": {
     "node": ">=22.0.0"
