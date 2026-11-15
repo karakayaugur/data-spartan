@@ -1,8 +1,9 @@
 <section class="cast" aria-label="Film cast">
   <div class="cast-layout">
     <div class="cast-list">
+      <h3 class="cast-heading" id="cast-list-title">CAST</h3>
       @if (cast().length) {
-        <ul aria-label="Cast members">
+        <ul aria-labelledby="cast-list-title">
           @for (character of cast(); track character.id) {
             <li>
               <button
@@ -24,12 +25,12 @@
         <p>No cast information available.</p>
       }
     </div>
-    <section id="character-details" class="character-details" aria-label="Character details">
+    <div id="character-details" class="character-details" aria-label="Character details">
       @if (selectedCharacterId(); as id) {
         <app-character-panel [characterId]="id"></app-character-panel>
       } @else {
         <p class="selection-hint">Select a cast member to see their details.</p>
       }
-    </section>
+    </div>
   </div>
 </section>

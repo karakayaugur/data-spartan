@@ -12,20 +12,26 @@ h2 {
   margin: 20px 0 12px;
 }
 dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 32px;
   margin-top: 24px;
 }
-dl div {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
+dl > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
   padding: 16px 0;
   border-top: 1px solid var(--surface-3);
   font-size: 14px;
 }
 dt {
+  overflow-wrap: anywhere;
   color: var(--text-2);
 }
 dd {
+  min-width: 0;
+  overflow-wrap: anywhere;
   margin: 0;
   text-align: right;
 }
@@ -41,4 +47,13 @@ dd {
   padding: 12px;
   background: var(--surface-2);
   color: var(--text-0);
+}
+
+@media (max-width: 1023px) {
+  :host {
+    padding: 20px;
+  }
+  dl {
+    grid-template-columns: 1fr;
+  }
 }
