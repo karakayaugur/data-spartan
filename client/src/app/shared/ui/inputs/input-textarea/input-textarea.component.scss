@@ -18,7 +18,7 @@
   }
   &__required-indicator {
     margin-left: 0.25rem;
-    color: var(--destructive-1);
+    color: var(--destructive);
     font-size: var(--font-size-0);
     font-weight: var(--font-weight-5);
   }
@@ -46,8 +46,8 @@ textarea:focus {
   box-shadow: 0 0 0 3px color-mix(in oklch, var(--brand) 20%, transparent);
 }
 textarea.input-textarea__input-invalid {
-  border-color: var(--destructive-1);
-  box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive-1) 18%, transparent);
+  border-color: var(--destructive);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive) 18%, transparent);
 }
 
 .input-textarea {
@@ -94,6 +94,6 @@ textarea::placeholder {
   }
 
   &__char-counter.input-textarea__char-counter--at-limit {
-    color: var(--destructive-1);
+    color: var(--destructive);
   }
 }

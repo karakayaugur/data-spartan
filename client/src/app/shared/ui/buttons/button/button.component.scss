@@ -1,5 +1,5 @@
 :host {
-  --button-scale: 0.825;
+  --button-scale: 1;
 }
 
 :host(.button--block) {
@@ -62,12 +62,12 @@
   }
 
   &__control[data-variant="danger"] {
-    background: var(--destructive-1);
+    background: var(--destructive);
     color: var(--white, #fff);
   }
 
   &__control[data-variant="warning"] {
-    background: var(--warning-1);
+    background: var(--warning);
     color: var(--warning-fg);
   }
 }
@@ -79,11 +79,11 @@
   }
 
   &__control[data-variant="danger-outline"] {
-    --outline-color: var(--destructive-1);
+    --outline-color: var(--destructive);
   }
 
   &__control[data-variant="warning-outline"] {
-    --outline-color: var(--warning-1);
+    --outline-color: var(--warning);
   }
 
   &__control[data-variant="primary-outline"],
@@ -103,24 +103,25 @@
 
   &__control[data-size="small"] {
     padding: calc(0.375rem * var(--button-scale)) calc(0.75rem * var(--button-scale));
-    height: calc(2.25rem * var(--button-scale));
+    height: calc(var(--control-height-small) * var(--button-scale));
     font-size: calc(var(--font-size-0) * var(--button-scale));
   }
 
   &__control[data-size="medium"] {
     padding: calc(0.375rem * var(--button-scale)) calc(0.75rem * var(--button-scale));
-    height: calc(2.5rem * var(--button-scale));
+    height: calc(var(--control-height-medium) * var(--button-scale));
     font-size: calc(var(--font-size-0) * var(--button-scale));
   }
 
   &__control[data-size="large"] {
     padding: calc(0.75rem * var(--button-scale)) calc(1.5rem * var(--button-scale));
-    height: calc(3rem * var(--button-scale));
+    height: calc(var(--control-height-large) * var(--button-scale));
     font-size: calc(var(--font-size-1) * var(--button-scale));
   }
 
   &__control svg {
     flex-shrink: 0;
+    scale: var(--button-icon-scale, 1);
   }
 }
 

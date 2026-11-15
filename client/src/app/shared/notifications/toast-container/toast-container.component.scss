@@ -28,7 +28,7 @@
     animation: toast-in 180ms ease-out;
   }
   &__toast[data-variant="error"] {
-    --toast-accent: var(--destructive-1);
+    --toast-accent: var(--destructive);
   }
   &__toast[data-variant="success"] {
     --toast-accent: var(--green-7);

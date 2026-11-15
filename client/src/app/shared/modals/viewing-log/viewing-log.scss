@@ -12,17 +12,15 @@
   }
   &__form {
     display: grid;
-    gap: 16px;
-  }
-  &__date-time {
-    display: grid;
+    gap: 1rem;
     grid-template-columns: 1fr;
-    gap: 16px;
   }
 }
+
 section {
   margin-top: 28px;
 }
+
 .viewing-log {
   &__viewing {
     display: flex;

@@ -1,6 +1,17 @@
 :host {
+  --picker-height: var(--control-height-medium);
+  --picker-font-size: var(--font-size-0);
   display: block;
   min-width: 0;
+}
+
+:host([data-size="small"]) {
+  --picker-height: var(--control-height-small);
+}
+
+:host([data-size="large"]) {
+  --picker-height: var(--control-height-large);
+  --picker-font-size: var(--font-size-1);
 }
 .input-picker {
   &__label {
@@ -12,10 +23,11 @@
   }
   &__required {
     margin-left: 0.25rem;
-    color: var(--destructive-1);
+    color: var(--destructive);
   }
   &__control {
     position: relative;
+    height: var(--picker-height);
     border: 1px solid var(--surface-2);
     border-radius: var(--radius-4);
     background: light-dark(#fff, rgb(255 255 255 / 5%));
@@ -25,22 +37,23 @@
     box-shadow: 0 0 0 3px color-mix(in oklch, var(--brand) 20%, transparent);
   }
   &__control--invalid {
-    border-color: var(--destructive-1);
+    border-color: var(--destructive);
   }
   &__field {
     width: 100%;
-    height: 48px;
-    padding: 0.75rem 2.75rem 0.75rem 0.875rem;
+    height: 100%;
+    padding: 0 2.75rem 0 1rem;
     border: 0;
     outline: 0;
     background: transparent;
     color: var(--text-1);
     font: inherit;
+    font-size: var(--picker-font-size);
     cursor: pointer;
   }
   &__field::placeholder {
     color: var(--text-muted);
-    font-size: var(--font-size-0);
+    font-size: inherit;
     opacity: 1;
   }
   &__trigger {
@@ -58,5 +71,9 @@
   &__trigger:focus-visible {
     outline: 2px solid var(--brand);
     outline-offset: 2px;
+  }
+
+  &__control:focus-within .input-picker__trigger {
+    color: var(--brand);
   }
 }

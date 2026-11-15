@@ -1,24 +1,22 @@
 <app-modal
   [title]="film.title + ' (' + (film.releaseDate | date: 'MMM d, yyyy') + ')'"
-  size="large"
+  size="small"
 >
   <form class="viewing-log__form" (submit)="onSubmit(); $event.preventDefault()" novalidate>
-    <div class="viewing-log__date-time">
-      <app-input-picker
-        inputId="viewing-date"
-        label="Date"
-        [min]="film.releaseDate"
-        [max]="today"
-        ear
-        [(value)]="form.date"
-      ></app-input-picker>
-      <app-input-picker
-        inputId="viewing-time"
-        type="time"
-        label="Time"
-        [(value)]="form.time"
-      ></app-input-picker>
-    </div>
+    <app-input-picker
+      inputId="viewing-date"
+      label="Date"
+      [min]="film.releaseDate"
+      [max]="today"
+      ear
+      [(value)]="form.date"
+    ></app-input-picker>
+    <app-input-picker
+      inputId="viewing-time"
+      type="time"
+      label="Time"
+      [(value)]="form.time"
+    ></app-input-picker>
     <app-input-textarea
       inputId="viewing-description"
       label="Description"
@@ -26,7 +24,7 @@
       [rows]="2"
       [(value)]="form.description"
     ></app-input-textarea>
-    <app-button label="Add viewing" type="submit"></app-button>
+    <app-button label="Add viewing" icon="plus" type="submit"></app-button>
   </form>
 
   @if(viewings()[0]){

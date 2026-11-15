@@ -25,12 +25,12 @@
 }
 
 .badge[data-variant="danger"] {
-  background: var(--destructive-1);
+  background: var(--destructive);
   color: var(--white, #fff);
 }
 
 .badge[data-variant="warning"] {
-  background: var(--warning-1);
+  background: var(--warning);
   color: var(--warning-fg);
 }
 
@@ -39,11 +39,11 @@
 }
 
 .badge[data-variant="danger-outline"] {
-  --outline-color: var(--destructive-1);
+  --outline-color: var(--destructive);
 }
 
 .badge[data-variant="warning-outline"] {
-  --outline-color: var(--warning-1);
+  --outline-color: var(--warning);
 }
 
 .badge[data-variant="primary-outline"],
@@ -72,7 +72,7 @@
   --status-color: light-dark(var(--green-8), var(--green-4));
 }
 .badge[data-variant="error"] {
-  --status-color: var(--destructive-1);
+  --status-color: var(--destructive);
 }
 .badge[data-variant="info"] {
   --status-color: light-dark(var(--blue-7), var(--blue-4));

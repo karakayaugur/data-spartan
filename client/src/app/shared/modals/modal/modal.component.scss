@@ -47,7 +47,13 @@
   }
 
   &__close-button {
+    --button-scale: 0.78;
+    --button-icon-scale: 1.6;
     flex-shrink: 0;
+    hover {
+      background: var(--surface-2);
+      scale: 1.05;
+    }
   }
 
   &__body {

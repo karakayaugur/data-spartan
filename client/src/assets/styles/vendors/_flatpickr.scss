@@ -5,6 +5,7 @@
   .flatpickr-wrapper {
     display: block;
     width: 100%;
+    height: 100%;
   }
 
   .flatpickr-calendar {
@@ -97,7 +98,9 @@
   }
 
   .flatpickr-months .flatpickr-disabled {
-    display: none;
+    display: flex;
+    opacity: 0.3;
+    pointer-events: none;
   }
 
   .flatpickr-months .flatpickr-prev-month:hover,
@@ -114,6 +117,7 @@
 
   .flatpickr-weekdays {
     height: var(--size-7);
+    margin-bottom: var(--size-2);
     background: transparent;
   }
 
@@ -163,7 +167,27 @@
   }
 
   .flatpickr-day.today {
-    border-color: var(--text-2);
+    border-color: transparent;
+    background: color-mix(in srgb, var(--brand) 12%, var(--surface-1));
+    color: var(--text-0);
+  }
+
+  .flatpickr-day.today::after {
+    content: "";
+    position: absolute;
+    bottom: 3px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--brand);
+  }
+
+  .flatpickr-day.today:is(:hover, :focus) {
+    background: var(--surface-2);
+  }
+
+  .flatpickr-day.today.selected::after {
+    background: currentColor;
   }
 
   .flatpickr-day:is(.prevMonthDay, .nextMonthDay) {
@@ -188,12 +212,21 @@
     cursor: not-allowed;
   }
 
+  .flatpickr-day.today.flatpickr-disabled::after {
+    display: none;
+  }
+
   .numInputWrapper {
     border-radius: var(--radius-4);
   }
 
   .numInputWrapper:hover {
     background: var(--surface-2);
+  }
+
+  .flatpickr-current-month .numInputWrapper,
+  .flatpickr-current-month .numInputWrapper:hover {
+    background: transparent;
   }
 
   .numInputWrapper span {
@@ -309,6 +342,12 @@
   right: 0;
   left: auto;
   width: 100%;
+}
+
+.input-picker-popover .flatpickr-calendar {
+  position: fixed;
+  max-width: calc(100vw - 16px);
+  overflow-y: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, input } from "@angular/core";
 import { DialogRef } from "@angular/cdk/dialog";
-import { ButtonComponent } from "@shared/shared-ui";
+import { ButtonComponent } from "@shared/ui/buttons/button/button.component";
 
 export type ModalSize = "small" | "medium" | "large" | "full";
 

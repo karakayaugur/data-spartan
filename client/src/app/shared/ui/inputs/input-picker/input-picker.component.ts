@@ -32,6 +32,7 @@ import { InputFeedbackComponent } from "../input-feedback/input-feedback.compone
   host: {
     class: "input-picker",
     "[attr.data-type]": "type()",
+    "[attr.data-size]": "size()",
     "(keydown.escape)": "onEscape($event)",
   },
   templateUrl: "./input-picker.component.html",
@@ -43,6 +44,7 @@ export class InputPickerComponent implements Validatable {
   readonly inputId = input.required<string>();
   readonly label = input.required<string>();
   readonly type = input<"date" | "time">("date");
+  readonly size = input<"small" | "medium" | "large">("medium");
   readonly required = input(true);
   readonly min = input("");
   readonly max = input("");
@@ -50,9 +52,34 @@ export class InputPickerComponent implements Validatable {
   private readonly field = viewChild.required<ElementRef<HTMLInputElement>>("field");
   private readonly ready = signal(false);
   private picker?: Instance;
+  private popoverHost?: HTMLDivElement;
+
+  private positionPopover(picker: Instance): void {
+    const field = this.field().nativeElement;
+    const bounds = field.getBoundingClientRect();
+    const calendar = picker.calendarContainer;
+    const viewport = field.ownerDocument.documentElement;
+    const width = Math.min(this.type() === "time" ? bounds.width : 320, viewport.clientWidth - 16);
+    calendar.style.width = `${width}px`;
+    calendar.style.maxHeight = "none";
+    const height = calendar.offsetHeight;
+    const below = viewport.clientHeight - bounds.bottom - 16;
+    const above = bounds.top - 16;
+    const showAbove = height > below && above > below;
+    const available = Math.max(0, showAbove ? above : below);
+    calendar.style.maxHeight = `${available}px`;
+    calendar.style.left = `${Math.max(8, Math.min(bounds.left, viewport.clientWidth - width - 8))}px`;
+    calendar.style.top = `${showAbove ? Math.max(8, bounds.top - Math.min(height, available) - 8) : bounds.bottom + 8}px`;
+  }
 
   constructor() {
     afterNextRender(() => {
+      const field = this.field().nativeElement;
+      this.popoverHost = field.ownerDocument.createElement("div");
+      this.popoverHost.className = "input-picker input-picker-popover";
+      (field.closest("cdk-dialog-container") ?? field.ownerDocument.body).appendChild(
+        this.popoverHost,
+      );
       this.picker = flatpickr(this.field().nativeElement, {
         enableTime: this.type() === "time",
         noCalendar: this.type() === "time",
@@ -62,7 +89,8 @@ export class InputPickerComponent implements Validatable {
         defaultHour: 0,
         defaultMinute: 0,
         disableMobile: true,
-        static: true,
+        appendTo: this.popoverHost,
+        position: (picker) => this.positionPopover(picker),
         allowInput: false,
         locale: { firstDayOfWeek: 1 },
         onReady: (_, __, picker) => {
@@ -74,8 +102,9 @@ export class InputPickerComponent implements Validatable {
           this.value.set(value);
           if (this.error()) this.validate();
         },
-        onOpen: () => {
+        onOpen: (_, __, picker) => {
           if (this.type() === "time" && !this.value()) this.picker?.setDate("00:00", true);
+          this.positionPopover(picker);
         },
       });
       this.ready.set(true);
@@ -92,7 +121,17 @@ export class InputPickerComponent implements Validatable {
       this.picker?.setDate(value, false);
       if (!value) this.error.set("");
     });
-    inject(DestroyRef).onDestroy(() => this.picker?.destroy());
+    const reposition = () => {
+      if (this.picker?.isOpen) this.positionPopover(this.picker);
+    };
+    document.addEventListener("scroll", reposition, true);
+    window.addEventListener("resize", reposition);
+    inject(DestroyRef).onDestroy(() => {
+      document.removeEventListener("scroll", reposition, true);
+      window.removeEventListener("resize", reposition);
+      this.picker?.destroy();
+      this.popoverHost?.remove();
+    });
   }
 
   open(): void {

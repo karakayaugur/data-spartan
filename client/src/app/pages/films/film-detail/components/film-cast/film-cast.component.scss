@@ -17,14 +17,13 @@
     border: 1px solid var(--surface-3);
     border-radius: var(--radius-8);
     background: var(--surface-1);
-    align-items: start;
+    align-items: stretch;
   }
 
   &__cast-layout > div {
     border-radius: var(--radius-8);
     padding: 0.5rem;
     background: var(--surface-0);
-    height: 100%;
   }
 
   &__cast-list .film-cast__cast-heading {
@@ -81,6 +80,13 @@
   }
 
   &__character-details {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  &__character-details > app-character-panel {
+    flex: 1;
     min-width: 0;
   }
 

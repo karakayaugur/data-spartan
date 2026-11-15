@@ -15,13 +15,14 @@
   --text-muted: var(--gray-5);
 
   --destructive-0: var(--red-0);
-  --destructive-1: var(--red-6);
-  --warning-1: var(--orange-6);
+  --destructive: var(--red-9);
+  --warning: var(--orange-6);
   --warning-fg: var(--gray-0);
 }
 
 [color-scheme="dark"] {
   color-scheme: dark;
+  --destructive: var(--red-6);
 
   --brand: #15a6de;
 
@@ -39,6 +40,7 @@
 @media (prefers-color-scheme: dark) {
   :root:not([color-scheme]) {
     color-scheme: dark;
+    --destructive: var(--red-6);
 
     --brand: #15a6de;
 
