@@ -4,7 +4,6 @@ import { Validatable, VALIDATABLE } from "@shared/models/validatable.model";
 
 @Component({
   selector: "app-input-textarea",
-  standalone: true,
   imports: [InputFeedbackComponent],
   templateUrl: "./input-textarea.component.html",
   styleUrl: "./input-textarea.component.css",

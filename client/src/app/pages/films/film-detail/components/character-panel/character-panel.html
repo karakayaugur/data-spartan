@@ -8,8 +8,8 @@
     <button type="button" class="retry" (click)="load()">Try again</button>
   </div>
   } @else if (character(); as person) {
-  <h2>{{ person.name }}</h2>
-  <app-avatar-badge [type]="person.kind"></app-avatar-badge>
+  <h3>{{ person.name }}</h3>
+  <app-avatar-badge [type]="person.kind" [label]="person.name"></app-avatar-badge>
   @if (person.kind === 'robot') {
   <dl>
     <div>

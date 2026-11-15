@@ -37,7 +37,6 @@ const WEEKDAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
 @Component({
   selector: "app-input-date",
-  standalone: true,
   imports: [LucideDynamicIcon, InputFeedbackComponent],
   templateUrl: "./input-date.component.html",
   styleUrl: "./input-date.component.css",

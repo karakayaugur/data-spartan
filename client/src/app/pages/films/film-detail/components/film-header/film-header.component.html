@@ -1,0 +1,20 @@
+<header class="film-header">
+  <span class="eyebrow">EPISODE {{ film().episodeId }}</span>
+  <h1>{{ film().episodeId }} - {{ film().title }}</h1>
+  <p class="film-meta">
+    {{ film().releaseDate | date: "longDate" }} <span aria-hidden="true">·</span> Directed by
+    {{ film().director }}
+  </p>
+  <div class="viewing-count" aria-live="polite">
+    <app-button
+      [label]="'Watched ' + viewingCount() + (viewingCount() === 1 ? ' time' : ' times')"
+      variant="neutral"
+      size="small"
+      ariaHasPopup="dialog"
+      [ariaLabel]="
+        'Open viewing log for ' + film().title + ', watched ' + viewingCount() + ' times'
+      "
+      (clicked)="openModal.emit()"
+    ></app-button>
+  </div>
+</header>

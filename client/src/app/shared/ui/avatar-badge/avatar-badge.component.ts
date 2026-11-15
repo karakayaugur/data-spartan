@@ -14,8 +14,9 @@ export type AvatarBadgeType = "robot" | "organic";
 })
 export class AvatarBadgeComponent {
   readonly type = input.required<AvatarBadgeType>();
+  readonly label = input.required<string>();
   readonly icon = computed(() => (this.type() === "robot" ? "bot" : "user"));
-  readonly label = computed(() =>
-    this.type() === "robot" ? "Artificial being · Droid" : "Organic character",
-  );
+  // readonly label = computed(() =>
+  //   this.type() === "robot" ? "Artificial being · Droid" : "Organic character",
+  // );
 }

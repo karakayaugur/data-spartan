@@ -15,7 +15,6 @@ export type ButtonSize = "small" | "medium" | "large";
 
 @Component({
   selector: "app-button",
-  standalone: true,
   imports: [LucideDynamicIcon, A11yModule],
   templateUrl: "./button.component.html",
   styleUrl: "./button.component.css",
