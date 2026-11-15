@@ -23,12 +23,7 @@
   border-radius: var(--radius-8);
   padding: 0.5rem;
   background: var(--surface-0);
-}
-
-/* --- Sol Taraf: Cast Listesi --- */
-.cast-list {
-  /* .cast-layout > div zaten arka plan ve padding veriyor, 
-     burada sadece liste içi scroll ve liste yapılandırması kalıyor */
+  height: 100%;
 }
 
 .cast-list .cast-heading {
@@ -39,7 +34,7 @@
 .cast-list ul {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem; /* Butonlar arası hafif boşluk */
+  gap: 0.25rem;
   margin: 0;
   padding: 0;
   list-style: none;

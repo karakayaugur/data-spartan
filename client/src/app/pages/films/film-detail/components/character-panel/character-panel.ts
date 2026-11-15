@@ -1,12 +1,30 @@
+import {
+  LucideDna,
+  LucideTags,
+  LucideGlobe,
+  LucideRuler,
+  LucideCalendar,
+  LucideWeight,
+  LucideFactory,
+} from "@lucide/angular";
 import { Component, DestroyRef, inject, input, signal } from "@angular/core";
 import { takeUntilDestroyed, toObservable } from "@angular/core/rxjs-interop";
 import { catchError, combineLatest, of, startWith, Subject, switchMap, tap } from "rxjs";
-import { AvatarBadgeComponent } from "@shared/ui/avatar-badge";
+import { AvatarBadgeComponent } from "./avatar-badge/avatar-badge.component";
 import { Character, CharacterService } from "@core/http";
 
 @Component({
   selector: "app-character-panel",
-  imports: [AvatarBadgeComponent],
+  imports: [
+    AvatarBadgeComponent,
+    LucideDna,
+    LucideTags,
+    LucideGlobe,
+    LucideRuler,
+    LucideCalendar,
+    LucideWeight,
+    LucideFactory,
+  ],
   templateUrl: "./character-panel.html",
   styleUrl: "./character-panel.css",
 })

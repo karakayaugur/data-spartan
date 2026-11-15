@@ -3,56 +3,83 @@
   <p class="status" role="status">Loading character…</p>
   } @else if (failed()) {
   <div class="status" role="alert">
-    <h2>Character unavailable</h2>
+    <h3>Character unavailable</h3>
     <p>We couldn't load these details.</p>
     <button type="button" class="retry" (click)="load()">Try again</button>
   </div>
   } @else if (character(); as person) {
-  <h3>{{ person.name }}</h3>
-  <app-avatar-badge [type]="person.kind" [label]="person.name"></app-avatar-badge>
-  @if (person.kind === 'robot') {
-  <dl>
-    <div>
-      <dt>Height</dt>
-      <dd>{{ display(person.height, ' cm') }}</dd>
-    </div>
-    <div>
-      <dt>Mass</dt>
-      <dd>{{ display(person.mass, ' kg') }}</dd>
-    </div>
-    <div>
-      <dt>Manufacturing year</dt>
-      <dd>{{ display(person.manufacturingYear) }}</dd>
-    </div>
-  </dl>
-  } @else {
-  <dl>
-    <div>
-      <dt>Species</dt>
-      <dd>
-        @for (species of person.species; track $index) {
-        <span class="species"> {{ species.name }}</span> } @empty { Unknown }
-      </dd>
-    </div>
-    <div>
-      <dt>Classification</dt>
-      <dd>
-        @for (species of person.species; track $index) {
-        <span class="species">{{ species.classification }}</span> } @empty { Unknown }
-      </dd>
-    </div>
-    <div>
-      <dt>Homeworld</dt>
-      <dd>{{ display(person.homeworld) }}</dd>
-    </div>
-    <div>
-      <dt>Height</dt>
-      <dd>{{ display(person.height, ' cm') }}</dd>
-    </div>
-    <div>
-      <dt>Birth year</dt>
-      <dd>{{ display(person.birthYear) }}</dd>
-    </div>
-  </dl>
-  } }
+  <div class="character-content">
+    <h3>{{ person.name }}</h3>
+    <app-avatar-badge [type]="person.kind"></app-avatar-badge>
+    @if (person.kind === 'robot') {
+    <dl>
+      <div>
+        <dt>
+          <svg lucideRuler [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
+          ><span>Height</span>
+        </dt>
+        <dd>{{ display(person.height, ' cm') }}</dd>
+      </div>
+      <div>
+        <dt>
+          <svg lucideWeight [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
+          ><span>Mass</span>
+        </dt>
+        <dd>{{ display(person.mass, ' kg') }}</dd>
+      </div>
+      <div>
+        <dt>
+          <svg lucideFactory [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
+          ><span>Manufacturing year</span>
+        </dt>
+        <dd>{{ display(person.manufacturingYear) }}</dd>
+      </div>
+    </dl>
+    } @else {
+    <dl>
+      <div>
+        <dt>
+          <svg lucideDna [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
+          ><span>Species</span>
+        </dt>
+        <dd>
+          @for (species of person.species; track $index) {
+          <span class="species"> {{ species.name }}</span> } @empty { Unknown }
+        </dd>
+      </div>
+      <div>
+        <dt>
+          <svg lucideTags [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
+          ><span>Classification</span>
+        </dt>
+        <dd>
+          @for (species of person.species; track $index) {
+          <span class="species">{{ species.classification }}</span> } @empty { Unknown }
+        </dd>
+      </div>
+      <div>
+        <dt>
+          <svg lucideGlobe [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
+          ><span>Homeworld</span>
+        </dt>
+        <dd>{{ display(person.homeworld) }}</dd>
+      </div>
+      <div>
+        <dt>
+          <svg lucideRuler [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
+          ><span>Height</span>
+        </dt>
+        <dd>{{ display(person.height, ' cm') }}</dd>
+      </div>
+      <div>
+        <dt>
+          <svg lucideCalendar [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
+          ><span>Birth year</span>
+        </dt>
+        <dd>{{ display(person.birthYear) }}</dd>
+      </div>
+    </dl>
+    }
+  </div>
+  }
 </div>

@@ -14,6 +14,7 @@ import {
   TitleStrategy,
   withComponentInputBinding,
   withRouterConfig,
+  withViewTransitions,
 } from "@angular/router";
 
 import {
@@ -117,6 +118,14 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       routes,
       withComponentInputBinding(),
+      withViewTransitions({
+        skipInitialTransition: true,
+        onViewTransitionCreated: ({ transition }) => {
+          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            transition.skipTransition();
+          }
+        },
+      }),
       withRouterConfig({
         paramsInheritanceStrategy: "always",
       }),

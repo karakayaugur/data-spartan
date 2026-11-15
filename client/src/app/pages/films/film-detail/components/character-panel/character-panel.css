@@ -5,11 +5,14 @@
   border-radius: var(--radius-6);
   background: var(--surface-1);
   color: var(--text-0);
+  position: relative;
+  height: 100%;
 }
-h2 {
+h3 {
   font-size: 28px;
   font-weight: 600;
   margin: 20px 0 12px;
+  text-align: center;
 }
 dl {
   display: grid;
@@ -26,6 +29,9 @@ dl > div {
   font-size: 14px;
 }
 dt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   overflow-wrap: anywhere;
   color: var(--text-2);
 }
@@ -55,5 +61,28 @@ dd {
   }
   dl {
     grid-template-columns: 1fr;
+  }
+}
+
+app-avatar-badge {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+dt svg {
+  flex-shrink: 0;
+}
+
+.character-content {
+  opacity: 0;
+  animation: var(--animation-fade-in);
+  animation-duration: 300ms;
+  animation-fill-mode: both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .character-content {
+    opacity: 1;
+    animation: none;
   }
 }

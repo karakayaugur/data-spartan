@@ -20,3 +20,35 @@ body {
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
 }
+
+/* Keep the application shell still; animate only routed content. */
+::view-transition-old(root),
+::view-transition-new(root),
+::view-transition-group(route-content) {
+  animation: none;
+}
+
+::view-transition-old(route-content) {
+  animation: route-fade-out 250ms ease-out both;
+}
+
+::view-transition-new(route-content) {
+  animation: var(--animation-fade-in);
+  animation-duration: 250ms;
+  animation-fill-mode: both;
+  opacity: 0;
+}
+
+@keyframes route-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(route-content),
+  ::view-transition-new(route-content) {
+    animation: none;
+    opacity: 1;
+  }
+}
