@@ -1,8 +1,7 @@
-<app-modal [title]="film.title" size="large">
-  <p class="viewing-log__note">
-    Record when you watched this film. Records are kept for this browser tab’s session, including
-    page reloads.
-  </p>
+<app-modal
+  [title]="film.title + ' (' + (film.releaseDate | date: 'MMM d, yyyy') + ')'"
+  size="large"
+>
   <form class="viewing-log__form" (submit)="onSubmit(); $event.preventDefault()" novalidate>
     <div class="viewing-log__date-time">
       <app-input-picker
@@ -10,6 +9,7 @@
         label="Date"
         [min]="film.releaseDate"
         [max]="today"
+        ear
         [(value)]="form.date"
       ></app-input-picker>
       <app-input-picker
@@ -28,8 +28,15 @@
     ></app-input-textarea>
     <app-button label="Add viewing" type="submit"></app-button>
   </form>
+
+  @if(viewings()[0]){
+  <ng-container [ngTemplateOutlet]="viewingTemplate"></ng-container>
+  }
+</app-modal>
+
+<ng-template #viewingTemplate>
   <section aria-labelledby="history-title">
-    <h3 id="history-title">Recorded viewings ({{ viewings().length }})</h3>
+    <h3 id="history-title" tabindex="-1">Recorded viewings ({{ viewings().length }})</h3>
     <div aria-live="polite">
       @for (viewing of viewings(); track viewing.id) {
       <article class="viewing-log__viewing">
@@ -55,4 +62,4 @@
       }
     </div>
   </section>
-</app-modal>
+</ng-template>

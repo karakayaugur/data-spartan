@@ -15,7 +15,10 @@ export type ButtonSize = "small" | "medium" | "large";
 
 @Component({
   selector: "app-button",
-  host: { class: "button" },
+  host: {
+    class: "button",
+    "[class.button--block]": "block()",
+  },
   imports: [LucideDynamicIcon, A11yModule],
   templateUrl: "./button.component.html",
   styleUrl: "./button.component.scss",
@@ -35,6 +38,7 @@ export class ButtonComponent {
   readonly iconPosition = input<"start" | "end">("start");
   readonly loading = input(false);
   readonly disabled = input(false);
+  readonly block = input(false);
   readonly type = input<"submit" | "button">("button");
   readonly clicked = output<void>();
 

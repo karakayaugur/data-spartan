@@ -1,0 +1,17 @@
+:host {
+  display: block;
+}
+.confirm-modal {
+  &__message {
+    margin: 0 0 var(--size-4);
+    color: var(--text-1);
+    font-size: var(--font-size-0);
+    line-height: var(--font-lineheight-3);
+    overflow-wrap: anywhere;
+  }
+  &__actions {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--size-2);
+  }
+}

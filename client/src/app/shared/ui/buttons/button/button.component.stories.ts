@@ -20,6 +20,7 @@ const meta: Meta<ButtonComponent> = {
     variant: "primary",
     size: "medium",
     disabled: false,
+    block: false,
     loading: false,
     iconOnly: false,
     icon: null,
@@ -27,6 +28,7 @@ const meta: Meta<ButtonComponent> = {
     clicked: fn(),
   },
   argTypes: {
+    block: { control: "boolean" },
     variant: { control: "select", options: variants },
     size: { control: "inline-radio", options: ["small", "medium", "large"] },
     icon: { control: "select", options: [null, "plus", "check", "arrow-right", "trash-2", "x"] },
@@ -36,6 +38,7 @@ const meta: Meta<ButtonComponent> = {
 export default meta;
 type Story = StoryObj<ButtonComponent>;
 export const Default: Story = {};
+export const Block: Story = { args: { block: true } };
 export const WithIcon: Story = { args: { icon: "plus", label: "Add viewing" } };
 export const IconOnly: Story = {
   args: { icon: "x", iconOnly: true, ariaLabel: "Close", variant: "ghost" },

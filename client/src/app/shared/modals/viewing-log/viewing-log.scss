@@ -4,7 +4,6 @@
   display: block;
 }
 .viewing-log {
-  &__note,
   &__empty {
     color: var(--text-2);
     font-size: 13px;
@@ -23,10 +22,6 @@
 }
 section {
   margin-top: 28px;
-}
-h3 {
-  font-size: 15px;
-  margin-bottom: 12px;
 }
 .viewing-log {
   &__viewing {

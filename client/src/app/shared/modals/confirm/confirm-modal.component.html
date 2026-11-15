@@ -1,0 +1,21 @@
+<app-modal [title]="data.title" size="small">
+  <p class="confirm-modal__message" id="confirm-modal-message">{{ data.message }}</p>
+  <div class="confirm-modal__actions">
+    <app-button
+      class="confirm-modal__cancel"
+      [label]="data.cancelLabel ?? 'Cancel'"
+      [block]="true"
+      variant="neutral"
+      icon="undo-2"
+      (clicked)="close(false)"
+    ></app-button>
+    <app-button
+      class="confirm-modal__confirm"
+      [label]="data.confirmLabel ?? 'Confirm'"
+      icon="trash-2"
+      [block]="true"
+      variant="danger"
+      (clicked)="close(true)"
+    ></app-button>
+  </div>
+</app-modal>

@@ -1,14 +1,17 @@
 <div class="modal" [attr.data-size]="size()">
   <header class="modal__header">
-    <h2>{{ title() }}</h2>
+    <h3>{{ title() }}</h3>
     <app-button
       icon="x"
       [iconOnly]="true"
-      variant="ghost"
-      size="small"
+      variant="neutral"
+      size="medium"
       ariaLabel="Close modal"
       (clicked)="close()"
+      class="modal__close-button"
     ></app-button>
   </header>
-  <div class="modal__body"><ng-content></ng-content></div>
+  <div class="modal__body">
+    <ng-content></ng-content>
+  </div>
 </div>

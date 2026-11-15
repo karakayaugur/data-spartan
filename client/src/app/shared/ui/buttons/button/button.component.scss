@@ -2,6 +2,15 @@
   --button-scale: 0.825;
 }
 
+:host(.button--block) {
+  display: block;
+  width: 100%;
+
+  .button__control {
+    width: 100%;
+  }
+}
+
 .button {
   &__control {
     position: relative;

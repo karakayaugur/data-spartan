@@ -1,11 +1,26 @@
 import flatpickr from "flatpickr";
-import { DatePipe } from "@angular/common";
+import { DatePipe, NgTemplateOutlet } from "@angular/common";
 import { ModalComponent } from "../modal/modal.component";
 import { InputPickerComponent } from "@shared/shared-ui";
-import { Component, computed, inject, signal, viewChildren } from "@angular/core";
+import {
+  afterNextRender,
+  Component,
+  computed,
+  DestroyRef,
+  ElementRef,
+  inject,
+  Injector,
+  signal,
+  viewChildren,
+} from "@angular/core";
 import { DIALOG_DATA } from "@angular/cdk/dialog";
 import { FilmSummary } from "@core/http";
 import { FilmFacade } from "@core/store";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { ModalService } from "../modal-service";
+import { ConfirmModalComponent } from "../confirm/confirm-modal.component";
+import type { ConfirmModalData } from "../confirm/confirm-modal.types";
+
 import { ButtonComponent } from "@shared/ui/buttons/button/button.component";
 import { VALIDATABLE } from "@shared/models/validatable.model";
 import { InputTextareaComponent } from "@shared/ui/inputs/input-textarea/input-textarea.component";
@@ -25,6 +40,7 @@ const initialFormState = {
     InputPickerComponent,
     InputTextareaComponent,
     ButtonComponent,
+    NgTemplateOutlet,
   ],
   templateUrl: "./viewing-log.html",
   styleUrl: "./viewing-log.scss",
@@ -34,6 +50,11 @@ export class ViewingLog {
   readonly film = inject<FilmSummary>(DIALOG_DATA);
   private readonly filmFacade = inject(FilmFacade);
   private readonly validatables = viewChildren(VALIDATABLE);
+  private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly injector = inject(Injector);
+  private readonly modal = inject(ModalService);
+  private readonly destroyRef = inject(DestroyRef);
+  private confirming = false;
   readonly viewings = computed(() => this.filmFacade.getViewings(this.film.id));
 
   readonly form = {
@@ -64,6 +85,37 @@ export class ViewingLog {
   }
 
   remove(id: string): void {
-    this.filmFacade.removeViewing(this.film.id, id);
+    const viewing = this.viewings().find((item) => item.id === id);
+    if (!viewing || this.confirming) return;
+
+    this.confirming = true;
+    const date = flatpickr.formatDate(flatpickr.parseDate(viewing.date, "Y-m-d")!, "M j, Y");
+    this.modal
+      .open<boolean, ConfirmModalData>(ConfirmModalComponent, {
+        data: {
+          title: "Delete viewing?",
+          message: `Delete the viewing recorded for ${date}, ${viewing.time}? This action cannot be undone.`,
+          confirmLabel: "Delete",
+        },
+        role: "alertdialog",
+        ariaLabel: "Delete viewing?",
+        ariaDescribedBy: "confirm-modal-message",
+        autoFocus: ".confirm-modal__cancel button",
+      })
+      .closed.pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((confirmed) => {
+        this.confirming = false;
+        if (confirmed !== true) return;
+        this.filmFacade.removeViewing(this.film.id, id);
+      });
+  }
+
+  private focusAfterRender(selector: string): void {
+    afterNextRender(
+      () => this.element.nativeElement.querySelector<HTMLElement>(selector)?.focus(),
+      {
+        injector: this.injector,
+      },
+    );
   }
 }
