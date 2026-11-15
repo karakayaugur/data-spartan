@@ -4,18 +4,21 @@
   "type": "module",
   "description": "Data Spartan \u2014 Angular client + Express BFF",
   "scripts": {
+    "predev": "npm run install-packages",
     "dev": "concurrently -k \"nodemon\" \"npm run watch:client\"",
     "watch:client": "npm --prefix client run watch",
     "build": "NODE_ENV=production npm --prefix client run build",
     "install-packages": "npm ci && npm --prefix client ci && npm --prefix server ci",
     "start": "node server/index.js",
+    "clean": "rm -rf client/node_modules/ && rm -rf server/node_modules/ && rm -rf client/dist && rm -rf node_modules/",
     "debug": "concurrently -k \"node --inspect server/index.js\" \"npm run watch:client\"",
     "test": "npm --prefix client test -- --watch=false --browsers=ChromeHeadless",
-    "test:server": "npm --prefix server test",
     "prepare": "husky",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "prestorybook": "npm --prefix client ci --include=dev",
     "storybook": "npm --prefix client run storybook",
+    "prebuild-storybook": "npm --prefix client ci --include=dev",
     "build-storybook": "npm --prefix client run build-storybook"
   },
   "engines": {
@@ -28,9 +31,6 @@
     "lint-staged": "^17.6.0",
     "nodemon": "^3.1.7",
     "prettier": "^3.10.1"
-  },
-  "dependencies": {
-    "@auth0/angular-jwt": "^5.2.0"
   },
   "volta": {
     "node": "24.18.0"

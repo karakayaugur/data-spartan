@@ -4,13 +4,13 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "node index.js",
-    "test": "node --test"
+    "start": "node index.js"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
     "express": "^5.0.1",
-    "helmet": "^8.0.0"
+    "helmet": "^8.0.0",
+    "http-proxy-middleware": "^3.0.11"
   },
   "engines": {
     "node": ">=v24.14.0"

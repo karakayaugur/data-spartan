@@ -3,9 +3,9 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "node:url";
 import helmet from "helmet";
-import apiRoute from "./routes/api.js";
-import errorRoute from "./routes/error.js";
-import { logger } from "./lib/logger.js";
+import { createProxyMiddleware, fixRequestBody } from "http-proxy-middleware";
+import errorRoute from "./middlewares/client-error.js";
+import { logger } from "./middlewares/logger.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -32,13 +32,23 @@ app.get("/health", (_req, res) => {
 });
 
 app.post("/proxyUrl/error", errorRoute);
-app.get("/proxyUrl/error-test", (req, res) => {
-  res.status(500).json({
-    status: "error",
-    message: "This is a test error response",
-  });
-});
-app.use("/proxyUrl", apiRoute);
+app.use(
+  "/proxyUrl",
+  createProxyMiddleware({
+    target: process.env.SWAPI_BASE_URL || "https://swapi.dev/api/",
+    changeOrigin: true,
+    proxyTimeout: 15_000,
+    on: {
+      proxyReq: fixRequestBody,
+      error(error, _req, res) {
+        logger("API proxy failed", { message: error.message });
+        if (res.headersSent) return res.end();
+        res.writeHead(502, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ message: "Unable to reach the upstream API" }));
+      },
+    },
+  }),
+);
 app.use(express.static(clientDist));
 app.get("/{*path}", (_req, res) => {
   res.sendFile(path.join(clientDist, "index.html"));

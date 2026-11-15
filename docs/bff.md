@@ -1,23 +1,17 @@
-# Star Wars BFF
+# Star Wars API proxy
 
 Angular → ApiService → Express `/proxyUrl` → SWAPI.
 
-| BFF endpoint                 | Angular servisi              | Cevap                                    |
-| ---------------------------- | ---------------------------- | ---------------------------------------- |
-| GET /proxyUrl/films          | FilmService.getList()        | FilmSummary[]; bölüm sırasıyla           |
-| GET /proxyUrl/films/:id      | FilmService.getById(id)      | Film; açılış metni ve tüm oyuncu kadrosu |
-| GET /proxyUrl/characters/:id | CharacterService.getById(id) | RobotCharacter veya OrganicCharacter     |
+Express forwards requests under `/proxyUrl` to `SWAPI_BASE_URL` (default `https://swapi.dev/api/`). The proxy preserves the request method, path, query and body, and returns the upstream status, headers and body. It has no SWAPI resource validation, model conversion or server cache. The upstream host is configured on the server; callers cannot choose it.
 
-Cevap tipleri `core/http/film/film.interface.ts` ve `core/http/character/character.interface.ts` dosyalarındadır. Kimlikler SWAPI kaynak kimliğidir; bölüm numarası film kimliği değildir.
+Model conversion lives in Angular `FilmService` and `CharacterService`. FilmService maps snake_case fields, sorts films by episode and returns character URLs unchanged without fetching cast members. CharacterService resolves species and homeworld, classifies Droid/artificial species as robots and uses `birth_year` as manufacturingYear. Missing species remain empty and missing homeworld is Unknown. UI models and viewing history are unchanged.
 
-Robot ayrımı tür adı `Droid` veya sınıflandırma `artificial` olduğunda yapılır. Robot cevabı boy, kütle ve üretim yılı; organik karakter cevabı boy, doğum yılı, gezegen ve tür/sınıflandırma bilgilerini içerir. SWAPI ayrı üretim yılı sunmadığından robotlarda `birth_year` alanı `manufacturingYear` olarak aktarılır. Tür bağlantısı boşsa `species: []` döner; UI bunu bilinmiyor olarak göstermelidir. `unknown` ve `n/a` değerleri korunur.
+SwapiService resolves upstream resource links through the local proxy and caches resources for five minutes on the client. The proxy has a 15-second upstream timeout.
 
-BFF, film kadrosunun bağlantılarını altılı gruplarla çözer. Aynı kaynak için eşzamanlı istekler birleştirilir; başarılı kaynaklar beş dakika bellekte tutulur. Her upstream isteğin 15 saniye zaman aşımı vardır. Başarısız istekler önbellekten çıkarılır. Yeniden başlatma önbelleği temizler.
+Upstream error responses pass through unchanged. Proxy connection failures return 502 with `{ message: "Unable to reach the upstream API" }`. HTTP logging and POST `/proxyUrl/error` client error reporting remain in place. The Angular HTTP interceptor displays error toasts; unexpected client errors are reported separately.
 
-`SWAPI_BASE_URL` varsayılan olarak `https://swapi.dev/api/` değerindedir. Gelen istek URL'si upstream hedefi belirleyemez. Yalnızca açıkça tanımlanmış GET uçları sunulur; eski genel proxy kaldırılmıştır. SWAPI bağlantılarından sadece izin verilen kaynak yolları çıkarılıp yapılandırılmış upstream adresinde çağrılır.
+Viewing history remains in sessionStorage under `data-spartan.films` for the browser tab session.
 
-Hatalar `{ message: string }` biçimindedir: geçersiz kimlik 400, bulunamayan kaynak/uç 404, upstream hatası 502, zaman aşımı 504. Film kadrosunun bir parçası yüklenemezse eksik kadro göstermek yerine istek hata verir. Film listesi açılışta sol menüde yüklenir. `/films/:id` sayfası film metnini ve tam kadroyu gösterir; karakter düğmeleri kadro listesinin yanındaki ayrıntı panelini günceller. Yükleme, hata ve tekrar deneme durumları desteklenir; film değiştirildiğinde önceki istek iptal edilir. Her filmin izleme geçmişi düğmesi bir modal açar; zorunlu tarih/saat ve isteğe bağlı açıklamayla birden fazla kayıt ekleme, listeleme ve silme desteklenir. Bu kayıtlar `data-spartan.films` anahtarı altında film listesiyle birlikte `sessionStorage` içinde tutulur; sayfa yenilendiğinde geri yüklenir ve sekme oturumu boyunca korunur.
+Proxy configuration lives directly in `server/index.js`. HTTP logging and client error reporting live under `server/middlewares/`.
 
-Kaynak şema: https://swapi.dev/documentation
-
-Doğrulama: `npm run test:server`, `npm test`, `npm run build`.
+Validation: `npm test`, `npm run build`.
