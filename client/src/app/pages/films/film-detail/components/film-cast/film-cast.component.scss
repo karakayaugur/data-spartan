@@ -11,9 +11,9 @@
 
   &__cast-layout {
     display: grid;
-    grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
+    grid-template-columns: 1fr;
     gap: 1rem;
-    padding: 1rem;
+    padding: 12px;
     border: 1px solid var(--surface-3);
     border-radius: var(--radius-8);
     background: var(--surface-1);
@@ -39,7 +39,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    max-height: 520px;
+    max-height: 200px;
     overflow-y: auto;
   }
 
@@ -91,15 +91,15 @@
   }
 }
 
-@include breakpoints.down(laptop) {
+@include breakpoints.up(laptop) {
   .film-cast {
     &__cast-layout {
-      grid-template-columns: 1fr;
-      padding: 12px;
+      grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
+      padding: 1rem;
     }
 
     &__cast-list ul {
-      max-height: 200px;
+      max-height: 520px;
     }
   }
 }

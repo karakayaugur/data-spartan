@@ -13,29 +13,28 @@
   }
 
   &__menu-toggle {
-    display: none;
+    display: inline-flex;
+    position: fixed;
+    top: calc(16px + env(safe-area-inset-top, 0px));
+    right: calc(20px + env(safe-area-inset-right, 0px));
+    z-index: 20;
   }
 
   &__content {
     view-transition-name: route-content;
-    padding: 48px 36px;
+    padding: 84px 20px 28px;
     max-width: 1200px;
     margin-inline: auto;
   }
 }
 
-@include breakpoints.down(mobile) {
+@include breakpoints.up(tablet) {
   .layout {
     &__menu-toggle {
-      display: inline-flex;
-      position: fixed;
-      top: calc(16px + env(safe-area-inset-top, 0px));
-      right: calc(20px + env(safe-area-inset-right, 0px));
-      z-index: 20;
+      display: none;
     }
-
     &__content {
-      padding: 84px 20px 28px;
+      padding: 48px 36px;
     }
   }
 }

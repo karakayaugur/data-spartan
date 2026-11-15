@@ -77,7 +77,9 @@ Application styles use SCSS and component-scoped BEM names: `block__element` and
 - `assets/styles/tokens/`: Open Props and primitive tokens.
 - `assets/styles/theme/`: runtime light/dark CSS custom properties.
 - `assets/styles/base/`: reset, fonts and typography.
-- `assets/styles/abstracts/`: CSS-free Sass helpers. Use `@use "abstracts/breakpoints"` and `@include breakpoints.down(mobile)` for responsive component rules.
+- `assets/styles/abstracts/`: CSS-free Sass helpers. Use `@use "abstracts/breakpoints"` and `@include breakpoints.up(tablet)` for responsive component rules.
 - Component SCSS files own their layout and visual styles. Theme values remain `var(--brand)`, `var(--surface-1)`, etc., so theme changes work at runtime.
 
 Angular CLI generates SCSS for new components by default.
+
+Responsive styles use a mobile-first approach: base rules target small screens, with `breakpoints.up(...)` adding wider layouts (tablet: 641px, laptop: 1024px). Keep motion and theme preference queries separate from viewport breakpoints.

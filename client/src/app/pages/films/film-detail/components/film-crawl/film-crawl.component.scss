@@ -6,7 +6,7 @@
 .film-crawl {
   &__story {
     margin-top: 36px;
-    padding: 28px;
+    padding: 20px;
     background: var(--surface-1);
     border: 1px solid var(--surface-3);
     border-radius: var(--radius-8);
@@ -24,10 +24,10 @@
     text-align: center;
   }
 }
-@include breakpoints.down(compact) {
+@include breakpoints.up(compact) {
   .film-crawl {
     &__story {
-      padding: 20px;
+      padding: 28px;
     }
   }
 }

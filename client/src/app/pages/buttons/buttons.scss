@@ -33,7 +33,7 @@ header p {
   }
 
   &__button-panel {
-    padding: 24px;
+    padding: 16px;
     border: 1px solid var(--surface-3);
     border-radius: 16px;
     background: var(--surface-1);
@@ -50,9 +50,9 @@ h2 {
 .buttons {
   &__examples {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     align-items: end;
-    gap: 24px;
+    gap: 20px 16px;
   }
 
   &__example {
@@ -68,15 +68,15 @@ h2 {
   }
 }
 
-@include breakpoints.down(mobile) {
+@include breakpoints.up(tablet) {
   .buttons {
     &__button-panel {
-      padding: 16px;
+      padding: 24px;
     }
 
     &__examples {
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 20px 16px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 24px;
     }
   }
 }

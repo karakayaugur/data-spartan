@@ -2,7 +2,7 @@
 
 :host {
   display: block;
-  padding: 28px;
+  padding: 20px;
   border-radius: var(--radius-6);
   background: var(--surface-1);
   color: var(--text-0);
@@ -17,7 +17,7 @@ h3 {
 }
 dl {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   column-gap: 32px;
   margin-top: 24px;
 }
@@ -58,12 +58,12 @@ dd {
   }
 }
 
-@include breakpoints.down(laptop) {
+@include breakpoints.up(laptop) {
   :host {
-    padding: 20px;
+    padding: 28px;
   }
   dl {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
