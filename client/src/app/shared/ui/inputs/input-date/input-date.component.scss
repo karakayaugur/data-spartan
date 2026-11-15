@@ -23,7 +23,7 @@
     font-weight: var(--font-weight-5);
   }
 
-  &__date-trigger {
+  &__trigger {
     width: 100%;
     border: 1px solid var(--input-border, var(--surface-2));
     border-radius: var(--radius-4);
@@ -36,20 +36,20 @@
       border-color 0.15s ease,
       box-shadow 0.15s ease;
   }
-  &__date-trigger:hover:not(:focus):not(.input-date__trigger--invalid) {
+  &__trigger:hover:not(:focus):not(.input-date__trigger--invalid) {
     border-color: var(--input-border-hover, var(--text-2));
   }
-  &__date-trigger:focus {
+  &__trigger:focus {
     outline: none;
     border-color: var(--input-border-focus, var(--brand));
     box-shadow: 0 0 0 3px color-mix(in oklch, var(--brand) 20%, transparent);
   }
-  &__date-trigger.input-date__trigger--invalid {
+  &__trigger.input-date__trigger--invalid {
     border-color: var(--destructive-1);
     box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive-1) 18%, transparent);
   }
 
-  &__date-trigger {
+  &__trigger {
     height: 3rem;
     padding: 0.5rem 0.875rem;
     line-height: 1.25;
@@ -67,7 +67,7 @@
 }
 
 .input-date {
-  &__date-backdrop {
+  &__backdrop {
     position: fixed;
     inset: 0;
     z-index: 50;
@@ -86,7 +86,7 @@
     z-index: 51;
   }
 
-  &__date-trigger {
+  &__trigger {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -95,31 +95,31 @@
     cursor: pointer;
   }
 
-  &__date-placeholder {
+  &__placeholder {
     color: var(--text-muted);
     font-weight: var(--font-weight-3);
     font-size: var(--font-size-0);
     opacity: 1;
   }
 
-  &__date-icon {
+  &__icon {
     flex-shrink: 0;
     color: var(--text-2);
   }
 
-  &__date-dropdown {
+  &__dropdown {
     position: absolute;
     top: calc(100% + 0.375rem);
     left: 0;
     z-index: 2;
-    width: 100%;
-    min-width: 18.5rem;
-    max-width: 22rem;
+    width: 20rem;
+    min-width: 0;
+    max-width: calc(100vw - 64px);
     padding: 0.875rem;
     background: var(--surface-1);
-    border: var(--border-size-1) solid var(--surface-3);
+    border: var(--border-size-1) solid var(--surface-2);
     border-radius: 0.75rem;
-    box-shadow: var(--elevation-3);
+    box-shadow: var(--shadow-3);
   }
 
   &__calendar-header {
@@ -134,12 +134,12 @@
     width: 100%;
     appearance: none;
     padding: 0.5rem 1.75rem 0.5rem 0.75rem;
-    border: var(--border-size-1) solid var(--input-border);
+    border: var(--border-size-1) solid var(--input-border, var(--surface-2));
     border-radius: 0.5rem;
     background: var(--surface-1)
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23666' stroke-width='1.5' d='m3 4.5 3 3 3-3'/%3E%3C/svg%3E")
       no-repeat right 0.625rem center;
-    font-family: var(--font-body);
+    font-family: var(--font-face);
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--text-1);
@@ -147,8 +147,8 @@
 
     &:focus {
       outline: none;
-      border-color: var(--input-border-focus);
-      box-shadow: 0 0 0 3px var(--focus-ring);
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--brand) 20%, transparent);
     }
   }
 
@@ -182,7 +182,7 @@
     border: none;
     border-radius: 999px;
     background: transparent;
-    font-family: var(--font-body);
+    font-family: var(--font-face);
     font-size: 0.875rem;
     color: var(--text-1);
     cursor: pointer;
