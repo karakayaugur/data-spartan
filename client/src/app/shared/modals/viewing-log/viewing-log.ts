@@ -1,13 +1,13 @@
+import flatpickr from "flatpickr";
 import { DatePipe } from "@angular/common";
 import { ModalComponent } from "../modal/modal.component";
-import { InputTimeComponent } from "@shared/shared-ui";
+import { InputPickerComponent } from "@shared/shared-ui";
 import { Component, computed, inject, signal, viewChildren } from "@angular/core";
 import { DIALOG_DATA } from "@angular/cdk/dialog";
 import { FilmSummary } from "@core/http";
 import { FilmFacade } from "@core/store";
 import { ButtonComponent } from "@shared/ui/buttons/button/button.component";
 import { VALIDATABLE } from "@shared/models/validatable.model";
-import { InputDateComponent } from "@shared/ui/inputs/input-date/input-date.component";
 import { InputTextareaComponent } from "@shared/ui/inputs/input-textarea/input-textarea.component";
 
 const initialFormState = {
@@ -22,8 +22,7 @@ const initialFormState = {
   imports: [
     DatePipe,
     ModalComponent,
-    InputDateComponent,
-    InputTimeComponent,
+    InputPickerComponent,
     InputTextareaComponent,
     ButtonComponent,
   ],
@@ -31,6 +30,7 @@ const initialFormState = {
   styleUrl: "./viewing-log.scss",
 })
 export class ViewingLog {
+  readonly today = flatpickr.formatDate(new Date(), "Y-m-d");
   readonly film = inject<FilmSummary>(DIALOG_DATA);
   private readonly filmFacade = inject(FilmFacade);
   private readonly validatables = viewChildren(VALIDATABLE);

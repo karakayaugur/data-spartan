@@ -1,0 +1,35 @@
+<label class="input-picker__label" [for]="inputId()">
+  {{ label() }}
+  @if (required()) {
+    <span class="input-picker__required" aria-hidden="true">*</span>
+  }
+</label>
+<div class="input-picker__control" [class.input-picker__control--invalid]="error()">
+  <input
+    #field
+    class="input-picker__field"
+    type="text"
+    [id]="inputId()"
+    [name]="inputId()"
+    [placeholder]="type() === 'date' ? 'yyyy-mm-dd' : 'hh:mm'"
+    [attr.aria-required]="required()"
+    [attr.aria-invalid]="!!error()"
+    [attr.aria-describedby]="error() ? inputId() + '-error' : null"
+    autocomplete="off"
+  />
+  <button
+    class="input-picker__trigger"
+    type="button"
+    [attr.aria-label]="'Choose ' + label()"
+    (click)="open()"
+  >
+    <svg
+      [lucideIcon]="type() === 'date' ? 'calendar' : 'clock'"
+      [size]="20"
+      aria-hidden="true"
+    ></svg>
+  </button>
+</div>
+@if (error()) {
+  <app-input-feedback [message]="error()" [feedbackId]="inputId() + '-error'"></app-input-feedback>
+}
