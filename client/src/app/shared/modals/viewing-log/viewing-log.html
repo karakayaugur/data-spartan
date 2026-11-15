@@ -1,6 +1,6 @@
 <app-modal
   [title]="film.title + ' (' + (film.releaseDate | date: 'MMM d, yyyy') + ')'"
-  size="small"
+  size="medium"
 >
   <form class="viewing-log__form" (submit)="onSubmit(); $event.preventDefault()" novalidate>
     <app-input-picker
@@ -8,7 +8,6 @@
       label="Date"
       [min]="film.releaseDate"
       [max]="today"
-      ear
       [(value)]="form.date"
     ></app-input-picker>
     <app-input-picker
@@ -24,7 +23,7 @@
       [rows]="2"
       [(value)]="form.description"
     ></app-input-textarea>
-    <app-button label="Add viewing" icon="plus" type="submit"></app-button>
+    <app-button label="Add viewing" icon="plus" type="submit" [block]="true"></app-button>
   </form>
 
   @if(viewings()[0]){
@@ -40,7 +39,7 @@
         @for (viewing of viewings(); track viewing.id) {
         <li class="viewing-log__viewing">
           <time class="viewing-log__timestamp" [attr.datetime]="viewing.date + 'T' + viewing.time">
-            <svg lucideCalendar [size]="14" [strokeWidth]="1.75" aria-hidden="true"></svg>
+            <svg lucideCalendar [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg>
             <span>{{ viewing.date | date: "MMM d, yyyy" }}, {{ viewing.time }}</span>
           </time>
           <app-button

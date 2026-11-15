@@ -9,9 +9,9 @@
   }
   &__label {
     position: relative;
-    margin-bottom: var(--size-2);
+    margin-bottom: var(--field-label-gap, var(--size-2));
     color: var(--input-label, var(--text-1));
-    font-size: var(--font-size-0);
+    font-size: var(--field-font-size, var(--font-size-0));
     font-weight: var(--font-weight-5);
     letter-spacing: var(--font-letterspacing-0);
     text-align: left;
@@ -26,12 +26,13 @@
 
 textarea {
   width: 100%;
-  border: 1px solid var(--input-border, var(--surface-2));
-  border-radius: var(--radius-4);
+  border: 1px solid var(--input-border, var(--field-border, var(--surface-2)));
+  border-radius: var(--field-radius, var(--radius-4));
   background-color: var(--field-bg);
   box-shadow: none;
   color: var(--text-1);
   font: inherit;
+  font-size: var(--field-font-size, inherit);
   transition:
     background-color 0.15s ease,
     border-color 0.15s ease,
@@ -58,7 +59,7 @@ textarea.input-textarea__input-invalid {
   }
 }
 textarea {
-  min-height: 6.25rem;
+  min-height: var(--textarea-min-height, 6.25rem);
   padding: 0.75rem 0.875rem;
   line-height: 1.4;
   resize: vertical;
@@ -69,7 +70,7 @@ textarea[readonly] {
   cursor: default;
 }
 textarea::placeholder {
-  color: var(--text-muted);
+  color: var(--field-muted, var(--text-muted));
   font-weight: var(--font-weight-3);
   font-size: var(--font-size-0);
   opacity: 1;

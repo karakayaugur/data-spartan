@@ -25,6 +25,7 @@ import type { ConfirmModalData } from "../confirm/confirm-modal.types";
 import { ButtonComponent } from "@shared/ui/buttons/button/button.component";
 import { VALIDATABLE } from "@shared/models/validatable.model";
 import { InputTextareaComponent } from "@shared/ui/inputs/input-textarea/input-textarea.component";
+import { NotificationService } from "@shared/notifications";
 
 const initialFormState = {
   date: "",
@@ -51,6 +52,7 @@ export class ViewingLog {
   readonly today = flatpickr.formatDate(new Date(), "Y-m-d");
   readonly film = inject<FilmSummary>(DIALOG_DATA);
   private readonly filmFacade = inject(FilmFacade);
+  private readonly notifications = inject(NotificationService);
   private readonly validatables = viewChildren(VALIDATABLE);
   private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector = inject(Injector);
@@ -109,6 +111,7 @@ export class ViewingLog {
         this.confirming = false;
         if (confirmed !== true) return;
         this.filmFacade.removeViewing(this.film.id, id);
+        this.notifications.success("Viewing deleted.");
       });
   }
 
