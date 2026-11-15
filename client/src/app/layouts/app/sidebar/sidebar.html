@@ -46,11 +46,11 @@
     }
   </div>
   <nav id="film-navigation" aria-label="Films">
-    films @for (film of films(); track film.id) {
+    films @for (film of films(); track film.episodeId) {
     <div class="sidebar__film-row" [class.sidebar__film-row--active-row]="activeFilm.isActive">
       <a
         class="sidebar__film-link"
-        [routerLink]="['/films', film.id]"
+        [routerLink]="['/films', film.episodeId]"
         routerLinkActive="active"
         #activeFilm="routerLinkActive"
         (click)="closeMenu.emit()"
@@ -68,7 +68,7 @@
       </a>
       <div
         class="sidebar__viewing-action"
-        [title]="'Viewing log · ' + viewingCount(film.id) + (viewingCount(film.id) === 1 ? ' viewing' : ' viewings')"
+        [title]="'Viewing log · ' + viewingCount(film.episodeId) + (viewingCount(film.episodeId) === 1 ? ' viewing' : ' viewings')"
       >
         <app-button
           [iconOnly]="true"
@@ -76,15 +76,15 @@
           variant="ghost"
           size="small"
           ariaHasPopup="dialog"
-          [ariaLabel]="'Viewing log for ' + film.title + ', ' + viewingCount(film.id) + ' viewings'"
+          [ariaLabel]="'Viewing log for ' + film.title + ', ' + viewingCount(film.episodeId) + ' viewings'"
           (clicked)="openViewingLog(film)"
         ></app-button>
-        @if (viewingCount(film.id) > 0) {
+        @if (viewingCount(film.episodeId) > 0) {
         <app-badge
           type="number"
           variant="default"
           class="sidebar__viewing-count"
-          [value]="viewingCount(film.id)"
+          [value]="viewingCount(film.episodeId)"
           aria-hidden="true"
         ></app-badge>
         }

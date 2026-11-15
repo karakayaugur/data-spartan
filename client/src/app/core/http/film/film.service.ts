@@ -1,19 +1,21 @@
 import { inject, Injectable } from "@angular/core";
-import { ApiService } from "../api";
-import { Film, FilmSummary } from "./film.interface";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 import { Cacheable } from "ts-cacheable";
+import { Film, FilmSummary } from "./film.interface";
 
 @Injectable({ providedIn: "root" })
 export class FilmService {
-  private readonly api = inject(ApiService);
+  private readonly apiUrl = "/proxyUrl/films";
+  private readonly http = inject(HttpClient);
 
   @Cacheable()
-  getList() {
-    return this.api.get<FilmSummary[]>("films");
+  getList(): Observable<FilmSummary[]> {
+    return this.http.get<FilmSummary[]>(this.apiUrl);
   }
 
-  @Cacheable({ maxCacheCount: 100 })
-  getById(id: number) {
-    return this.api.get<Film>(`films/${id}`);
+  @Cacheable({ maxCacheCount: 1000 })
+  getByEpisodeId(id: number): Observable<Film> {
+    return this.http.get<Film>(`${this.apiUrl}/${id}`);
   }
 }

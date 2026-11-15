@@ -59,7 +59,7 @@ export class ViewingLog {
   private readonly modal = inject(ModalService);
   private readonly destroyRef = inject(DestroyRef);
   private confirming = false;
-  readonly viewings = computed(() => this.filmFacade.getViewings(this.film.id));
+  readonly viewings = computed(() => this.filmFacade.getViewings(this.film.episodeId));
 
   readonly form = {
     date: signal(initialFormState.date),
@@ -73,7 +73,7 @@ export class ViewingLog {
       .every(Boolean);
     if (!valid) return;
 
-    this.filmFacade.addViewing(this.film.id, {
+    this.filmFacade.addViewing(this.film.episodeId, {
       date: this.form.date(),
       time: this.form.time(),
       description: this.form.description(),
@@ -110,7 +110,7 @@ export class ViewingLog {
       .subscribe((confirmed) => {
         this.confirming = false;
         if (confirmed !== true) return;
-        this.filmFacade.removeViewing(this.film.id, id);
+        this.filmFacade.removeViewing(this.film.episodeId, id);
         this.notifications.success("Viewing deleted.");
       });
   }

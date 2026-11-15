@@ -1,12 +1,16 @@
 import { inject, Injectable } from "@angular/core";
-import { ApiService } from "../api";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { Cacheable } from "ts-cacheable";
 import { Character } from "./character.interface";
 
 @Injectable({ providedIn: "root" })
 export class CharacterService {
-  private readonly api = inject(ApiService);
+  private readonly apiUrl = "/proxyUrl/characters";
+  private readonly http = inject(HttpClient);
 
-  getById(id: number) {
-    return this.api.get<Character>(`characters/${id}`);
+  @Cacheable({ maxCacheCount: 100 })
+  getById(id: number): Observable<Character> {
+    return this.http.get<Character>(`${this.apiUrl}/${id}`);
   }
 }

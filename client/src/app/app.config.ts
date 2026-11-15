@@ -105,14 +105,14 @@ import {
 } from "@lucide/angular";
 
 import { AppErrorHandler } from "@core/services/app-error-handler";
-import { ErrorInterceptor } from "@core/interceptors";
+import { DataInterceptor, ErrorInterceptor } from "@core/interceptors";
 import { routes } from "./app.routes";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     { provide: TitleStrategy, useClass: AppTitleStrategy },
     provideAppInitializer(() => inject(FilmFacade).loadFilms()),
-    provideHttpClient(withInterceptors([ErrorInterceptor])),
+    provideHttpClient(withInterceptors([ErrorInterceptor, DataInterceptor])),
     provideBrowserGlobalErrorListeners(),
     { provide: ErrorHandler, useClass: AppErrorHandler },
     provideZoneChangeDetection({ eventCoalescing: true }),

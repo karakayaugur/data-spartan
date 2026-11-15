@@ -50,11 +50,11 @@ export class FilmFacade {
     this.patchState({ films });
   }
 
-  public getViewings(filmId: number): readonly Viewing[] {
-    return this.viewings()[filmId] ?? [];
+  public getViewings(episodeId: number): readonly Viewing[] {
+    return this.viewings()[episodeId] ?? [];
   }
 
-  public addViewing(filmId: number, payload: ViewingPayload): void {
+  public addViewing(episodeId: number, payload: ViewingPayload): void {
     const viewing: Viewing = {
       ...payload,
       description: payload.description.trim(),
@@ -63,16 +63,16 @@ export class FilmFacade {
     this.patchState({
       viewings: {
         ...this.viewings(),
-        [filmId]: [...this.getViewings(filmId), viewing],
+        [episodeId]: [...this.getViewings(episodeId), viewing],
       },
     });
   }
 
-  public removeViewing(filmId: number, viewingId: string): void {
+  public removeViewing(episodeId: number, viewingId: string): void {
     this.patchState({
       viewings: {
         ...this.viewings(),
-        [filmId]: this.getViewings(filmId).filter((item) => item.id !== viewingId),
+        [episodeId]: this.getViewings(episodeId).filter((item) => item.id !== viewingId),
       },
     });
   }

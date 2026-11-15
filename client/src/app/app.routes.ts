@@ -15,13 +15,13 @@ export const routes: Routes = [
         loadComponent: () => import("./pages/films/film-list/film-list").then((m) => m.FilmList),
       },
       {
-        path: "films/:id",
+        path: "films/:episodeId",
         title: (route) => {
-          const id = Number(route.paramMap.get("id"));
+          const episodeId = Number(route.paramMap.get("episodeId"));
           return (
             inject(FilmFacade)
               .films()
-              .find((film) => film.id === id)?.title ?? "Film"
+              .find((film) => film.episodeId === episodeId)?.title ?? "Film"
           );
         },
         loadComponent: () =>

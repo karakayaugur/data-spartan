@@ -1,5 +1,9 @@
+export interface ResponseModel<T> {
+  results: T[];
+}
+
 export interface FilmSummary {
-  id: number;
+  url: string;
   title: string;
   episodeId: number;
   releaseDate: string;

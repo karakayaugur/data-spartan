@@ -42,7 +42,6 @@ export class FilmStore {
             if (!film || typeof film !== "object") return false;
             const value = film as Record<string, unknown>;
             return (
-              Number.isSafeInteger(value["id"]) &&
               typeof value["title"] === "string" &&
               typeof value["episodeId"] === "number" &&
               typeof value["releaseDate"] === "string"
@@ -52,9 +51,9 @@ export class FilmStore {
 
       const viewings: FilmsState["viewings"] = {};
       if (data?.viewings && typeof data.viewings === "object" && !Array.isArray(data.viewings)) {
-        for (const [filmId, entries] of Object.entries(data.viewings)) {
-          if (!/^[1-9]\d*$/.test(filmId) || !Array.isArray(entries)) continue;
-          viewings[Number(filmId)] = entries.filter(
+        for (const [episodeId, entries] of Object.entries(data.viewings)) {
+          if (!/^[1-9]\d*$/.test(episodeId) || !Array.isArray(entries)) continue;
+          viewings[Number(episodeId)] = entries.filter(
             (item): item is Viewing =>
               !!item &&
               typeof item === "object" &&

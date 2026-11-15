@@ -4,8 +4,8 @@
     <p>Choose a film to discover its story, meet the cast and record your viewings.</p>
   </header>
   <nav class="film-list__film-grid" aria-label="Choose a film">
-    @for (film of films(); track film.id) {
-    <a class="film-list__film-card" [routerLink]="['/films', film.id]">
+    @for (film of films(); track film.episodeId) {
+    <a class="film-list__film-card" [routerLink]="['/films', film.episodeId]">
       <span class="film-list__film-icon" aria-hidden="true"
         ><svg lucideIcon="film" [size]="20" [strokeWidth]="1.75"></svg
       ></span>

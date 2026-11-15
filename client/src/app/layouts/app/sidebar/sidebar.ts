@@ -63,8 +63,8 @@ export class Sidebar {
     }
   }
 
-  viewingCount(filmId: number): number {
-    return this.viewings()[filmId]?.length ?? 0;
+  viewingCount(episodeId: number): number {
+    return this.viewings()[episodeId]?.length ?? 0;
   }
 
   openViewingLog(film: FilmSummary): void {
