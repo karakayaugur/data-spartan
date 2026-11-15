@@ -27,16 +27,6 @@ export const routes: Routes = [
         loadComponent: () =>
           import("./pages/films/film-detail/film-detail").then((m) => m.FilmDetail),
       },
-      {
-        path: "badges",
-        title: "Badges",
-        loadComponent: () => import("./pages/badges/badges").then((m) => m.Badges),
-      },
-      {
-        path: "buttons",
-        title: "Buttons",
-        loadComponent: () => import("./pages/buttons/buttons").then((m) => m.Buttons),
-      },
     ],
   },
   { path: "**", redirectTo: "films" },

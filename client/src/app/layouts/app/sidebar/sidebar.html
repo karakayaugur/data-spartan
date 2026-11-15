@@ -46,7 +46,7 @@
     }
   </div>
   <nav id="film-navigation" aria-label="Films">
-    @for (film of films(); track film.id) {
+    films @for (film of films(); track film.id) {
     <div class="sidebar__film-row" [class.sidebar__film-row--active-row]="activeFilm.isActive">
       <a
         class="sidebar__film-link"
@@ -95,22 +95,6 @@
     } }
   </nav>
   <div class="sidebar__footer">
-    <a
-      class="sidebar__film-link"
-      routerLink="/badges"
-      routerLinkActive="active"
-      ariaCurrentWhenActive="page"
-      (click)="closeMenu.emit()"
-      >Badges</a
-    >
-    <a
-      class="sidebar__film-link"
-      routerLink="/buttons"
-      routerLinkActive="active"
-      ariaCurrentWhenActive="page"
-      (click)="closeMenu.emit()"
-      >Buttons</a
-    >
     <app-theme-toggle></app-theme-toggle>
   </div>
 </aside>
