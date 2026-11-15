@@ -1,7 +1,6 @@
 :host {
   display: block;
   padding: 28px;
-  border: 1px solid var(--surface-3);
   border-radius: var(--radius-6);
   background: var(--surface-1);
   color: var(--text-0);
@@ -76,7 +75,7 @@ dt svg {
 .character-content {
   opacity: 0;
   animation: var(--animation-fade-in);
-  animation-duration: 300ms;
+  animation-duration: 200ms;
   animation-fill-mode: both;
 }
 

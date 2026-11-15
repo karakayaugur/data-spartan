@@ -6,7 +6,6 @@
   margin-top: 40px;
 }
 
-/* --- Ana Grid Yapısı --- */
 .cast-layout {
   display: grid;
   grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
@@ -18,7 +17,6 @@
   align-items: start;
 }
 
-/* .cast-layout altındaki doğrudan iki ana kutu (Sol liste ve sağ detay paneli) */
 .cast-layout > div {
   border-radius: var(--radius-8);
   padding: 0.5rem;
@@ -66,7 +64,10 @@
 .character:hover,
 .character.selected {
   background: var(--surface-2);
-  color: var(--text-muted);
+  font-weight: 500;
+  transition:
+    background-color 0.2s ease,
+    font-weight 0.2s ease;
 }
 
 .character:focus-visible {
@@ -84,7 +85,6 @@
   line-height: 1.8;
 }
 
-/* --- Responsive (Mobil Uyum) --- */
 @media (max-width: 1023px) {
   .cast-layout {
     grid-template-columns: 1fr;

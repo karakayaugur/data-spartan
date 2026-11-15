@@ -31,6 +31,9 @@
 .sidebar a {
   color: inherit;
   text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    font-weight 0.2s ease;
 }
 .brand {
   display: flex;
