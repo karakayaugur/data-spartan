@@ -8,9 +8,12 @@ export type AvatarBadgeType = "robot" | "organic";
   imports: [LucideDynamicIcon],
   providers: [provideLucideIcons(LucideBot, LucideUser)],
   templateUrl: "./avatar-badge.component.html",
-  styleUrl: "./avatar-badge.component.css",
+  styleUrl: "./avatar-badge.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { "[class.avatar-robot]": 'type() === "robot"' },
+  host: {
+    class: "avatar-badge",
+    "[class.avatar-badge--robot]": 'type() === "robot"',
+  },
 })
 export class AvatarBadgeComponent {
   readonly type = input.required<AvatarBadgeType>();

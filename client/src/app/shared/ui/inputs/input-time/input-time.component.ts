@@ -7,9 +7,12 @@ import { Validatable, VALIDATABLE } from "@shared/models/validatable.model";
   selector: "app-input-time",
   imports: [LucideDynamicIcon, InputFeedbackComponent],
   templateUrl: "./input-time.component.html",
-  styleUrl: "./input-time.component.css",
+  styleUrl: "./input-time.component.scss",
   providers: [{ provide: VALIDATABLE, useExisting: InputTimeComponent }],
-  host: { "[class.open]": "open()" },
+  host: {
+    class: "input-time",
+    "[class.input-time--open]": "open()",
+  },
 })
 export class InputTimeComponent implements Validatable {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -98,7 +101,7 @@ export class InputTimeComponent implements Validatable {
 
   close(): void {
     this.open.set(false);
-    this.elementRef.nativeElement.querySelector<HTMLInputElement>(".time-input")?.focus();
+    this.elementRef.nativeElement.querySelector<HTMLInputElement>(".input-time__input")?.focus();
   }
 
   @HostListener("document:click", ["$event"])

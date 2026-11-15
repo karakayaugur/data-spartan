@@ -15,9 +15,10 @@ export type BadgeVariant =
 
 @Component({
   selector: "app-badge",
+  host: { class: "badge" },
   imports: [LucideDynamicIcon],
   templateUrl: "./badge.component.html",
-  styleUrl: "./badge.component.css",
+  styleUrl: "./badge.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgeComponent {

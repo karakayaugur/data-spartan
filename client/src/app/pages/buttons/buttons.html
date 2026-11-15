@@ -1,15 +1,15 @@
-<section class="buttons-page" aria-labelledby="buttons-title">
+<section class="buttons__page" aria-labelledby="buttons-title">
   <header>
     <h1 id="buttons-title">Buttons</h1>
     <p>Shared button variants, sizes and states. Use the sidebar switch to compare themes.</p>
   </header>
-  <p class="action-status" role="status">{{ lastAction() }}</p>
+  <p class="buttons__action-status" role="status">{{ lastAction() }}</p>
   @for (variant of variants; track variant) {
-  <section class="button-panel" [attr.aria-labelledby]="'variant-' + variant">
+  <section class="buttons__button-panel" [attr.aria-labelledby]="'variant-' + variant">
     <h2 [id]="'variant-' + variant">{{ variant }}</h2>
-    <div class="examples">
+    <div class="buttons__examples">
       @for (size of sizes; track size) {
-      <div class="example">
+      <div class="buttons__example">
         <span>{{ size }}</span
         ><app-button
           [label]="size"
@@ -19,7 +19,7 @@
         ></app-button>
       </div>
       }
-      <div class="example">
+      <div class="buttons__example">
         <span>Start icon</span
         ><app-button
           label="Add entry"
@@ -28,7 +28,7 @@
           (clicked)="record(variant + ' start icon')"
         ></app-button>
       </div>
-      <div class="example">
+      <div class="buttons__example">
         <span>End icon</span
         ><app-button
           label="Continue"
@@ -38,11 +38,11 @@
           (clicked)="record(variant + ' end icon')"
         ></app-button>
       </div>
-      <div class="example">
+      <div class="buttons__example">
         <span>Disabled</span
         ><app-button label="Unavailable" [disabled]="true" [variant]="variant"></app-button>
       </div>
-      <div class="example">
+      <div class="buttons__example">
         <span>Loading</span
         ><app-button
           label="Save"
@@ -54,11 +54,11 @@
     </div>
   </section>
   }
-  <section class="button-panel" aria-labelledby="icon-title">
+  <section class="buttons__button-panel" aria-labelledby="icon-title">
     <h2 id="icon-title">Icon buttons</h2>
-    <div class="examples">
+    <div class="buttons__examples">
       @for (size of sizes; track size) {
-      <div class="example">
+      <div class="buttons__example">
         <span>{{ size }}</span
         ><app-button
           [iconOnly]="true"
@@ -70,7 +70,7 @@
         ></app-button>
       </div>
       }
-      <div class="example">
+      <div class="buttons__example">
         <span>Disabled</span
         ><app-button
           [iconOnly]="true"
@@ -80,7 +80,7 @@
           [disabled]="true"
         ></app-button>
       </div>
-      <div class="example">
+      <div class="buttons__example">
         <span>Loading</span
         ><app-button
           [iconOnly]="true"

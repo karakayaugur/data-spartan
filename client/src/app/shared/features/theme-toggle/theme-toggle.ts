@@ -4,9 +4,10 @@ import { ThemeFacade } from "@core/store";
 
 @Component({
   selector: "app-theme-toggle",
+  host: { class: "theme-toggle" },
   imports: [LucideDynamicIcon],
   templateUrl: "./theme-toggle.html",
-  styleUrl: "./theme-toggle.css",
+  styleUrl: "./theme-toggle.scss",
 })
 export class ThemeToggleComponent {
   private readonly themeFacade = inject(ThemeFacade);

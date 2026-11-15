@@ -69,3 +69,15 @@ SWAPI does not provide a separate manufacturing year for robots, so `birth_year`
 State management follows the reference project's AuthStore pattern. `core/store/films/films.store.ts` manages signal state, the `setState` / `patchState` / `clearState` operations, and synchronization with `sessionStorage`.
 
 `FilmsService` in `films.services.ts` provides methods to read and update the film list and viewing history. The initial HTTP response populates the film list in the store. Modal entries update the same state's `viewings[filmId]` field. An `effect` persists state changes, and refreshing the film list preserves viewing history.
+
+## Styling architecture
+
+Application styles use SCSS and component-scoped BEM names: `block__element` and `block__element--state`. Keep nesting shallow and preserve framework-owned classes.
+
+- `assets/styles/tokens/`: Open Props and primitive tokens.
+- `assets/styles/theme/`: runtime light/dark CSS custom properties.
+- `assets/styles/base/`: reset, fonts and typography.
+- `assets/styles/abstracts/`: CSS-free Sass helpers. Use `@use "abstracts/breakpoints"` and `@include breakpoints.down(mobile)` for responsive component rules.
+- Component SCSS files own their layout and visual styles. Theme values remain `var(--brand)`, `var(--surface-1)`, etc., so theme changes work at runtime.
+
+Angular CLI generates SCSS for new components by default.

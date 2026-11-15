@@ -6,9 +6,10 @@ export type ModalSize = "small" | "medium" | "large" | "full";
 
 @Component({
   selector: "app-modal",
+  host: { class: "modal" },
   imports: [ButtonComponent],
   templateUrl: "./modal.component.html",
-  styleUrl: "./modal.component.css",
+  styleUrl: "./modal.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalComponent {

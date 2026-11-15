@@ -14,12 +14,13 @@ import { NotificationVariant } from "../notification.model";
 
 @Component({
   selector: "app-toast-container",
+  host: { class: "toast-container" },
   imports: [LucideDynamicIcon, ButtonComponent],
   providers: [
     provideLucideIcons(LucideCircleAlert, LucideCircleCheck, LucideCircleX, LucideInfo, LucideX),
   ],
   templateUrl: "./toast-container.component.html",
-  styleUrl: "./toast-container.component.css",
+  styleUrl: "./toast-container.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToastContainer {

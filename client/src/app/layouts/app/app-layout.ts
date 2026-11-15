@@ -8,10 +8,11 @@ import { MobileNavService } from "./mobile-nav.service";
 
 @Component({
   selector: "app-layout",
+  host: { class: "layout" },
   imports: [RouterOutlet, Sidebar, ButtonComponent],
   providers: [MobileNavService],
   templateUrl: "./app-layout.html",
-  styleUrl: "./app-layout.css",
+  styleUrl: "./app-layout.scss",
 })
 export class AppLayout {
   readonly nav = inject(MobileNavService);

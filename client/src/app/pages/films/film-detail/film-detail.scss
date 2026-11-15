@@ -1,0 +1,9 @@
+:host {
+  display: block;
+}
+.film-detail {
+  &__status {
+    padding-block: 40px;
+    line-height: 1.8;
+  }
+}

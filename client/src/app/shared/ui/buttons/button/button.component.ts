@@ -15,9 +15,10 @@ export type ButtonSize = "small" | "medium" | "large";
 
 @Component({
   selector: "app-button",
+  host: { class: "button" },
   imports: [LucideDynamicIcon, A11yModule],
   templateUrl: "./button.component.html",
-  styleUrl: "./button.component.css",
+  styleUrl: "./button.component.scss",
 })
 export class ButtonComponent {
   readonly label = input("Submit");

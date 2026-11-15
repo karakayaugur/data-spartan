@@ -1,5 +1,5 @@
 @if (mobile().matches && mobileOpen()) {
-<div class="sidebar-backdrop" (click)="closeMenu.emit()" aria-hidden="true"></div>
+<div class="sidebar__backdrop" (click)="closeMenu.emit()" aria-hidden="true"></div>
 } @if (!mobile().matches || mobileOpen()) {
 <aside
   class="sidebar"
@@ -10,15 +10,15 @@
   [cdkTrapFocus]="mobile().matches"
   [cdkTrapFocusAutoCapture]="mobile().matches"
 >
-  <div class="sidebar-header">
+  <div class="sidebar__header">
     <a
-      class="brand"
+      class="sidebar__brand"
       routerLink="/dashboard"
       aria-label="DataSpartan home"
       (click)="closeMenu.emit()"
     >
       <img
-        class="brand-logo"
+        class="sidebar__brand-logo"
         src="/assets/images/data-spartan-logo.png"
         alt="DataSpartan"
         width="1851"
@@ -39,17 +39,17 @@
   </div>
   <div aria-live="polite">
     @if (loading()) {
-    <p class="nav-message" role="status">Loading films…</p>
+    <p class="sidebar__nav-message" role="status">Loading films…</p>
     } @if (failed()) {
-    <p class="nav-message" role="alert">We couldn't load the films.</p>
-    <button class="retry" type="button" (click)="filmFacade.loadFilms()">Try again</button>
+    <p class="sidebar__nav-message" role="alert">We couldn't load the films.</p>
+    <button class="sidebar__retry" type="button" (click)="filmFacade.loadFilms()">Try again</button>
     }
   </div>
   <nav id="film-navigation" aria-label="Films">
     @for (film of films(); track film.id) {
-    <div class="film-row" [class.active-row]="activeFilm.isActive">
+    <div class="sidebar__film-row" [class.sidebar__film-row--active-row]="activeFilm.isActive">
       <a
-        class="film-link"
+        class="sidebar__film-link"
         [routerLink]="['/films', film.id]"
         routerLinkActive="active"
         #activeFilm="routerLinkActive"
@@ -58,16 +58,16 @@
         ariaCurrentWhenActive="page"
       >
         <svg
-          class="film-icon"
+          class="sidebar__film-icon"
           lucideIcon="film"
           [size]="20"
           [strokeWidth]="1.75"
           aria-hidden="true"
         ></svg>
-        <span class="film-title">{{ film.title }}</span>
+        <span class="sidebar__film-title">{{ film.title }}</span>
       </a>
       <div
-        class="viewing-action"
+        class="sidebar__viewing-action"
         [title]="'Viewing log · ' + viewingCount(film.id) + (viewingCount(film.id) === 1 ? ' viewing' : ' viewings')"
       >
         <app-button
@@ -83,7 +83,7 @@
         <app-badge
           type="number"
           variant="default"
-          class="viewing-count"
+          class="sidebar__viewing-count"
           [value]="viewingCount(film.id)"
           aria-hidden="true"
         ></app-badge>
@@ -91,12 +91,12 @@
       </div>
     </div>
     } @empty { @if (!loading() && !failed()) {
-    <p class="nav-message">No films available.</p>
+    <p class="sidebar__nav-message">No films available.</p>
     } }
   </nav>
-  <div class="sidebar-footer">
+  <div class="sidebar__footer">
     <a
-      class="film-link"
+      class="sidebar__film-link"
       routerLink="/badges"
       routerLinkActive="active"
       ariaCurrentWhenActive="page"
@@ -104,7 +104,7 @@
       >Badges</a
     >
     <a
-      class="film-link"
+      class="sidebar__film-link"
       routerLink="/buttons"
       routerLinkActive="active"
       ariaCurrentWhenActive="page"

@@ -1,10 +1,10 @@
-@import "open-props/fonts";
-@import "open-props/easings";
-@import "open-props/colors";
-@import "open-props/sizes";
-@import "open-props/shadows";
-@import "open-props/animations";
-@import "open-props/borders";
+@use "open-props/fonts";
+@use "open-props/easings";
+@use "open-props/colors";
+@use "open-props/sizes";
+@use "open-props/shadows";
+@use "open-props/animations";
+@use "open-props/borders";
 
 /* Colors */
 :root {

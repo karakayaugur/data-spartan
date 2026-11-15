@@ -1,8 +1,8 @@
-<div class="theme-segmented" role="group" aria-label="Appearance">
+<div class="theme-toggle__theme-segmented" role="group" aria-label="Appearance">
   <button
     type="button"
-    class="theme-option"
-    [class.active]="isLight()"
+    class="theme-toggle__theme-option"
+    [class.theme-toggle__theme-option--active]="isLight()"
     [attr.aria-pressed]="isLight()"
     (click)="setTheme('light', $event)"
   >
@@ -11,8 +11,8 @@
   </button>
   <button
     type="button"
-    class="theme-option"
-    [class.active]="isDark()"
+    class="theme-toggle__theme-option"
+    [class.theme-toggle__theme-option--active]="isDark()"
     [attr.aria-pressed]="isDark()"
     (click)="setTheme('dark', $event)"
   >

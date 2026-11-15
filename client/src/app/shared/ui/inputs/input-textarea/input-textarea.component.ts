@@ -4,9 +4,10 @@ import { Validatable, VALIDATABLE } from "@shared/models/validatable.model";
 
 @Component({
   selector: "app-input-textarea",
+  host: { class: "input-textarea" },
   imports: [InputFeedbackComponent],
   templateUrl: "./input-textarea.component.html",
-  styleUrl: "./input-textarea.component.css",
+  styleUrl: "./input-textarea.component.scss",
   providers: [{ provide: VALIDATABLE, useExisting: InputTextareaComponent }],
 })
 export class InputTextareaComponent implements Validatable {

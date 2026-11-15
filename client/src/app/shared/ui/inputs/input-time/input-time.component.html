@@ -1,23 +1,23 @@
-<div class="input-container">
-  <label class="label" [for]="inputId()"
+<div class="input-time__input-container">
+  <label class="input-time__label" [for]="inputId()"
     >{{ label() }}
     @if (required()) {
-      <span class="required-indicator" aria-hidden="true">*</span>
+      <span class="input-time__required-indicator" aria-hidden="true">*</span>
     }
   </label>
   @if (open()) {
     <button
-      class="time-backdrop"
+      class="input-time__backdrop"
       type="button"
       aria-label="Close picker"
       (click)="close()"
     ></button>
   }
-  <div class="time-wrap">
-    <div class="time-field">
+  <div class="input-time__wrap">
+    <div class="input-time__field">
       <input
-        class="time-input"
-        [class.input-invalid]="error()"
+        class="input-time__input"
+        [class.input-time__input--invalid]="error()"
         type="text"
         autocomplete="off"
         [id]="inputId()"
@@ -31,7 +31,7 @@
         (keydown.enter)="onTimeEnter($event)"
       />
       <button
-        class="time-toggle"
+        class="input-time__toggle"
         type="button"
         aria-label="Choose time"
         aria-haspopup="dialog"
@@ -40,7 +40,7 @@
         (click)="toggle($event)"
       >
         <svg
-          class="time-icon"
+          class="input-time__icon"
           lucideIcon="clock"
           [size]="18"
           [strokeWidth]="1.75"
@@ -50,20 +50,24 @@
     </div>
     @if (open()) {
       <div
-        class="time-dropdown"
+        class="input-time__dropdown"
         role="dialog"
         [id]="inputId() + '-picker'"
         aria-label="Choose time"
       >
-        <div class="time-columns">
-          <div class="time-column">
+        <div class="input-time__columns">
+          <div class="input-time__column">
             <h3 [id]="inputId() + '-hours'">Hour</h3>
-            <div class="time-options" role="group" [attr.aria-labelledby]="inputId() + '-hours'">
+            <div
+              class="input-time__options"
+              role="group"
+              [attr.aria-labelledby]="inputId() + '-hours'"
+            >
               @for (hour of hours; track hour) {
                 <button
-                  class="time-option"
+                  class="input-time__option"
                   type="button"
-                  [class.selected]="selectedHour() === hour"
+                  [class.input-time__option--selected]="selectedHour() === hour"
                   [attr.aria-pressed]="selectedHour() === hour"
                   (click)="selectTime('hour', hour)"
                 >
@@ -72,14 +76,18 @@
               }
             </div>
           </div>
-          <div class="time-column">
+          <div class="input-time__column">
             <h3 [id]="inputId() + '-minutes'">Minute</h3>
-            <div class="time-options" role="group" [attr.aria-labelledby]="inputId() + '-minutes'">
+            <div
+              class="input-time__options"
+              role="group"
+              [attr.aria-labelledby]="inputId() + '-minutes'"
+            >
               @for (minute of minutes; track minute) {
                 <button
-                  class="time-option"
+                  class="input-time__option"
                   type="button"
-                  [class.selected]="selectedMinute() === minute"
+                  [class.input-time__option--selected]="selectedMinute() === minute"
                   [attr.aria-pressed]="selectedMinute() === minute"
                   (click)="selectTime('minute', minute)"
                 >

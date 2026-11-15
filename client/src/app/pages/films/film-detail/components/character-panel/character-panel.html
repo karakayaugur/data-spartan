@@ -1,14 +1,14 @@
 <div aria-live="polite">
   @if (loading()) {
-  <p class="status" role="status">Loading character…</p>
+  <p class="character-panel__status" role="status">Loading character…</p>
   } @else if (failed()) {
-  <div class="status" role="alert">
+  <div class="character-panel__status" role="alert">
     <h3>Character unavailable</h3>
     <p>We couldn't load these details.</p>
-    <button type="button" class="retry" (click)="load()">Try again</button>
+    <button type="button" class="character-panel__retry" (click)="load()">Try again</button>
   </div>
   } @else if (character(); as person) {
-  <div class="character-content">
+  <div class="character-panel__content">
     <h3>{{ person.name }}</h3>
     <app-avatar-badge [type]="person.kind"></app-avatar-badge>
     @if (person.kind === 'robot') {
@@ -44,7 +44,7 @@
         </dt>
         <dd>
           @for (species of person.species; track $index) {
-          <span class="species"> {{ species.name }}</span> } @empty { Unknown }
+          <span class="character-panel__species"> {{ species.name }}</span> } @empty { Unknown }
         </dd>
       </div>
       <div>
@@ -54,7 +54,8 @@
         </dt>
         <dd>
           @for (species of person.species; track $index) {
-          <span class="species">{{ species.classification }}</span> } @empty { Unknown }
+          <span class="character-panel__species">{{ species.classification }}</span> } @empty {
+          Unknown }
         </dd>
       </div>
       <div>

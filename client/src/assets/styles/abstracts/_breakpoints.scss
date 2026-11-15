@@ -1,0 +1,18 @@
+@use "sass:map";
+
+$breakpoints: (
+  phone: 400px,
+  compact: 480px,
+  mobile: 640px,
+  laptop: 1023px,
+);
+
+@mixin down($name) {
+  @if not map.has-key($breakpoints, $name) {
+    @error "Unknown breakpoint: #{$name}";
+  }
+
+  @media (max-width: map.get($breakpoints, $name)) {
+    @content;
+  }
+}

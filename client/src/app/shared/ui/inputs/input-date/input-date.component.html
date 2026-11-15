@@ -1,23 +1,23 @@
-<div class="input-container">
-  <label class="label" [for]="inputId()">
+<div class="input-date__input-container">
+  <label class="input-date__label" [for]="inputId()">
     {{ label() }}
     @if (required()) {
-      <span class="required-indicator" aria-hidden="true">*</span>
+      <span class="input-date__required-indicator" aria-hidden="true">*</span>
     }
   </label>
   @if (open()) {
     <button
       type="button"
-      class="date-backdrop"
+      class="input-date__backdrop"
       aria-label="Close picker"
       (click)="close()"
     ></button>
   }
-  <div class="picker-wrap" [class.picker-wrap--open]="open()">
+  <div class="input-date__picker-wrap" [class.input-date__picker-wrap--open]="open()">
     <button
       type="button"
-      class="date-trigger"
-      [class.input-invalid]="error()"
+      class="input-date__trigger"
+      [class.input-date__trigger--invalid]="error()"
       [id]="inputId()"
       [attr.aria-expanded]="open()"
       [attr.aria-controls]="open() ? inputId() + '-picker' : null"
@@ -27,12 +27,12 @@
       (click)="toggle($event)"
     >
       @if (displayValue()) {
-        <span class="date-value">{{ displayValue() }}</span>
+        <span class="input-date__value">{{ displayValue() }}</span>
       } @else {
-        <span class="date-placeholder">dd / mm / yyyy</span>
+        <span class="input-date__placeholder">dd / mm / yyyy</span>
       }
       <svg
-        class="date-icon"
+        class="input-date__icon"
         lucideIcon="calendar"
         [size]="18"
         [strokeWidth]="1.75"
@@ -41,14 +41,14 @@
     </button>
     @if (open()) {
       <div
-        class="date-dropdown"
+        class="input-date__dropdown"
         role="dialog"
         [id]="inputId() + '-picker'"
         aria-label="Choose date"
       >
-        <div class="calendar-header">
+        <div class="input-date__calendar-header">
           <select
-            class="month-select"
+            class="input-date__month-select"
             [value]="viewMonth()"
             aria-label="Month"
             (change)="onMonthChange($event)"
@@ -59,7 +59,7 @@
           </select>
 
           <select
-            class="year-select"
+            class="input-date__year-select"
             [value]="viewYear()"
             aria-label="Year"
             (change)="onYearChange($event)"
@@ -70,21 +70,21 @@
           </select>
         </div>
 
-        <div class="weekdays" aria-hidden="true">
+        <div class="input-date__weekdays" aria-hidden="true">
           @for (weekday of weekdays; track weekday) {
-            <span class="weekday">{{ weekday }}</span>
+            <span class="input-date__weekday">{{ weekday }}</span>
           }
         </div>
 
-        <div class="days" role="grid">
+        <div class="input-date__days" role="grid">
           @for (day of calendarDays(); track day.iso) {
             <button
               type="button"
-              class="day"
+              class="input-date__day"
               role="gridcell"
-              [class.day--muted]="!day.inMonth"
-              [class.day--selected]="isSelected(day)"
-              [class.day--today]="isToday(day)"
+              [class.input-date__day--muted]="!day.inMonth"
+              [class.input-date__day--selected]="isSelected(day)"
+              [class.input-date__day--today]="isToday(day)"
               (click)="selectDay(day)"
             >
               {{ day.date.getDate() }}

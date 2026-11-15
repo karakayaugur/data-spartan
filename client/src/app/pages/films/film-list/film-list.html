@@ -3,24 +3,24 @@
     <h1 id="films-title">Explore the films</h1>
     <p>Choose a film to discover its story, meet the cast and record your viewings.</p>
   </header>
-  <nav class="film-grid" aria-label="Choose a film">
+  <nav class="film-list__film-grid" aria-label="Choose a film">
     @for (film of films(); track film.id) {
-    <a class="film-card" [routerLink]="['/films', film.id]">
-      <span class="film-icon" aria-hidden="true"
+    <a class="film-list__film-card" [routerLink]="['/films', film.id]">
+      <span class="film-list__film-icon" aria-hidden="true"
         ><svg lucideIcon="film" [size]="20" [strokeWidth]="1.75"></svg
       ></span>
       <h2>{{ film.title }}</h2>
       <app-badge
-        class="release"
+        class="film-list__release"
         [label]="(film.releaseDate | date: 'MMM d, yyyy') ?? ''"
         variant="default"
       ></app-badge>
-      <span class="film-action"
+      <span class="film-list__film-action"
         >Explore film <svg lucideIcon="chevron-right" [size]="12" aria-hidden="true"></svg
       ></span>
     </a>
     } @empty {
-    <p class="empty">No films available. Use the sidebar to retry loading the films.</p>
+    <p class="film-list__empty">No films available. Use the sidebar to retry loading the films.</p>
     }
   </nav>
 </section>

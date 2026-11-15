@@ -1,3 +1,5 @@
+@use "abstracts/breakpoints";
+
 :host {
   display: block;
   padding: 28px;
@@ -40,21 +42,23 @@ dd {
   margin: 0;
   text-align: right;
 }
-.species {
-  display: block;
-}
-.status {
-  padding-block: 24px;
-  line-height: 1.8;
-}
-.retry {
-  margin-top: 16px;
-  padding: 12px;
-  background: var(--surface-2);
-  color: var(--text-0);
+.character-panel {
+  &__species {
+    display: block;
+  }
+  &__status {
+    padding-block: 24px;
+    line-height: 1.8;
+  }
+  &__retry {
+    margin-top: 16px;
+    padding: 12px;
+    background: var(--surface-2);
+    color: var(--text-0);
+  }
 }
 
-@media (max-width: 1023px) {
+@include breakpoints.down(laptop) {
   :host {
     padding: 20px;
   }
@@ -72,16 +76,20 @@ dt svg {
   flex-shrink: 0;
 }
 
-.character-content {
-  opacity: 0;
-  animation: var(--animation-fade-in);
-  animation-duration: 200ms;
-  animation-fill-mode: both;
+.character-panel {
+  &__character-content {
+    opacity: 0;
+    animation: var(--animation-fade-in);
+    animation-duration: 200ms;
+    animation-fill-mode: both;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .character-content {
-    opacity: 1;
-    animation: none;
+  .character-panel {
+    &__character-content {
+      opacity: 1;
+      animation: none;
+    }
   }
 }

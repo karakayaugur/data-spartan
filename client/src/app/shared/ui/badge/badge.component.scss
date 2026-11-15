@@ -58,8 +58,10 @@
   flex-shrink: 0;
 }
 
-.label {
-  line-height: 1;
+.badge {
+  &__label {
+    line-height: 1;
+  }
 }
 
 /* Status variants */
@@ -85,22 +87,24 @@
   color: var(--status-color);
 }
 
-.dot {
-  position: relative;
-  width: 6px;
-  height: 6px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: currentColor;
-}
+.badge {
+  &__dot {
+    position: relative;
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: currentColor;
+  }
 
-.dot::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: inherit;
-  animation: badge-pulse 1.5s ease-out infinite;
+  &__dot::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: inherit;
+    animation: badge-pulse 1.5s ease-out infinite;
+  }
 }
 
 .badge[data-number="true"] {
@@ -127,23 +131,27 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dot::before {
-    animation: none;
+  .badge {
+    &__dot::before {
+      animation: none;
+    }
   }
 }
 
-.probability-bars {
-  display: inline-flex;
-  align-items: end;
-  gap: 2px;
-}
+.badge {
+  &__probability-bars {
+    display: inline-flex;
+    align-items: end;
+    gap: 2px;
+  }
 
-.probability-bars > span {
-  width: 3px;
-  border-radius: 2px;
-  background: currentColor;
-}
+  &__probability-bars > span {
+    width: 3px;
+    border-radius: 2px;
+    background: currentColor;
+  }
 
-.probability-bars .dim {
-  opacity: 0.3;
+  &__probability-bars .badge__dim {
+    opacity: 0.3;
+  }
 }

@@ -27,6 +27,7 @@ import { FilmSummary } from "@core/http";
 
 @Component({
   selector: "app-sidebar",
+  host: { class: "sidebar" },
   imports: [
     RouterLink,
     RouterLinkActive,
@@ -38,7 +39,7 @@ import { FilmSummary } from "@core/http";
   ],
   providers: [provideLucideIcons(LucideX, LucideEye, LucideSun, LucideMoon, LucideFilm)],
   templateUrl: "./sidebar.html",
-  styleUrl: "./sidebar.css",
+  styleUrl: "./sidebar.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Sidebar {
@@ -71,7 +72,7 @@ export class Sidebar {
     this.modal.open(ViewingLog, {
       data: film,
       ariaLabel: film.title,
-      restoreFocus: this.mobile().matches ? ".menu-toggle button" : true,
+      restoreFocus: this.mobile().matches ? ".layout__menu-toggle button" : true,
     });
   }
 }

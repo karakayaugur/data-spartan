@@ -3,10 +3,11 @@ import { LucideDynamicIcon, LucideX, provideLucideIcons } from "@lucide/angular"
 
 @Component({
   selector: "app-input-feedback",
+  host: { class: "input-feedback" },
   imports: [LucideDynamicIcon],
   providers: [provideLucideIcons(LucideX)],
   templateUrl: "./input-feedback.component.html",
-  styleUrl: "./input-feedback.component.css",
+  styleUrl: "./input-feedback.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputFeedbackComponent {

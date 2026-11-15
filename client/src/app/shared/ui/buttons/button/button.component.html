@@ -1,4 +1,5 @@
 <button
+  class="button__control"
   [attr.cdkFocusInitial]="focusInitial() ? '' : null"
   cdkMonitorElementFocus
   [attr.type]="type()"
@@ -16,7 +17,7 @@
 >
   @if (loading()) {
     <svg
-      class="spinner"
+      class="button__spinner"
       lucideIcon="loader-circle"
       [size]="iconSize"
       [strokeWidth]="2"
@@ -26,7 +27,7 @@
     <svg [lucideIcon]="icon()!" [size]="iconSize" [strokeWidth]="2" aria-hidden="true"></svg>
   }
   @if (!iconOnly()) {
-    <span class="label">{{ displayLabel() }}</span>
+    <span class="button__label">{{ displayLabel() }}</span>
   }
   @if (!iconOnly() && !loading() && icon() && iconPosition() === "end") {
     <svg [lucideIcon]="icon()!" [size]="iconSize" [strokeWidth]="2" aria-hidden="true"></svg>

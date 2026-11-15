@@ -1,4 +1,4 @@
-<section class="badges-page" aria-labelledby="badges-title">
+<section class="badges__page" aria-labelledby="badges-title">
   <header>
     <h1 id="badges-title">Badges</h1>
     <p>
@@ -6,18 +6,18 @@
       themes.
     </p>
   </header>
-  <section class="badge-panel" aria-labelledby="source-title">
+  <section class="badges__badge-panel" aria-labelledby="source-title">
     <h2 id="source-title">Source</h2>
-    <div class="examples">
+    <div class="badges__examples">
       <app-badge label="ORGANIC" variant="success"></app-badge>
       <app-badge label="SB2024" variant="info" icon="arrow-up-right"></app-badge>
       <app-badge label="SUMMER2" variant="info" icon="arrow-up-right"></app-badge>
       <app-badge label="AFF20" variant="info" icon="arrow-up-right"></app-badge>
     </div>
   </section>
-  <section class="badge-panel" aria-labelledby="status-title">
+  <section class="badges__badge-panel" aria-labelledby="status-title">
     <h2 id="status-title">Lead status</h2>
-    <div class="examples">
+    <div class="badges__examples">
       <app-badge label="PRE-SALE" variant="warning-outline"></app-badge>
       <app-badge label="CLOSED" variant="success"></app-badge>
       <app-badge label="LOST" variant="error"></app-badge>
@@ -25,29 +25,29 @@
       <app-badge label="NEW" variant="primary-outline"></app-badge>
     </div>
   </section>
-  <section class="badge-panel" aria-labelledby="probability-title">
+  <section class="badges__badge-panel" aria-labelledby="probability-title">
     <h2 id="probability-title">Probability</h2>
-    <div class="examples">
+    <div class="badges__examples">
       <app-badge label="LOW" probability="low" variant="warning-outline"></app-badge>
       <app-badge label="MID" probability="mid" variant="primary-outline"></app-badge>
       <app-badge label="HIGH" probability="high" variant="success"></app-badge>
     </div>
   </section>
   @for (variant of variants; track variant) {
-  <section class="badge-panel" [attr.aria-labelledby]="'variant-' + variant">
+  <section class="badges__badge-panel" [attr.aria-labelledby]="'variant-' + variant">
     <h2 [id]="'variant-' + variant">{{ variant }}</h2>
-    <div class="examples">
-      <div class="example">
+    <div class="badges__examples">
+      <div class="badges__example">
         <span>Label</span><app-badge label="Active" [variant]="variant"></app-badge>
       </div>
-      <div class="example">
+      <div class="badges__example">
         <span>Icon</span><app-badge label="Completed" icon="check" [variant]="variant"></app-badge>
       </div>
-      <div class="example">
+      <div class="badges__example">
         <span>Status dot</span
         ><app-badge label="Online" [dot]="true" [variant]="variant"></app-badge>
       </div>
-      <div class="example">
+      <div class="badges__example">
         <span>Number</span><app-badge type="number" [value]="6" [variant]="variant"></app-badge>
       </div>
     </div>

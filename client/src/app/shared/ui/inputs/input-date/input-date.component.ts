@@ -39,10 +39,11 @@ const WEEKDAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
   selector: "app-input-date",
   imports: [LucideDynamicIcon, InputFeedbackComponent],
   templateUrl: "./input-date.component.html",
-  styleUrl: "./input-date.component.css",
+  styleUrl: "./input-date.component.scss",
   providers: [{ provide: VALIDATABLE, useExisting: InputDateComponent }],
   host: {
-    "[class.open]": "open()",
+    class: "input-date",
+    "[class.input-date--open]": "open()",
   },
 })
 export class InputDateComponent implements Validatable {
@@ -144,7 +145,7 @@ export class InputDateComponent implements Validatable {
 
   close(): void {
     this.open.set(false);
-    this.elementRef.nativeElement.querySelector<HTMLButtonElement>(".date-trigger")?.focus();
+    this.elementRef.nativeElement.querySelector<HTMLButtonElement>(".input-date__trigger")?.focus();
   }
 
   onMonthChange(event: Event): void {

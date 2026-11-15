@@ -1,13 +1,13 @@
-<div class="input-container">
-  <label class="label" [for]="inputId()"
+<div class="input-textarea__input-container">
+  <label class="input-textarea__label" [for]="inputId()"
     >{{ label() }}
     @if (required()) {
-      <span class="required-indicator">*</span>
+      <span class="input-textarea__required-indicator">*</span>
     }
   </label>
-  <div class="input-wrap">
+  <div class="input-textarea__input-wrap">
     <textarea
-      [class.input-invalid]="hasError() || error()"
+      [class.input-textarea__input-invalid]="hasError() || error()"
       [attr.aria-invalid]="!!(hasError() || error())"
       [attr.aria-describedby]="error() ? inputId() + '-error' : null"
       [id]="inputId()"
@@ -21,7 +21,10 @@
     ></textarea>
   </div>
   @if (remaining() !== null) {
-    <span class="char-counter" [class.at-limit]="remaining()! <= 0">
+    <span
+      class="input-textarea__char-counter"
+      [class.input-textarea__char-counter--at-limit]="remaining()! <= 0"
+    >
       {{ remaining() }} characters remaining
     </span>
   }

@@ -1,0 +1,41 @@
+@use "abstracts/breakpoints";
+
+.layout {
+  &__capsule {
+    display: flex;
+    height: 100dvh;
+  }
+
+  &__main {
+    flex: 1;
+    min-width: 0;
+    overflow-y: auto;
+  }
+
+  &__menu-toggle {
+    display: none;
+  }
+
+  &__content {
+    view-transition-name: route-content;
+    padding: 48px 36px;
+    max-width: 1200px;
+    margin-inline: auto;
+  }
+}
+
+@include breakpoints.down(mobile) {
+  .layout {
+    &__menu-toggle {
+      display: inline-flex;
+      position: fixed;
+      top: calc(16px + env(safe-area-inset-top, 0px));
+      right: calc(20px + env(safe-area-inset-right, 0px));
+      z-index: 20;
+    }
+
+    &__content {
+      padding: 84px 20px 28px;
+    }
+  }
+}

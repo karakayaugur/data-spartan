@@ -15,6 +15,7 @@ import { Character, CharacterService } from "@core/http";
 
 @Component({
   selector: "app-character-panel",
+  host: { class: "character-panel" },
   imports: [
     AvatarBadgeComponent,
     LucideDna,
@@ -26,7 +27,7 @@ import { Character, CharacterService } from "@core/http";
     LucideFactory,
   ],
   templateUrl: "./character-panel.html",
-  styleUrl: "./character-panel.css",
+  styleUrl: "./character-panel.scss",
 })
 export class CharacterPanel {
   readonly characterId = input.required<number>();

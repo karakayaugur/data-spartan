@@ -1,0 +1,33 @@
+@use "abstracts/breakpoints";
+
+:host {
+  display: block;
+}
+.film-crawl {
+  &__story {
+    margin-top: 36px;
+    padding: 28px;
+    background: var(--surface-1);
+    border: 1px solid var(--surface-3);
+    border-radius: var(--radius-8);
+  }
+  &__crawl {
+    white-space: pre-line;
+    line-height: 1.9;
+    color: var(--text-1);
+    max-width: 65ch;
+    margin-top: 20px;
+  }
+
+  &__crawl {
+    margin-inline: auto;
+    text-align: center;
+  }
+}
+@include breakpoints.down(compact) {
+  .film-crawl {
+    &__story {
+      padding: 20px;
+    }
+  }
+}

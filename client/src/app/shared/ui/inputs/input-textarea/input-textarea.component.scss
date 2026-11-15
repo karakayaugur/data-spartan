@@ -2,24 +2,26 @@
   --field-bg: light-dark(#fff, rgb(255 255 255 / 5%));
 }
 
-.input-container {
-  display: flex;
-  flex-direction: column;
-}
-.label {
-  position: relative;
-  margin-bottom: var(--size-2);
-  color: var(--input-label, var(--text-1));
-  font-size: var(--font-size-0);
-  font-weight: var(--font-weight-5);
-  letter-spacing: var(--font-letterspacing-0);
-  text-align: left;
-}
-.required-indicator {
-  margin-left: 0.25rem;
-  color: var(--destructive-1);
-  font-size: var(--font-size-0);
-  font-weight: var(--font-weight-5);
+.input-textarea {
+  &__input-container {
+    display: flex;
+    flex-direction: column;
+  }
+  &__label {
+    position: relative;
+    margin-bottom: var(--size-2);
+    color: var(--input-label, var(--text-1));
+    font-size: var(--font-size-0);
+    font-weight: var(--font-weight-5);
+    letter-spacing: var(--font-letterspacing-0);
+    text-align: left;
+  }
+  &__required-indicator {
+    margin-left: 0.25rem;
+    color: var(--destructive-1);
+    font-size: var(--font-size-0);
+    font-weight: var(--font-weight-5);
+  }
 }
 
 textarea {
@@ -35,7 +37,7 @@ textarea {
     border-color 0.15s ease,
     box-shadow 0.15s ease;
 }
-textarea:hover:not(:focus):not(.input-invalid) {
+textarea:hover:not(:focus):not(.input-textarea__input-invalid) {
   border-color: var(--input-border-hover, var(--text-2));
 }
 textarea:focus {
@@ -43,15 +45,17 @@ textarea:focus {
   border-color: var(--input-border-focus, var(--brand));
   box-shadow: 0 0 0 3px color-mix(in oklch, var(--brand) 20%, transparent);
 }
-textarea.input-invalid {
+textarea.input-textarea__input-invalid {
   border-color: var(--destructive-1);
   box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive-1) 18%, transparent);
 }
 
-.input-wrap {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
+.input-textarea {
+  &__input-wrap {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+  }
 }
 textarea {
   min-height: 6.25rem;
@@ -76,18 +80,20 @@ textarea::placeholder {
   width: 100%;
 }
 
-.input-wrap {
-  align-items: flex-start;
-}
+.input-textarea {
+  &__input-wrap {
+    align-items: flex-start;
+  }
 
-.char-counter {
-  display: block;
-  text-align: right;
-  font-size: 0.75rem;
-  color: var(--input-placeholder);
-  margin-top: 0.25rem;
-}
+  &__char-counter {
+    display: block;
+    text-align: right;
+    font-size: 0.75rem;
+    color: var(--input-placeholder);
+    margin-top: 0.25rem;
+  }
 
-.char-counter.at-limit {
-  color: var(--destructive-1);
+  &__char-counter.input-textarea__char-counter--at-limit {
+    color: var(--destructive-1);
+  }
 }

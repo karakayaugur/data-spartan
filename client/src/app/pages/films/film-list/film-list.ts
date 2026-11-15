@@ -12,10 +12,11 @@ import { FilmFacade } from "@core/store";
 
 @Component({
   selector: "app-film-list",
+  host: { class: "film-list" },
   imports: [RouterLink, BadgeComponent, DatePipe, LucideDynamicIcon],
   providers: [provideLucideIcons(LucideFilm, LucideChevronRight)],
   templateUrl: "./film-list.html",
-  styleUrl: "./film-list.css",
+  styleUrl: "./film-list.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilmList {

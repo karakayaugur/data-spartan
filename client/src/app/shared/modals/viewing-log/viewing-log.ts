@@ -18,6 +18,7 @@ const initialFormState = {
 
 @Component({
   selector: "app-viewing-log",
+  host: { class: "viewing-log" },
   imports: [
     DatePipe,
     ModalComponent,
@@ -27,7 +28,7 @@ const initialFormState = {
     ButtonComponent,
   ],
   templateUrl: "./viewing-log.html",
-  styleUrl: "./viewing-log.css",
+  styleUrl: "./viewing-log.scss",
 })
 export class ViewingLog {
   readonly film = inject<FilmSummary>(DIALOG_DATA);

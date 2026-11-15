@@ -4,9 +4,10 @@ import { CharacterPanel } from "../character-panel/character-panel";
 
 @Component({
   selector: "app-film-cast",
+  host: { class: "film-cast" },
   imports: [CharacterPanel],
   templateUrl: "./film-cast.component.html",
-  styleUrl: "./film-cast.component.css",
+  styleUrl: "./film-cast.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilmCastComponent {

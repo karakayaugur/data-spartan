@@ -4,8 +4,9 @@ import { ToastContainer } from "@shared/notifications";
 
 @Component({
   selector: "app-root",
+  host: { class: "app" },
   imports: [RouterOutlet, ToastContainer],
   templateUrl: "./app.html",
-  styleUrl: "./app.css",
+  styleUrl: "./app.scss",
 })
 export class App {}

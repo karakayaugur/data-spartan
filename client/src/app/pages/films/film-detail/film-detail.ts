@@ -12,9 +12,10 @@ import { FilmCastComponent } from "./components/film-cast/film-cast.component";
 
 @Component({
   selector: "app-film-detail",
+  host: { class: "film-detail" },
   imports: [NgTemplateOutlet, FilmHeaderComponent, FilmCrawlComponent, FilmCastComponent],
   templateUrl: "./film-detail.html",
-  styleUrl: "./film-detail.css",
+  styleUrl: "./film-detail.scss",
 })
 export class FilmDetail {
   private readonly modal = inject(ModalService);

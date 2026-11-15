@@ -1,5 +1,5 @@
 <div class="modal" [attr.data-size]="size()">
-  <header class="modal-header">
+  <header class="modal__header">
     <h2>{{ title() }}</h2>
     <app-button
       icon="x"
@@ -10,5 +10,5 @@
       (clicked)="close()"
     ></app-button>
   </header>
-  <div class="modal-body"><ng-content></ng-content></div>
+  <div class="modal__body"><ng-content></ng-content></div>
 </div>

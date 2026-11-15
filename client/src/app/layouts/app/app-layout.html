@@ -1,8 +1,8 @@
-<div class="capsule">
+<div class="layout__capsule">
   <app-sidebar [mobileOpen]="nav.open()" (closeMenu)="nav.close()"></app-sidebar>
-  <main class="main" id="main-content" [inert]="nav.open()">
+  <main class="layout__main" id="main-content" [inert]="nav.open()">
     <app-button
-      class="menu-toggle"
+      class="layout__menu-toggle"
       icon="menu"
       [iconOnly]="true"
       variant="neutral"
@@ -13,7 +13,7 @@
       (clicked)="nav.toggle()"
     >
     </app-button>
-    <div class="content">
+    <div class="layout__content">
       <router-outlet></router-outlet>
     </div>
   </main>

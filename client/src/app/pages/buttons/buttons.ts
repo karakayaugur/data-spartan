@@ -15,12 +15,13 @@ import {
 
 @Component({
   selector: "app-buttons",
+  host: { class: "buttons" },
   imports: [ButtonComponent],
   providers: [
     provideLucideIcons(LucideArrowRight, LucideCheck, LucideLoaderCircle, LucidePlus, LucideX),
   ],
   templateUrl: "./buttons.html",
-  styleUrl: "./buttons.css",
+  styleUrl: "./buttons.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Buttons {

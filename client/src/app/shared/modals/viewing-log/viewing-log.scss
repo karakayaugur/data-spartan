@@ -1,0 +1,61 @@
+@use "abstracts/breakpoints";
+
+:host {
+  display: block;
+}
+.viewing-log {
+  &__note,
+  &__empty {
+    color: var(--text-2);
+    font-size: 13px;
+    line-height: 1.7;
+    margin-block: 20px;
+  }
+  &__form {
+    display: grid;
+    gap: 16px;
+  }
+  &__date-time {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}
+section {
+  margin-top: 28px;
+}
+h3 {
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+.viewing-log {
+  &__viewing {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: start;
+    padding: 16px 0;
+    border-top: 1px solid var(--surface-3);
+    font-size: 13px;
+  }
+  &__viewing-copy {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  &__viewing-copy p {
+    white-space: pre-wrap;
+    color: var(--text-2);
+    line-height: 1.7;
+    margin-top: 8px;
+  }
+  &__delete {
+    flex-shrink: 0;
+  }
+}
+@include breakpoints.down(phone) {
+  .viewing-log {
+    &__date-time {
+      grid-template-columns: 1fr;
+    }
+  }
+}
