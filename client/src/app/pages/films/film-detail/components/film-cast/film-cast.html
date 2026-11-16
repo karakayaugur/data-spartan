@@ -2,7 +2,15 @@
   <div class="film-cast__cast-layout">
     <div class="film-cast__cast-list">
       <h3 class="film-cast__cast-heading" id="cast-list-title">CAST</h3>
-      @if (cast().length) {
+      @if (loading()) {
+      <p class="film-detail__cast-loading" role="status">Loading characters...</p>
+      } @else if (error()) {
+      <p role="alert">We couldn't load the cast.</p>
+      <button type="button" (click)="retryLoading()">Try again</button>
+      } @else { @if (failedCount() > 0) {
+      <p role="status">Some characters couldn't be loaded.</p>
+      <button type="button" (click)="retryLoading()">Try again</button>
+      } @if (cast().length) {
       <ul aria-labelledby="cast-list-title">
         @for (character of cast(); track character.id) {
         <li>
@@ -23,7 +31,7 @@
       </ul>
       } @else {
       <p>No cast information available.</p>
-      }
+      } }
     </div>
     <div id="character-details" class="film-cast__character-details" aria-label="Character details">
       @if (selectedCharacterId(); as id) {

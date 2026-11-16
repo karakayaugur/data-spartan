@@ -1,24 +1,45 @@
-import { ChangeDetectionStrategy, Component, effect, input, signal } from "@angular/core";
-import { Person, People } from "@core/http";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  input,
+  signal,
+} from "@angular/core";
+import { takeUntilDestroyed, toObservable } from "@angular/core/rxjs-interop";
+import { CastListFacade } from "@core/store";
 import { CharacterPanel } from "../character-panel/character-panel";
 
 @Component({
   selector: "app-film-cast",
   host: { class: "film-cast" },
   imports: [CharacterPanel],
+  providers: [CastListFacade],
   templateUrl: "./film-cast.html",
   styleUrl: "./film-cast.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilmCast {
-  readonly cast = input.required<People>();
+  readonly characters = input.required<readonly string[]>();
+  private readonly castFacade = inject(CastListFacade);
+  private readonly destroyRef = inject(DestroyRef);
+  readonly cast = this.castFacade.cast;
+  readonly loading = this.castFacade.loading;
+  readonly error = this.castFacade.error;
+  readonly failedCount = this.castFacade.failedCount;
   readonly selectedCharacterId = signal<number | null>(null);
 
   constructor() {
-    effect(() => {
-      this.cast();
-      this.selectedCharacterId.set(null);
-    });
+    toObservable(this.characters)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((urls) => {
+        this.selectedCharacterId.set(null);
+        this.castFacade.loadCast(urls);
+      });
+  }
+
+  retryLoading(): void {
+    this.castFacade.retry();
   }
 
   openCharacter(id: number | null): void {

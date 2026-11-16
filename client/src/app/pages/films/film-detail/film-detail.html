@@ -10,10 +10,6 @@
 
   <app-film-crawl [crawlText]="selected.openingCrawl"></app-film-crawl>
 
-  @if (castLoading()) {
-  <div class="film-detail__cast-loading">Loading characters...</div>
-  } @else {
-  <app-film-cast [cast]="cast()"></app-film-cast>
-  }
+  <app-film-cast [characters]="selected.characters"></app-film-cast>
 </article>
 }
