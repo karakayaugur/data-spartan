@@ -6,7 +6,7 @@ import { Character } from "./character.interface";
 
 @Injectable({ providedIn: "root" })
 export class CharacterService {
-  private readonly apiUrl = "/proxyUrl/characters";
+  private readonly apiUrl = "/proxyUrl/people";
   private readonly http = inject(HttpClient);
 
   @Cacheable({ maxCacheCount: 100 })

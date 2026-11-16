@@ -1,20 +1,18 @@
-interface CharacterBase {
-  id: number;
+export interface Character {
+  url: string;
   name: string;
   height: string;
-}
-
-export interface RobotCharacter extends CharacterBase {
-  kind: "robot";
   mass: string;
-  manufacturingYear: string;
-}
-
-export interface OrganicCharacter extends CharacterBase {
-  kind: "organic";
   birthYear: string;
+  gender: string;
+  hairColor: string;
+  skinColor: string;
+  eyeColor: string;
   homeworld: string;
-  species: { name: string; classification: string }[];
+  species: string[];
+  films: string[];
+  starships: string[];
+  vehicles: string[];
+  created: string;
+  edited: string;
 }
-
-export type Character = RobotCharacter | OrganicCharacter;

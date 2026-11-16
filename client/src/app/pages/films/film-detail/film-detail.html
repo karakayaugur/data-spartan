@@ -1,5 +1,5 @@
 @if (loading()) {
-<ng-container [ngTemplateOutlet]="loadingTemplate"></ng-container>
+<div class="film-detail__status" role="status">Loading film…</div>
 } @else if (film(); as selected) {
 <article>
   <app-film-header
@@ -7,10 +7,13 @@
     [viewingCount]="viewingCount()"
     (openModal)="openViewingModal()"
   ></app-film-header>
+
   <app-film-crawl [crawlText]="selected.openingCrawl"></app-film-crawl>
-  <app-film-cast [cast]="selected.cast"></app-film-cast>
+
+  @if (castLoading()) {
+  <div class="film-detail__cast-loading">Loading characters...</div>
+  } @else {
+  <app-film-cast [cast]="cast()"></app-film-cast>
+  }
 </article>
 }
-<ng-template #loadingTemplate>
-  <div class="film-detail__status" role="status">Loading film and cast…</div>
-</ng-template>

@@ -10,77 +10,36 @@
   } @else if (character(); as person) {
   <div class="character-panel__content">
     <h3>{{ person.name }}</h3>
-    <app-avatar-badge [type]="person.kind"></app-avatar-badge>
-    @if (person.kind === 'robot') {
     <dl>
       <div>
-        <dt>
-          <svg lucideRuler [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
-          ><span>Height</span>
-        </dt>
+        <dt>Height</dt>
         <dd>{{ display(person.height, ' cm') }}</dd>
       </div>
       <div>
-        <dt>
-          <svg lucideWeight [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
-          ><span>Mass</span>
-        </dt>
+        <dt>Mass</dt>
         <dd>{{ display(person.mass, ' kg') }}</dd>
       </div>
       <div>
-        <dt>
-          <svg lucideFactory [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
-          ><span>Manufacturing year</span>
-        </dt>
-        <dd>{{ display(person.manufacturingYear) }}</dd>
-      </div>
-    </dl>
-    } @else {
-    <dl>
-      <div>
-        <dt>
-          <svg lucideDna [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
-          ><span>Species</span>
-        </dt>
-        <dd>
-          @for (species of person.species; track $index) {
-          <span class="character-panel__species"> {{ species.name }}</span> } @empty { Unknown }
-        </dd>
-      </div>
-      <div>
-        <dt>
-          <svg lucideTags [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
-          ><span>Classification</span>
-        </dt>
-        <dd>
-          @for (species of person.species; track $index) {
-          <span class="character-panel__species">{{ species.classification }}</span> } @empty {
-          Unknown }
-        </dd>
-      </div>
-      <div>
-        <dt>
-          <svg lucideGlobe [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
-          ><span>Homeworld</span>
-        </dt>
-        <dd>{{ display(person.homeworld) }}</dd>
-      </div>
-      <div>
-        <dt>
-          <svg lucideRuler [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
-          ><span>Height</span>
-        </dt>
-        <dd>{{ display(person.height, ' cm') }}</dd>
-      </div>
-      <div>
-        <dt>
-          <svg lucideCalendar [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
-          ><span>Birth year</span>
-        </dt>
+        <dt>Birth year</dt>
         <dd>{{ display(person.birthYear) }}</dd>
       </div>
+      <div>
+        <dt>Gender</dt>
+        <dd>{{ display(person.gender) }}</dd>
+      </div>
+      <div>
+        <dt>Eye color</dt>
+        <dd>{{ display(person.eyeColor) }}</dd>
+      </div>
+      <div>
+        <dt>Hair color</dt>
+        <dd>{{ display(person.hairColor) }}</dd>
+      </div>
+      <div>
+        <dt>Skin color</dt>
+        <dd>{{ display(person.skinColor) }}</dd>
+      </div>
     </dl>
-    }
   </div>
   }
 </div>

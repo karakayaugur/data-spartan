@@ -1,3 +1,5 @@
+import type { Character } from "../character/character.interface";
+
 export interface ResponseModel<T> {
   results: T[];
 }
@@ -9,13 +11,13 @@ export interface FilmSummary {
   releaseDate: string;
 }
 
-export interface CastMember {
+export interface CastMember extends Character {
   id: number;
-  name: string;
+  isDroid: boolean;
 }
 
 export interface Film extends FilmSummary {
   openingCrawl: string;
   director: string;
-  cast: CastMember[];
+  characters: string[];
 }
