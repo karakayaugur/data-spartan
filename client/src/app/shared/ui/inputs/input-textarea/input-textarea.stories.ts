@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/angular";
-import { InputTextareaComponent } from "./input-textarea.component";
-import { ButtonComponent } from "@shared/shared-ui";
+import { InputTextarea } from "./input-textarea";
+import { Button } from "@shared/shared-ui";
 import { moduleMetadata } from "@storybook/angular";
 
-const meta: Meta<InputTextareaComponent> = {
+const meta: Meta<InputTextarea> = {
   title: "UI/Inputs/Description",
-  component: InputTextareaComponent,
-  decorators: [moduleMetadata({ imports: [ButtonComponent] })],
+  component: InputTextarea,
+  decorators: [moduleMetadata({ imports: [Button] })],
   args: {
     inputId: "storybook-textarea",
     label: "Description",
@@ -24,7 +24,7 @@ const meta: Meta<InputTextareaComponent> = {
   }),
 };
 export default meta;
-type Story = StoryObj<InputTextareaComponent>;
+type Story = StoryObj<InputTextarea>;
 export const Empty: Story = {};
 export const Filled: Story = { args: { value: "A wonderful film to watch again." } };
 export const Optional: Story = { args: { required: false } };

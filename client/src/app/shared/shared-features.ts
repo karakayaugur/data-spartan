@@ -1,4 +1,4 @@
-import { ThemeToggleComponent } from "./features";
-export const SharedFeatures = [ThemeToggleComponent] as const;
+import { ThemeToggle } from "./features";
+export const SharedFeatures = [ThemeToggle] as const;
 
-export { ThemeToggleComponent };
+export { ThemeToggle };

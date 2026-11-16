@@ -20,10 +20,10 @@ export type ButtonSize = "small" | "medium" | "large";
     "[class.button--block]": "block()",
   },
   imports: [LucideDynamicIcon, A11yModule],
-  templateUrl: "./button.component.html",
-  styleUrl: "./button.component.scss",
+  templateUrl: "./button.html",
+  styleUrl: "./button.scss",
 })
-export class ButtonComponent {
+export class Button {
   readonly label = input("Submit");
   readonly ariaControls = input<string | null>(null);
   readonly ariaExpanded = input<boolean | null>(null);

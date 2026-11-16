@@ -6,11 +6,11 @@ import { LucideDynamicIcon, LucideX, provideLucideIcons } from "@lucide/angular"
   host: { class: "input-feedback" },
   imports: [LucideDynamicIcon],
   providers: [provideLucideIcons(LucideX)],
-  templateUrl: "./input-feedback.component.html",
-  styleUrl: "./input-feedback.component.scss",
+  templateUrl: "./input-feedback.html",
+  styleUrl: "./input-feedback.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputFeedbackComponent {
+export class InputFeedback {
   readonly message = input.required<string>();
   readonly feedbackId = input.required<string>();
 }

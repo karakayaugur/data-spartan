@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/angular";
 import { moduleMetadata } from "@storybook/angular";
-import { InputPickerComponent } from "./input-picker.component";
-import { ButtonComponent } from "../../buttons/button/button.component";
-const meta: Meta<InputPickerComponent> = {
+import { InputPicker } from "./input-picker";
+import { Button } from "../../buttons/button/button";
+const meta: Meta<InputPicker> = {
   title: "UI/Inputs/Picker",
-  component: InputPickerComponent,
-  decorators: [moduleMetadata({ imports: [ButtonComponent] })],
+  component: InputPicker,
+  decorators: [moduleMetadata({ imports: [Button] })],
   args: {
     inputId: "storybook-picker",
     label: "Date",
@@ -25,7 +25,7 @@ const meta: Meta<InputPickerComponent> = {
   }),
 };
 export default meta;
-type Story = StoryObj<InputPickerComponent>;
+type Story = StoryObj<InputPicker>;
 export const Date: Story = {};
 export const Small: Story = { args: { size: "small" } };
 export const Large: Story = { args: { size: "large" } };

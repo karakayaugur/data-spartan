@@ -17,11 +17,11 @@ export type BadgeVariant =
   selector: "app-badge",
   host: { class: "badge" },
   imports: [LucideDynamicIcon],
-  templateUrl: "./badge.component.html",
-  styleUrl: "./badge.component.scss",
+  templateUrl: "./badge.html",
+  styleUrl: "./badge.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BadgeComponent {
+export class Badge {
   readonly label = input("");
   readonly type = input<"label" | "number">("label");
   readonly value = input(0);

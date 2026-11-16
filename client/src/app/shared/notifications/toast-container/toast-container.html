@@ -1,0 +1,31 @@
+<section class="toast-container__toast-stack" aria-label="Notifications">
+  @for (toast of service.notifications(); track toast.id) {
+  <div
+    class="toast-container__toast"
+    [attr.data-variant]="toast.variant"
+    [attr.role]="toast.variant === 'error' ? 'alert' : 'status'"
+  >
+    <svg
+      class="toast-container__toast-icon"
+      [lucideIcon]="icons[toast.variant]"
+      [size]="20"
+      aria-hidden="true"
+    ></svg>
+    <div class="toast-container__toast-content">
+      @if (toast.title) {
+      <p class="toast-container__toast-title">{{ toast.title }}</p>
+      }
+      <p class="toast-container__toast-message">{{ toast.message }}</p>
+    </div>
+    <app-button
+      [iconOnly]="true"
+      variant="neutral"
+      class="toast-container__toast-close"
+      icon="x"
+      size="small"
+      ariaLabel="Dismiss notification"
+      (clicked)="service.dismiss(toast.id)"
+    ></app-button>
+  </div>
+  }
+</section>

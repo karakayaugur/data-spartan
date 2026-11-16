@@ -1,12 +1,12 @@
 import { Component, inject, input } from "@angular/core";
 import { DIALOG_DATA } from "@angular/cdk/dialog";
-import { ButtonComponent } from "@shared/shared-ui";
-import { ModalComponent, ModalSize } from "../modal.component";
+import { Button } from "@shared/shared-ui";
+import { Modal, ModalSize } from "../modal";
 import { ModalService } from "../../modal-service";
 
 @Component({
   selector: "storybook-modal-content",
-  imports: [ModalComponent],
+  imports: [Modal],
   templateUrl: "./modal-content.html",
 })
 export class ModalDemoContent {
@@ -15,7 +15,7 @@ export class ModalDemoContent {
 
 @Component({
   selector: "storybook-modal-demo",
-  imports: [ButtonComponent],
+  imports: [Button],
   templateUrl: "./modal-demo.html",
 })
 export class ModalDemo {

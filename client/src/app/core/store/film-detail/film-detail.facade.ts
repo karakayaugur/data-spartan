@@ -2,7 +2,7 @@ import { inject, Injectable } from "@angular/core";
 import { firstValueFrom, forkJoin, of } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { FilmService } from "@core/http/film/film.service";
-import { CharacterService } from "@core/http/character/character.service";
+import { PeopleService } from "@core/http/people/people.service";
 import { FilmDetailStore } from "./film-detail.store";
 import type { People, Person } from "@core/http";
 
@@ -10,7 +10,7 @@ import type { People, Person } from "@core/http";
 export class FilmDetailFacade {
   private readonly store = inject(FilmDetailStore);
   private readonly filmApi = inject(FilmService);
-  private readonly characterApi = inject(CharacterService);
+  private readonly peopleApi = inject(PeopleService);
 
   readonly selectedFilm = this.store.selectedFilm;
   readonly cast = this.store.cast;
@@ -48,7 +48,7 @@ export class FilmDetailFacade {
     }
 
     const castRequest$ = ids.map((id) =>
-      this.characterApi.getById(id).pipe(
+      this.peopleApi.getById(id).pipe(
         map((person): Person => {
           return { ...person, id, isDroid: this.isDroid(person) };
         }),

@@ -10,8 +10,5 @@ export type { Person, People } from "./people";
 export { SpecieService } from "./specie";
 export type { Specie, Species } from "./specie";
 
-export { CharacterService } from "./character";
-export type { Character } from "./character";
-
 export { ClientErrorReporter } from "./error";
 export type { ClientErrorReport } from "./error";

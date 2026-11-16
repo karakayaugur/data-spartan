@@ -7,15 +7,15 @@ export type AvatarBadgeType = "robot" | "organic";
   selector: "app-avatar-badge",
   imports: [LucideDynamicIcon],
   providers: [provideLucideIcons(LucideBot, LucideUser)],
-  templateUrl: "./avatar-badge.component.html",
-  styleUrl: "./avatar-badge.component.scss",
+  templateUrl: "./avatar-badge.html",
+  styleUrl: "./avatar-badge.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: "avatar-badge",
     "[class.avatar-badge--robot]": 'type() === "robot"',
   },
 })
-export class AvatarBadgeComponent {
+export class AvatarBadge {
   readonly type = input.required<AvatarBadgeType>();
   readonly label = input<string>();
   readonly icon = computed(() => (this.type() === "robot" ? "bot" : "user"));

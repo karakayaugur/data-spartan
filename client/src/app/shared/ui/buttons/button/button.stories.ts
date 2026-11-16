@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/angular";
 import { fn } from "storybook/test";
-import { ButtonComponent } from "./button.component";
+import { Button } from "./button";
 
 const variants = [
   "primary",
@@ -12,9 +12,9 @@ const variants = [
   "danger-outline",
   "warning-outline",
 ];
-const meta: Meta<ButtonComponent> = {
+const meta: Meta<Button> = {
   title: "UI/Button",
-  component: ButtonComponent,
+  component: Button,
   args: {
     label: "Save changes",
     variant: "primary",
@@ -36,7 +36,7 @@ const meta: Meta<ButtonComponent> = {
   },
 };
 export default meta;
-type Story = StoryObj<ButtonComponent>;
+type Story = StoryObj<Button>;
 export const Default: Story = {};
 export const Block: Story = { args: { block: true } };
 export const WithIcon: Story = { args: { icon: "plus", label: "Add viewing" } };

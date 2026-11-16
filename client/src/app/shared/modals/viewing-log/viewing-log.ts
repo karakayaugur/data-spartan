@@ -1,7 +1,7 @@
 import flatpickr from "flatpickr";
 import { DatePipe, NgTemplateOutlet } from "@angular/common";
-import { ModalComponent } from "../modal/modal.component";
-import { InputPickerComponent } from "@shared/shared-ui";
+import { Modal } from "../modal/modal";
+import { InputPicker } from "@shared/shared-ui";
 import {
   afterNextRender,
   Component,
@@ -19,12 +19,12 @@ import { Film } from "@core/http";
 import { FilmFacade } from "@core/store";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { ModalService } from "../modal-service";
-import { ConfirmModalComponent } from "../confirm/confirm-modal.component";
+import { ConfirmModal } from "../confirm/confirm-modal";
 import type { ConfirmModalData } from "../confirm/confirm-modal.types";
 
-import { ButtonComponent } from "@shared/ui/buttons/button/button.component";
+import { Button } from "@shared/ui/buttons/button/button";
 import { VALIDATABLE } from "@shared/models/validatable.model";
-import { InputTextareaComponent } from "@shared/ui/inputs/input-textarea/input-textarea.component";
+import { InputTextarea } from "@shared/ui/inputs/input-textarea/input-textarea";
 import { NotificationService } from "@shared/notifications";
 
 const initialFormState = {
@@ -36,15 +36,7 @@ const initialFormState = {
 @Component({
   selector: "app-viewing-log",
   host: { class: "viewing-log" },
-  imports: [
-    DatePipe,
-    ModalComponent,
-    InputPickerComponent,
-    InputTextareaComponent,
-    ButtonComponent,
-    NgTemplateOutlet,
-    LucideCalendar,
-  ],
+  imports: [DatePipe, Modal, InputPicker, InputTextarea, Button, NgTemplateOutlet, LucideCalendar],
   templateUrl: "./viewing-log.html",
   styleUrl: "./viewing-log.scss",
 })
@@ -95,7 +87,7 @@ export class ViewingLog {
     this.confirming = true;
     const date = flatpickr.formatDate(flatpickr.parseDate(viewing.date, "Y-m-d")!, "M j, Y");
     this.modal
-      .open<boolean, ConfirmModalData>(ConfirmModalComponent, {
+      .open<boolean, ConfirmModalData>(ConfirmModal, {
         data: {
           title: "Delete viewing?",
           message: `Delete the viewing recorded for ${date}, ${viewing.time}? This action cannot be undone.`,

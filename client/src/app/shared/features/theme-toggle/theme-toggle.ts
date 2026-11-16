@@ -9,7 +9,7 @@ import { ThemeFacade } from "@core/store";
   templateUrl: "./theme-toggle.html",
   styleUrl: "./theme-toggle.scss",
 })
-export class ThemeToggleComponent {
+export class ThemeToggle {
   private readonly themeFacade = inject(ThemeFacade);
 
   readonly theme = this.themeFacade.theme;

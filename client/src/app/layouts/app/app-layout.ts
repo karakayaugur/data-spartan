@@ -2,14 +2,14 @@ import { Component, inject } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { NavigationEnd, Router, RouterOutlet } from "@angular/router";
 import { BreakpointObserver } from "@angular/cdk/layout";
-import { ButtonComponent } from "@shared/shared-ui";
+import { Button } from "@shared/shared-ui";
 import { Sidebar } from "./sidebar/sidebar";
 import { MobileNavService } from "./mobile-nav.service";
 
 @Component({
   selector: "app-layout",
   host: { class: "layout" },
-  imports: [RouterOutlet, Sidebar, ButtonComponent],
+  imports: [RouterOutlet, Sidebar, Button],
   providers: [MobileNavService],
   templateUrl: "./app-layout.html",
   styleUrl: "./app-layout.scss",

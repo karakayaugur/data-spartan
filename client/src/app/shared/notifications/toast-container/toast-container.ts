@@ -1,4 +1,4 @@
-import { ButtonComponent } from "@shared/shared-ui";
+import { Button } from "@shared/shared-ui";
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import {
   LucideCircleAlert,
@@ -15,12 +15,12 @@ import { NotificationVariant } from "../notification.model";
 @Component({
   selector: "app-toast-container",
   host: { class: "toast-container" },
-  imports: [LucideDynamicIcon, ButtonComponent],
+  imports: [LucideDynamicIcon, Button],
   providers: [
     provideLucideIcons(LucideCircleAlert, LucideCircleCheck, LucideCircleX, LucideInfo, LucideX),
   ],
-  templateUrl: "./toast-container.component.html",
-  styleUrl: "./toast-container.component.scss",
+  templateUrl: "./toast-container.html",
+  styleUrl: "./toast-container.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToastContainer {

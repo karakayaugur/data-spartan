@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/angular";
-import { BadgeComponent } from "./badge.component";
+import { Badge } from "./badge";
 const variants = [
   "default",
   "success",
@@ -12,9 +12,9 @@ const variants = [
   "danger-outline",
   "warning-outline",
 ];
-const meta: Meta<BadgeComponent> = {
+const meta: Meta<Badge> = {
   title: "UI/Badge",
-  component: BadgeComponent,
+  component: Badge,
   args: {
     label: "Active",
     variant: "success",
@@ -32,7 +32,7 @@ const meta: Meta<BadgeComponent> = {
   },
 };
 export default meta;
-type Story = StoryObj<BadgeComponent>;
+type Story = StoryObj<Badge>;
 export const Default: Story = {};
 export const StatusDot: Story = { args: { label: "Online", dot: true } };
 export const WithIcon: Story = { args: { label: "Completed", icon: "check" } };

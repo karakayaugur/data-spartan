@@ -21,8 +21,8 @@ import {
 } from "@lucide/angular";
 import { FilmFacade } from "@core/store";
 import { ModalService, ViewingLog } from "@shared/modals";
-import { ThemeToggleComponent } from "@shared/shared-features";
-import { BadgeComponent, ButtonComponent } from "@shared/shared-ui";
+import { ThemeToggle } from "@shared/shared-features";
+import { Badge, Button } from "@shared/shared-ui";
 import { Film } from "@core/http";
 
 @Component({
@@ -33,9 +33,9 @@ import { Film } from "@core/http";
     RouterLinkActive,
     A11yModule,
     LucideDynamicIcon,
-    ThemeToggleComponent,
-    ButtonComponent,
-    BadgeComponent,
+    ThemeToggle,
+    Button,
+    Badge,
   ],
   providers: [provideLucideIcons(LucideX, LucideEye, LucideSun, LucideMoon, LucideFilm)],
   templateUrl: "./sidebar.html",

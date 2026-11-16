@@ -4,14 +4,14 @@ import { ActivatedRoute } from "@angular/router";
 import { map } from "rxjs";
 import { FilmFacade, FilmDetailFacade } from "@core/store";
 import { ModalService, ViewingLog } from "@shared/modals";
-import { FilmHeaderComponent } from "./components/film-header/film-header.component";
-import { FilmCrawlComponent } from "./components/film-crawl/film-crawl.component";
-import { FilmCastComponent } from "./components/film-cast/film-cast.component";
+import { FilmHeader } from "./components/film-header/film-header";
+import { FilmCrawl } from "./components/film-crawl/film-crawl";
+import { FilmCast } from "./components/film-cast/film-cast";
 
 @Component({
   selector: "app-film-detail",
   host: { class: "film-detail" },
-  imports: [FilmHeaderComponent, FilmCrawlComponent, FilmCastComponent],
+  imports: [FilmHeader, FilmCrawl, FilmCast],
   templateUrl: "./film-detail.html",
   styleUrl: "./film-detail.scss",
 })

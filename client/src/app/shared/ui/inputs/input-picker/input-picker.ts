@@ -20,15 +20,15 @@ import {
 import flatpickr from "flatpickr";
 import type { Instance } from "flatpickr/dist/types/instance";
 import { Validatable, VALIDATABLE } from "@shared/models/validatable.model";
-import { InputFeedbackComponent } from "../input-feedback/input-feedback.component";
-import { ButtonComponent } from "../../buttons/button/button.component";
+import { InputFeedback } from "../input-feedback/input-feedback";
+import { Button } from "../../buttons/button/button";
 
 @Component({
   selector: "app-input-picker",
-  imports: [LucideDynamicIcon, InputFeedbackComponent, ButtonComponent],
+  imports: [LucideDynamicIcon, InputFeedback, Button],
   providers: [
     provideLucideIcons(LucideCalendar, LucideClock),
-    { provide: VALIDATABLE, useExisting: InputPickerComponent },
+    { provide: VALIDATABLE, useExisting: InputPicker },
   ],
   host: {
     class: "input-picker",
@@ -36,11 +36,11 @@ import { ButtonComponent } from "../../buttons/button/button.component";
     "[attr.data-size]": "size()",
     "(keydown.escape)": "onEscape($event)",
   },
-  templateUrl: "./input-picker.component.html",
-  styleUrl: "./input-picker.component.scss",
+  templateUrl: "./input-picker.html",
+  styleUrl: "./input-picker.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputPickerComponent implements Validatable {
+export class InputPicker implements Validatable {
   readonly value = model("");
   readonly inputId = input.required<string>();
   readonly label = input.required<string>();

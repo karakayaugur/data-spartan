@@ -1,4 +1,4 @@
 export { ModalService } from "./modal-service";
-export { ModalComponent } from "./modal/modal.component";
-export type { ModalSize } from "./modal/modal.component";
+export { Modal } from "./modal/modal";
+export type { ModalSize } from "./modal/modal";
 export { ViewingLog } from "./viewing-log/viewing-log";

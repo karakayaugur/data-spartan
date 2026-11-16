@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject, input, signal } from "@angular/core";
 import { takeUntilDestroyed, toObservable } from "@angular/core/rxjs-interop";
 import { catchError, combineLatest, of, startWith, Subject, switchMap, tap } from "rxjs";
-import { Character, CharacterService } from "@core/http";
+import { Person, PeopleService } from "@core/http";
 
 @Component({
   selector: "app-character-panel",
@@ -11,10 +11,10 @@ import { Character, CharacterService } from "@core/http";
 })
 export class CharacterPanel {
   readonly characterId = input.required<number>();
-  private readonly service = inject(CharacterService);
+  private readonly service = inject(PeopleService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly reload = new Subject<void>();
-  readonly character = signal<Character | null>(null);
+  readonly character = signal<Person | null>(null);
   readonly loading = signal(true);
   readonly failed = signal(false);
 

@@ -6,11 +6,11 @@ import { CharacterPanel } from "../character-panel/character-panel";
   selector: "app-film-cast",
   host: { class: "film-cast" },
   imports: [CharacterPanel],
-  templateUrl: "./film-cast.component.html",
-  styleUrl: "./film-cast.component.scss",
+  templateUrl: "./film-cast.html",
+  styleUrl: "./film-cast.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FilmCastComponent {
+export class FilmCast {
   readonly cast = input.required<People>();
   readonly selectedCharacterId = signal<number | null>(null);
 

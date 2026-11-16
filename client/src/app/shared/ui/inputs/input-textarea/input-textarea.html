@@ -1,8 +1,7 @@
 <div class="input-textarea__input-container">
   <label class="input-textarea__label" [for]="inputId()"
-    >{{ label() }}
-    @if (required()) {
-      <span class="input-textarea__required-indicator">*</span>
+    >{{ label() }} @if (required()) {
+    <span class="input-textarea__required-indicator">*</span>
     }
   </label>
   <div class="input-textarea__input-wrap">
@@ -21,17 +20,13 @@
     ></textarea>
   </div>
   @if (remaining() !== null) {
-    <span
-      class="input-textarea__char-counter"
-      [class.input-textarea__char-counter--at-limit]="remaining()! <= 0"
-    >
-      {{ remaining() }} characters remaining
-    </span>
-  }
-  @if (error()) {
-    <app-input-feedback
-      [message]="error()"
-      [feedbackId]="inputId() + '-error'"
-    ></app-input-feedback>
+  <span
+    class="input-textarea__char-counter"
+    [class.input-textarea__char-counter--at-limit]="remaining()! <= 0"
+  >
+    {{ remaining() }} characters remaining
+  </span>
+  } @if (error()) {
+  <app-input-feedback [message]="error()" [feedbackId]="inputId() + '-error'"></app-input-feedback>
   }
 </div>

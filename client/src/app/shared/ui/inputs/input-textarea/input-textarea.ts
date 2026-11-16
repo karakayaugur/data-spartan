@@ -1,16 +1,16 @@
-import { InputFeedbackComponent } from "../input-feedback/input-feedback.component";
+import { InputFeedback } from "../input-feedback/input-feedback";
 import { Component, computed, input, model, signal } from "@angular/core";
 import { Validatable, VALIDATABLE } from "@shared/models/validatable.model";
 
 @Component({
   selector: "app-input-textarea",
   host: { class: "input-textarea" },
-  imports: [InputFeedbackComponent],
-  templateUrl: "./input-textarea.component.html",
-  styleUrl: "./input-textarea.component.scss",
-  providers: [{ provide: VALIDATABLE, useExisting: InputTextareaComponent }],
+  imports: [InputFeedback],
+  templateUrl: "./input-textarea.html",
+  styleUrl: "./input-textarea.scss",
+  providers: [{ provide: VALIDATABLE, useExisting: InputTextarea }],
 })
-export class InputTextareaComponent implements Validatable {
+export class InputTextarea implements Validatable {
   readonly value = model("");
   readonly inputId = input.required<string>();
   readonly name = input("");

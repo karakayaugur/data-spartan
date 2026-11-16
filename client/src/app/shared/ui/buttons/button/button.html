@@ -16,20 +16,18 @@
   (click)="onClick()"
 >
   @if (loading()) {
-    <svg
-      class="button__spinner"
-      lucideIcon="loader-circle"
-      [size]="iconSize"
-      [strokeWidth]="2"
-      aria-hidden="true"
-    ></svg>
+  <svg
+    class="button__spinner"
+    lucideIcon="loader-circle"
+    [size]="iconSize"
+    [strokeWidth]="2"
+    aria-hidden="true"
+  ></svg>
   } @else if (icon() && (iconOnly() || iconPosition() === "start")) {
-    <svg [lucideIcon]="icon()!" [size]="iconSize" [strokeWidth]="2" aria-hidden="true"></svg>
-  }
-  @if (!iconOnly()) {
-    <span class="button__label">{{ displayLabel() }}</span>
-  }
-  @if (!iconOnly() && !loading() && icon() && iconPosition() === "end") {
-    <svg [lucideIcon]="icon()!" [size]="iconSize" [strokeWidth]="2" aria-hidden="true"></svg>
+  <svg [lucideIcon]="icon()!" [size]="iconSize" [strokeWidth]="2" aria-hidden="true"></svg>
+  } @if (!iconOnly()) {
+  <span class="button__label">{{ displayLabel() }}</span>
+  } @if (!iconOnly() && !loading() && icon() && iconPosition() === "end") {
+  <svg [lucideIcon]="icon()!" [size]="iconSize" [strokeWidth]="2" aria-hidden="true"></svg>
   }
 </button>
