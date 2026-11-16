@@ -9,7 +9,9 @@
     "watch": "ng serve",
     "test": "ng test",
     "storybook": "ng run data-spartan:storybook",
-    "build-storybook": "ng run data-spartan:build-storybook"
+    "build-storybook": "ng run data-spartan:build-storybook",
+    "test:ci": "ng test --watch=false",
+    "test:coverage": "ng test --watch=false --coverage --coverage-reporters=text --coverage-reporters=html --coverage-reporters=lcov"
   },
   "dependencies": {
     "@angular/build": "21.2.30",
@@ -36,6 +38,7 @@
     "@storybook/addon-a11y": "10.6.7",
     "@storybook/addon-docs": "10.6.7",
     "@storybook/angular": "10.6.7",
+    "@vitest/coverage-v8": "^4.1.12",
     "jsdom": "^31.0.1",
     "storybook": "10.6.7",
     "vitest": "^4.0.8"
