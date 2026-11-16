@@ -24,3 +24,7 @@ coverage/
 # Storybook generated files
 client/storybook-static/
 client/.storybook-cache/
+
+# Playwright generated reports
+client/playwright-report/
+client/test-results/

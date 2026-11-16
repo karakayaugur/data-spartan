@@ -21,7 +21,11 @@
     "prebuild-storybook": "npm --prefix client ci --include=dev",
     "build-storybook": "npm --prefix client run build-storybook",
     "test:ci": "npm --prefix client run test:ci",
-    "test:coverage": "npm --prefix client run test:coverage"
+    "test:coverage": "npm --prefix client run test:coverage",
+    "test:e2e": "npm --prefix client run test:e2e --",
+    "test:e2e:headed": "npm --prefix client run test:e2e:headed --",
+    "test:e2e:slow": "npm --prefix client run test:e2e:slow --",
+    "test:e2e:ui": "npm --prefix client run test:e2e:ui --"
   },
   "engines": {
     "node": ">=22.0.0"

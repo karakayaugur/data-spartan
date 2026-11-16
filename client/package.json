@@ -11,7 +11,11 @@
     "storybook": "ng run data-spartan:storybook",
     "build-storybook": "ng run data-spartan:build-storybook",
     "test:ci": "ng test --watch=false",
-    "test:coverage": "ng test --watch=false --coverage --coverage-reporters=text --coverage-reporters=html --coverage-reporters=lcov"
+    "test:coverage": "ng test --watch=false --coverage --coverage-reporters=text --coverage-reporters=html --coverage-reporters=lcov",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:slow": "PW_SLOW_MO=1000 playwright test --headed",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@angular/build": "21.2.30",
@@ -35,6 +39,7 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "21.2.30",
     "@angular/platform-browser-dynamic": "21.2.26",
+    "@playwright/test": "^1.65.1",
     "@storybook/addon-a11y": "10.6.7",
     "@storybook/addon-docs": "10.6.7",
     "@storybook/angular": "10.6.7",

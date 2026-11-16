@@ -47,6 +47,17 @@ npm start
 
 `npm test` uses Vitest with jsdom; Chrome or Chromium is not required. Tests are discovered from `*.spec.ts` and `*.test.ts` files. If no test files exist, the Angular test builder reports that no tests were found. `npm start` serves the compiled client on port 3000. The health check is available at `/health`. For Docker, use `make build` and `make run`. Docker Compose reads the upstream API address from the `SWAPI_BASE_URL` environment variable.
 
+## End-to-end test
+
+Install Chromium once, then run the Playwright scenario from the repository root:
+
+```sh
+npm --prefix client exec -- playwright install chromium
+npm run test:e2e
+```
+
+The test starts an isolated Angular dev server on port 4300 and mocks API responses, so Express and SWAPI are not required. It covers film navigation, robot and non-robot details, and adding/deleting a viewing through the real date/time controls. Fixtures are synthetic and do not validate SWAPI's film ID/episode numbering. The HTML report is generated in `client/playwright-report/`; failed runs retain a trace and screenshot in `client/test-results/`.
+
 ## Docker
 
 With Docker installed and running, execute these commands from the repository root. Node.js and npm are not required on the host; dependencies are installed and Angular is compiled inside the Docker build. The default SWAPI URL is configured, so a `.env` file is optional.

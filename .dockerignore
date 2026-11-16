@@ -5,7 +5,3 @@ client/dist
 .git
 .env
 *.md
-.agents
-.cursor
-.impeccable
-**/agent-transcripts
