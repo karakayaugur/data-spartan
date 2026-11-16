@@ -2,7 +2,7 @@
 
 Live application: [Data Spartan](http://ec2-34-246-168-123.eu-west-1.compute.amazonaws.com/)
 
-A Star Wars film browser built with Angular 20, Express 5, and Node.js 24. Browse films and characters from SWAPI, record viewing history, and switch between light and dark themes.
+A Star Wars film browser built with Angular 21 (zoneless), Express 5, and Node.js 24. Browse films and characters from SWAPI, record viewing history, and switch between light and dark themes.
 
 ```text
 client/
@@ -45,7 +45,7 @@ npm test
 npm start
 ```
 
-`npm test` requires Chrome or Chromium. `npm start` serves the compiled client on port 3000. The health check is available at `/health`. For Docker, use `make build` and `make run`. Docker Compose reads the upstream API address from the `SWAPI_BASE_URL` environment variable.
+`npm test` uses Vitest with jsdom; Chrome or Chromium is not required. Tests are discovered from `*.spec.ts` and `*.test.ts` files. If no test files exist, the Angular test builder reports that no tests were found. `npm start` serves the compiled client on port 3000. The health check is available at `/health`. For Docker, use `make build` and `make run`. Docker Compose reads the upstream API address from the `SWAPI_BASE_URL` environment variable.
 
 ## Docker
 

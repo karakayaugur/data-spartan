@@ -1,5 +1,4 @@
 import { applicationConfig, componentWrapperDecorator, type Preview } from "@storybook/angular";
-import { provideZoneChangeDetection } from "@angular/core";
 import {
   LucideCalendar,
   LucideClock,
@@ -31,7 +30,6 @@ const preview: Preview = {
   decorators: [
     applicationConfig({
       providers: [
-        provideZoneChangeDetection(),
         provideLucideIcons(
           LucideCalendar,
           LucideClock,

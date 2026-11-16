@@ -12,7 +12,7 @@
     "start": "node server/index.js",
     "clean": "rm -rf client/node_modules/ && rm -rf server/node_modules/ && rm -rf client/dist && rm -rf node_modules/",
     "debug": "concurrently -k \"node --inspect server/index.js\" \"npm run watch:client\"",
-    "test": "npm --prefix client test -- --watch=false --browsers=ChromeHeadless",
+    "test": "npm --prefix client test -- --watch=false",
     "prepare": "husky",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
