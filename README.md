@@ -17,7 +17,6 @@ server/
   index.js       # API proxy, Helmet, health check, and SPA hosting
   middlewares/   # HTTP logger and client error reporting
 deployment/      # Docker Compose configuration
-docs/            # Architecture notes
 ```
 
 ## Development
@@ -32,7 +31,7 @@ The `predev` step installs root, client, and server dependencies using their loc
 
 Client: http://localhost:4200 — Express: http://localhost:3000
 
-The Angular development server forwards `/proxyUrl` requests to the Express proxy. Express uses `SWAPI_BASE_URL`, which defaults to `https://swapi.dev/api/`. Angular does not access the external API directly. See `docs/bff.md` for the proxy endpoints and client model mapping.
+The Angular development server forwards `/proxyUrl` requests to the Express proxy. Express uses `SWAPI_BASE_URL`, which defaults to `https://swapi.dev/api/`. Angular does not access the external API directly.
 
 ## Validation and production
 
