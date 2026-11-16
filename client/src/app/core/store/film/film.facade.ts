@@ -58,7 +58,9 @@ export class FilmFacade {
     const viewing: Viewing = {
       ...payload,
       description: payload.description.trim(),
-      id: crypto.randomUUID(),
+      id: Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) =>
+        byte.toString(16).padStart(2, "0"),
+      ).join(""),
     };
     this.patchState({
       viewings: {

@@ -1,6 +1,6 @@
 import { signal } from "@angular/core";
 import { TestBed } from "@angular/core/testing";
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { FilmService } from "@core/http";
 import { FilmFacade } from "./film.facade";
 import { FilmStore } from "./film.store";
@@ -25,6 +25,23 @@ describe("FilmFacade viewing log", () => {
       ],
     });
     facade = TestBed.inject(FilmFacade);
+  });
+
+  afterEach(() => vi.unstubAllGlobals());
+
+  it("adds and removes viewings when randomUUID is unavailable", () => {
+    const getRandomValues = globalThis.crypto.getRandomValues.bind(globalThis.crypto);
+    vi.stubGlobal("crypto", { getRandomValues });
+    const entry = { date: "2020-05-04", time: "20:00", description: "" };
+
+    facade.addViewing(1, entry);
+    facade.addViewing(1, entry);
+    const [first, second] = facade.getViewings(1);
+
+    expect(first.id).toMatch(/^[a-f0-9]{32}$/);
+    expect(first.id).not.toBe(second.id);
+    facade.removeViewing(1, first.id);
+    expect(facade.getViewings(1)).toEqual([second]);
   });
 
   it("keeps viewing histories isolated by film", () => {
