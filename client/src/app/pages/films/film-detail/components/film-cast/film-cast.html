@@ -34,8 +34,8 @@
       } }
     </div>
     <div id="character-details" class="film-cast__character-details" aria-label="Character details">
-      @if (selectedCharacterId(); as id) {
-      <app-character-panel [characterId]="id"></app-character-panel>
+      @if (selectedCharacter()) {
+      <app-character-panel></app-character-panel>
       } @else {
       <p class="film-cast__selection-hint">Select a cast member to see their details.</p>
       }

@@ -12,6 +12,8 @@ export class CastListFacade {
   private urls: readonly string[] = [];
   private readonly store = new CastListStore();
 
+  readonly selectedCharacter = this.store.selectedCharacter;
+  readonly selectedCharacterId = this.store.selectedCharacterId;
   readonly cast = this.store.cast;
   readonly loading = this.store.loading;
   readonly error = this.store.error;
@@ -59,6 +61,10 @@ export class CastListFacade {
         takeUntilDestroyed(),
       )
       .subscribe((state) => this.store.setState(state));
+  }
+
+  selectCharacter(id: number | null): void {
+    this.store.selectCharacter(id);
   }
 
   loadCast(urls: readonly string[]): void {

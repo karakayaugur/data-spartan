@@ -1,52 +1,47 @@
-import { Component, DestroyRef, inject, input, signal } from "@angular/core";
-import { takeUntilDestroyed, toObservable } from "@angular/core/rxjs-interop";
-import { catchError, combineLatest, of, startWith, Subject, switchMap, tap } from "rxjs";
-import { Person, PeopleService } from "@core/http";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
+import {
+  LucideRuler,
+  LucideWeight,
+  LucideFactory,
+  LucideDna,
+  LucideTags,
+  LucideGlobe,
+  LucideCalendar,
+} from "@lucide/angular";
+import { CharacterDetailFacade } from "@core/store";
+import { AvatarBadge } from "@shared/shared-ui";
 
 @Component({
   selector: "app-character-panel",
   host: { class: "character-panel" },
+  imports: [
+    AvatarBadge,
+    LucideRuler,
+    LucideWeight,
+    LucideFactory,
+    LucideDna,
+    LucideTags,
+    LucideGlobe,
+    LucideCalendar,
+  ],
+  providers: [CharacterDetailFacade],
   templateUrl: "./character-panel.html",
   styleUrl: "./character-panel.scss",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharacterPanel {
-  readonly characterId = input.required<number>();
-  private readonly service = inject(PeopleService);
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly reload = new Subject<void>();
-  readonly character = signal<Person | null>(null);
-  readonly loading = signal(true);
-  readonly failed = signal(false);
-
-  constructor() {
-    combineLatest([toObservable(this.characterId), this.reload.pipe(startWith(undefined))])
-      .pipe(
-        tap(() => {
-          this.loading.set(true);
-          this.failed.set(false);
-          this.character.set(null);
-        }),
-        switchMap(([id]) =>
-          this.service.getById(id).pipe(
-            catchError(() => {
-              this.failed.set(true);
-              return of(null);
-            }),
-          ),
-        ),
-        takeUntilDestroyed(this.destroyRef),
-      )
-      .subscribe((character) => {
-        this.character.set(character);
-        this.loading.set(false);
-      });
-  }
+  private readonly detailFacade = inject(CharacterDetailFacade);
+  readonly character = this.detailFacade.character;
+  readonly species = this.detailFacade.species;
+  readonly homeworldName = this.detailFacade.homeworldName;
+  readonly loading = this.detailFacade.loading;
+  readonly failed = this.detailFacade.error;
 
   load(): void {
-    this.reload.next();
+    this.detailFacade.retry();
   }
 
-  display(value: string, unit = ""): string {
+  display(value: string | null | undefined, unit = ""): string {
     return !value || ["unknown", "n/a"].includes(value.toLowerCase())
       ? "Unknown"
       : `${value}${unit}`;

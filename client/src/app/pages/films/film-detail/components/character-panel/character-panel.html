@@ -1,45 +1,90 @@
-<div aria-live="polite">
-  @if (loading()) {
-  <p class="character-panel__status" role="status">Loading character…</p>
-  } @else if (failed()) {
-  <div class="character-panel__status" role="alert">
-    <h3>Character unavailable</h3>
-    <p>We couldn't load these details.</p>
-    <button type="button" class="character-panel__retry" (click)="load()">Try again</button>
-  </div>
-  } @else if (character(); as person) {
-  <div class="character-panel__content">
-    <h3>{{ person.name }}</h3>
+@if (character(); as person) {
+<div class="character-panel__content">
+  <h3>{{ person.name }}</h3>
+  @if (person.isDroid) {
+  <app-avatar-badge type="robot" label="Artificial being"></app-avatar-badge>
+  <dl>
+    <div>
+      <dt>
+        <svg lucideRuler [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
+        ><span>Height</span>
+      </dt>
+      <dd>{{ display(person.height, ' cm') }}</dd>
+    </div>
+    <div>
+      <dt>
+        <svg lucideWeight [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
+        ><span>Mass</span>
+      </dt>
+      <dd>{{ display(person.mass, ' kg') }}</dd>
+    </div>
+    <div>
+      <dt>
+        <svg lucideFactory [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
+        ><span>Manufacturing year</span>
+      </dt>
+      <dd>{{ display(person.birthYear) }}</dd>
+    </div>
+  </dl>
+  } @else {
+  <dl>
+    <div>
+      <dt>
+        <svg lucideRuler [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
+        ><span>Height</span>
+      </dt>
+      <dd>{{ display(person.height, ' cm') }}</dd>
+    </div>
+    <div>
+      <dt>
+        <svg lucideCalendar [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
+        ><span>Birth year</span>
+      </dt>
+      <dd>{{ display(person.birthYear) }}</dd>
+    </div>
+  </dl>
+  <div aria-live="polite">
+    @if (loading()) {
+    <p class="character-panel__status" role="status">Loading species and homeworld…</p>
+    } @else if (failed()) {
+    <div class="character-panel__status" role="alert">
+      <p>We couldn't load the species and homeworld details.</p>
+      <button type="button" class="character-panel__retry" (click)="load()">Try again</button>
+    </div>
+    } @else {
     <dl>
       <div>
-        <dt>Height</dt>
-        <dd>{{ display(person.height, ' cm') }}</dd>
+        <dt>
+          <svg lucideDna [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
+          ><span>Species</span>
+        </dt>
+        <dd>
+          @for (specie of species(); track specie.url) {
+          <span class="character-panel__species">{{ specie.name }}</span>
+          } @empty { Unknown }
+        </dd>
       </div>
       <div>
-        <dt>Mass</dt>
-        <dd>{{ display(person.mass, ' kg') }}</dd>
+        <dt>
+          <svg lucideTags [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
+          ><span>Classification</span>
+        </dt>
+        <dd>
+          @for (specie of species(); track specie.url) {
+          <span class="character-panel__species">{{ specie.classification }}</span>
+          } @empty { Unknown }
+        </dd>
       </div>
       <div>
-        <dt>Birth year</dt>
-        <dd>{{ display(person.birthYear) }}</dd>
-      </div>
-      <div>
-        <dt>Gender</dt>
-        <dd>{{ display(person.gender) }}</dd>
-      </div>
-      <div>
-        <dt>Eye color</dt>
-        <dd>{{ display(person.eyeColor) }}</dd>
-      </div>
-      <div>
-        <dt>Hair color</dt>
-        <dd>{{ display(person.hairColor) }}</dd>
-      </div>
-      <div>
-        <dt>Skin color</dt>
-        <dd>{{ display(person.skinColor) }}</dd>
+        <dt>
+          <svg lucideGlobe [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg
+          ><span>Homeworld</span>
+        </dt>
+        <dd>{{ display(homeworldName()) }}</dd>
       </div>
     </dl>
+    }
   </div>
   }
 </div>
+}

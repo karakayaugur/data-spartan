@@ -9,39 +9,58 @@
   position: relative;
 }
 h3 {
-  font-size: 28px;
+  font-size: clamp(22px, 2vw, 28px);
   font-weight: 600;
-  margin: 20px 0 12px;
+  margin: 0 0 20px;
   text-align: center;
 }
 dl {
   display: grid;
   grid-template-columns: 1fr;
-  column-gap: 32px;
-  margin-top: 24px;
+  gap: 12px;
+  margin: 16px 0 0;
 }
 dl > div {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 12px;
-  padding: 16px 0;
-  border-top: 1px solid var(--surface-3);
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid color-mix(in srgb, var(--text-0) 10%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface-1) 85%, var(--surface-0));
   font-size: 14px;
 }
 dt {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
   overflow-wrap: anywhere;
-  color: var(--text-2);
+  color: var(--text-1);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
 }
 dd {
   min-width: 0;
   overflow-wrap: anywhere;
   margin: 0;
-  text-align: right;
+  padding-left: 42px;
+  color: var(--text-0);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: left;
 }
 .character-panel {
+  &__value {
+    margin: 0;
+    font: inherit;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    text-align: left;
+  }
+
   &__species {
     display: block;
   }
@@ -67,12 +86,36 @@ dd {
 }
 
 app-avatar-badge {
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  margin: 0 auto 20px;
 }
 dt svg {
   flex-shrink: 0;
+  box-sizing: content-box;
+  padding: 8px;
+  border-radius: 50%;
+  color: var(--brand);
+  background: color-mix(in srgb, var(--brand) 12%, transparent);
+}
+
+dt svg[lucideDna],
+dt svg[lucideGlobe] {
+  color: light-dark(var(--teal-9), var(--teal-3));
+  background: light-dark(
+    color-mix(in srgb, var(--teal-9) 9%, transparent),
+    color-mix(in srgb, var(--teal-3) 12%, transparent)
+  );
+}
+
+dt svg[lucideFactory],
+dt svg[lucideTags] {
+  color: light-dark(var(--violet-8), var(--violet-4));
+  background: light-dark(
+    color-mix(in srgb, var(--violet-8) 9%, transparent),
+    color-mix(in srgb, var(--violet-4) 12%, transparent)
+  );
 }
 
 .character-panel {

@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  inject,
-  input,
-  signal,
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, input } from "@angular/core";
 import { takeUntilDestroyed, toObservable } from "@angular/core/rxjs-interop";
 import { CastListFacade } from "@core/store";
 import { CharacterPanel } from "../character-panel/character-panel";
@@ -27,13 +20,13 @@ export class FilmCast {
   readonly loading = this.castFacade.loading;
   readonly error = this.castFacade.error;
   readonly failedCount = this.castFacade.failedCount;
-  readonly selectedCharacterId = signal<number | null>(null);
+  readonly selectedCharacterId = this.castFacade.selectedCharacterId;
+  readonly selectedCharacter = this.castFacade.selectedCharacter;
 
   constructor() {
     toObservable(this.characters)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((urls) => {
-        this.selectedCharacterId.set(null);
         this.castFacade.loadCast(urls);
       });
   }
@@ -43,6 +36,6 @@ export class FilmCast {
   }
 
   openCharacter(id: number | null): void {
-    this.selectedCharacterId.set(id);
+    this.castFacade.selectCharacter(id);
   }
 }
