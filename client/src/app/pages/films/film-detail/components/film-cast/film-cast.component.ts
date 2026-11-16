@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, effect, input, signal } from "@angular/core";
-import { CastMember } from "@core/http/film";
+import { Person, People } from "@core/http";
 import { CharacterPanel } from "../character-panel/character-panel";
 
 @Component({
@@ -11,7 +11,7 @@ import { CharacterPanel } from "../character-panel/character-panel";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilmCastComponent {
-  readonly cast = input.required<readonly CastMember[]>();
+  readonly cast = input.required<People>();
   readonly selectedCharacterId = signal<number | null>(null);
 
   constructor() {
@@ -21,7 +21,7 @@ export class FilmCastComponent {
     });
   }
 
-  openCharacter(id: number): void {
+  openCharacter(id: number | null): void {
     this.selectedCharacterId.set(id);
   }
 }

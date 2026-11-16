@@ -1,23 +1,18 @@
-import type { Character } from "../character/character.interface";
-
-export interface ResponseModel<T> {
-  results: T[];
-}
-
-export interface FilmSummary {
+export interface Film {
   url: string;
   title: string;
   episodeId: number;
   releaseDate: string;
-}
-
-export interface CastMember extends Character {
-  id: number;
-  isDroid: boolean;
-}
-
-export interface Film extends FilmSummary {
   openingCrawl: string;
   director: string;
+  producer: string;
   characters: string[];
+  planets: string[];
+  starships: string[];
+  vehicles: string[];
+  species: string[];
+  created: string;
+  edited: string;
 }
+
+export type Films = Film[];

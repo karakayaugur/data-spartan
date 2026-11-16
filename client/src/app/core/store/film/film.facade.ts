@@ -1,7 +1,7 @@
 import { firstValueFrom } from "rxjs";
 import { FilmService } from "@core/http/film/film.service";
 import { computed, inject, Injectable, signal } from "@angular/core";
-import type { FilmSummary } from "@core/http/film/film.interface";
+import type { Film, Films } from "@core/http";
 import { FilmStore } from "./film.store";
 import { FilmsState, Viewing, ViewingPayload } from "./film.types";
 
@@ -20,7 +20,7 @@ export class FilmFacade {
     if (this.pending) return this.pending;
     this.loadingState.set(true);
     this.failedState.set(false);
-    this.pending = firstValueFrom(this.api.getList())
+    this.pending = firstValueFrom(this.api.getAll())
       .then((films) => this.setFilms(films))
       .catch(() => {
         this.failedState.set(true);
@@ -46,7 +46,7 @@ export class FilmFacade {
     this.store.clearState();
   }
 
-  public setFilms(films: FilmSummary[]): void {
+  public setFilms(films: Films): void {
     this.patchState({ films });
   }
 

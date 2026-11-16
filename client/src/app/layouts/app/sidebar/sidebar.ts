@@ -23,7 +23,7 @@ import { FilmFacade } from "@core/store";
 import { ModalService, ViewingLog } from "@shared/modals";
 import { ThemeToggleComponent } from "@shared/shared-features";
 import { BadgeComponent, ButtonComponent } from "@shared/shared-ui";
-import { FilmSummary } from "@core/http";
+import { Film } from "@core/http";
 
 @Component({
   selector: "app-sidebar",
@@ -67,7 +67,7 @@ export class Sidebar {
     return this.viewings()[episodeId]?.length ?? 0;
   }
 
-  openViewingLog(film: FilmSummary): void {
+  openViewingLog(film: Film): void {
     this.closeMenu.emit();
     this.modal.open(ViewingLog, {
       data: film,

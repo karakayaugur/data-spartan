@@ -15,7 +15,7 @@ import {
 } from "@angular/core";
 import { DIALOG_DATA } from "@angular/cdk/dialog";
 import { LucideCalendar } from "@lucide/angular";
-import { FilmSummary } from "@core/http";
+import { Film } from "@core/http";
 import { FilmFacade } from "@core/store";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { ModalService } from "../modal-service";
@@ -50,7 +50,7 @@ const initialFormState = {
 })
 export class ViewingLog {
   readonly today = flatpickr.formatDate(new Date(), "Y-m-d");
-  readonly film = inject<FilmSummary>(DIALOG_DATA);
+  readonly film = inject<Film>(DIALOG_DATA);
   private readonly filmFacade = inject(FilmFacade);
   private readonly notifications = inject(NotificationService);
   private readonly validatables = viewChildren(VALIDATABLE);

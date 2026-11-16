@@ -1,8 +1,8 @@
-import { Film, CastMember } from "@core/http";
+import { Film, People } from "@core/http";
 
 export interface FilmDetailState {
   selectedFilm: Film | null;
-  cast: CastMember[];
+  cast: People;
   loading: boolean;
   castLoading: boolean;
   error: boolean;

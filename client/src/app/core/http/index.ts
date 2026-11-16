@@ -1,8 +1,16 @@
-export type { ApiQueryValue, ApiRequestOptions } from "./api";
 export { FilmService } from "./film";
-export { CharacterService } from "./character";
+export type { Film, Films } from "./film";
 
-export type { Film, FilmSummary, CastMember } from "./film";
+export { PlanetService } from "./planet";
+export type { Planet, Planets } from "./planet";
+
+export { PeopleService } from "./people";
+export type { Person, People } from "./people";
+
+export { SpecieService } from "./specie";
+export type { Specie, Species } from "./specie";
+
+export { CharacterService } from "./character";
 export type { Character } from "./character";
 
 export { ClientErrorReporter } from "./error";

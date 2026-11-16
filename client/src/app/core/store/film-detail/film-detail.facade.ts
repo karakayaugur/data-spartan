@@ -4,7 +4,7 @@ import { catchError, map } from "rxjs/operators";
 import { FilmService } from "@core/http/film/film.service";
 import { CharacterService } from "@core/http/character/character.service";
 import { FilmDetailStore } from "./film-detail.store";
-import type { CastMember } from "@core/http/film/film.interface";
+import type { People, Person } from "@core/http";
 
 @Injectable({ providedIn: "root" })
 export class FilmDetailFacade {
@@ -49,7 +49,7 @@ export class FilmDetailFacade {
 
     const castRequest$ = ids.map((id) =>
       this.characterApi.getById(id).pipe(
-        map((person): CastMember => {
+        map((person): Person => {
           return { ...person, id, isDroid: this.isDroid(person) };
         }),
         catchError(() => of(null)),
@@ -58,7 +58,7 @@ export class FilmDetailFacade {
 
     // TODO: How many requests :( Maybe i should use mergeMap and load 5 by 5 and update the state as they come in.
     const results = await firstValueFrom(forkJoin(castRequest$));
-    const validCast = results.filter((c): c is CastMember => c !== null);
+    const validCast = results.filter((c): c is Person => c !== null);
 
     this.store.setState({ cast: validCast, castLoading: false });
   }

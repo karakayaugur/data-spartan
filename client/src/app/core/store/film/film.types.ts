@@ -1,4 +1,4 @@
-import type { FilmSummary } from "@core/http/film/film.interface";
+import type { Film } from "@core/http/film/film.interface";
 
 export interface Viewing {
   id: string;
@@ -10,6 +10,6 @@ export interface Viewing {
 export type ViewingPayload = Omit<Viewing, "id">;
 
 export interface FilmsState {
-  films: FilmSummary[];
+  films: Film[];
   viewings: Record<number, readonly Viewing[]>;
 }
