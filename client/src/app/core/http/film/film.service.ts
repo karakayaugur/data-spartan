@@ -1,6 +1,6 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { Cacheable } from "ts-cacheable";
 import { Film, Films } from "./film.interface";
 
@@ -16,6 +16,12 @@ export class FilmService {
 
   @Cacheable({ maxCacheCount: 1000 })
   getByEpisodeId(id: number | string): Observable<Film> {
-    return this.http.get<Film>(`${this.apiUrl}/${id}`);
+    return this.getAll().pipe(
+      map((films) => {
+        const film = films.find((item) => item.episodeId === Number(id));
+        if (!film) throw new Error(`Film not found for episode ${id}`);
+        return film;
+      }),
+    );
   }
 }

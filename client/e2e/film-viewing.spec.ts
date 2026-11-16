@@ -1,9 +1,9 @@
 import { expect, test } from "@playwright/test";
 
-// Synthetic film data keeps the application flow independent of upstream film numbering.
+// Episode numbers differ from SWAPI resource IDs.
 const film = {
-  title: "The Test Adventure",
-  episode_id: 1,
+  title: "A New Hope",
+  episode_id: 4,
   release_date: "1977-05-25",
   opening_crawl: "A deterministic adventure for the end-to-end test.",
   director: "Test Director",
@@ -46,7 +46,6 @@ test("browses a film, distinguishes cast details, and adds then deletes a viewin
   await page.clock.setFixedTime(new Date("2026-01-15T12:00:00Z"));
   const responses: Record<string, unknown> = {
     "/films": { count: 1, next: null, previous: null, results: [film] },
-    "/films/1": film,
     "/people/1": person,
     "/people/2": {
       ...person,
@@ -83,12 +82,10 @@ test("browses a film, distinguishes cast details, and adds then deletes a viewin
     await expect(page.getByRole("heading", { name: "Explore the films" })).toBeVisible();
     await page
       .getByRole("navigation", { name: "Choose a film" })
-      .getByRole("link", { name: /The Test Adventure/ })
+      .getByRole("link", { name: /A New Hope/ })
       .click();
-    await expect(page).toHaveURL(/\/films\/1$/);
-    await expect(
-      page.getByRole("heading", { name: "1 - The Test Adventure", exact: true }),
-    ).toBeVisible();
+    await expect(page).toHaveURL(/\/films\/4$/);
+    await expect(page.getByRole("heading", { name: "4 - A New Hope", exact: true })).toBeVisible();
   });
 
   const panel = page.locator("app-character-panel");
@@ -113,9 +110,9 @@ test("browses a film, distinguishes cast details, and adds then deletes a viewin
 
   await test.step("Add a viewing using the real date and time controls", async () => {
     await page
-      .getByRole("button", { name: "Open viewing log for The Test Adventure, watched 0 times" })
+      .getByRole("button", { name: "Open viewing log for A New Hope, watched 0 times" })
       .click();
-    const dialog = page.getByRole("dialog", { name: "The Test Adventure", exact: true });
+    const dialog = page.getByRole("dialog", { name: "A New Hope", exact: true });
     await dialog.getByRole("button", { name: "Choose Date", exact: true }).click();
     await page.locator(".flatpickr-day.today").click();
     await expect(dialog.getByRole("textbox", { name: "Date", exact: true })).toHaveValue(
@@ -142,7 +139,7 @@ test("browses a film, distinguishes cast details, and adds then deletes a viewin
   });
 
   await test.step("Confirm deletion and update the film viewing count", async () => {
-    const dialog = page.getByRole("dialog", { name: "The Test Adventure", exact: true });
+    const dialog = page.getByRole("dialog", { name: "A New Hope", exact: true });
     await dialog
       .getByRole("button", { name: "Delete viewing on 2026-01-15 at 20:30", exact: true })
       .click();
@@ -154,7 +151,7 @@ test("browses a film, distinguishes cast details, and adds then deletes a viewin
     await dialog.getByRole("button", { name: "Close modal", exact: true }).click();
     await expect(
       page.getByRole("button", {
-        name: "Open viewing log for The Test Adventure, watched 0 times",
+        name: "Open viewing log for A New Hope, watched 0 times",
       }),
     ).toBeVisible();
   });
