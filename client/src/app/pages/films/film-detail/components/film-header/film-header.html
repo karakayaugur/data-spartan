@@ -2,7 +2,7 @@
   <span class="film-header__eyebrow">EPISODE {{ film().episodeId }}</span>
   <h1>{{ film().episodeId }} - {{ film().title }}</h1>
   <p class="film-header__film-meta">
-    {{ film().releaseDate | date: "longDate" }} <span aria-hidden="true">·</span> Directed by {{
+    {{ film().releaseDate | displayDate }} <span aria-hidden="true">·</span> Directed by {{
     film().director }}
   </p>
   <div class="film-header__viewing-count" aria-live="polite">

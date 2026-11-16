@@ -18,6 +18,7 @@ export const routes: Routes = [
         path: "films/:episodeId",
         title: (route) => {
           const episodeId = Number(route.paramMap.get("episodeId"));
+          // update browser title
           return (
             inject(FilmFacade)
               .films()

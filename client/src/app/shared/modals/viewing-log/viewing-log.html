@@ -1,7 +1,4 @@
-<app-modal
-  [title]="film.title + ' (' + (film.releaseDate | date: 'MMM d, yyyy') + ')'"
-  size="medium"
->
+<app-modal [title]="film.title + ' (' + (film.releaseDate | displayDate) + ')'" size="medium">
   <form class="viewing-log__form" (submit)="onSubmit(); $event.preventDefault()" novalidate>
     <app-input-picker
       inputId="viewing-date"
@@ -40,7 +37,7 @@
         <li class="viewing-log__viewing">
           <time class="viewing-log__timestamp" [attr.datetime]="viewing.date + 'T' + viewing.time">
             <svg lucideCalendar [size]="16" [strokeWidth]="1.75" aria-hidden="true"></svg>
-            <span>{{ viewing.date | date: "MMM d, yyyy" }}, {{ viewing.time }}</span>
+            <span>{{ viewing.date | displayDate }}, {{ viewing.time }}</span>
           </time>
           <app-button
             class="viewing-log__delete"

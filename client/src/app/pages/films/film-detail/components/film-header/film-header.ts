@@ -1,4 +1,4 @@
-import { DatePipe } from "@angular/common";
+import { DisplayDatePipe } from "@shared/shared-pipe";
 import { ChangeDetectionStrategy, Component, input, output } from "@angular/core";
 import { Film } from "@core/http/film/film.interface";
 import { Button } from "@shared/shared-ui";
@@ -6,7 +6,7 @@ import { Button } from "@shared/shared-ui";
 @Component({
   selector: "app-film-header",
   host: { class: "film-header" },
-  imports: [DatePipe, Button],
+  imports: [DisplayDatePipe, Button],
   templateUrl: "./film-header.html",
   styleUrl: "./film-header.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,

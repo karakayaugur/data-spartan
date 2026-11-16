@@ -1,5 +1,5 @@
 import { A11yModule } from "@angular/cdk/a11y";
-import { BreakpointObserver } from "@angular/cdk/layout";
+import { ViewportService } from "@core/services/viewport.service";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,7 +8,6 @@ import {
   input,
   output,
 } from "@angular/core";
-import { toSignal } from "@angular/core/rxjs-interop";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import {
   LucideDynamicIcon,
@@ -43,17 +42,16 @@ import { Film } from "@core/http";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Sidebar {
-  readonly filmFacade = inject(FilmFacade);
   private readonly modal = inject(ModalService);
+
+  private readonly filmFacade = inject(FilmFacade);
   readonly films = this.filmFacade.films;
   readonly viewings = this.filmFacade.viewings;
   readonly loading = this.filmFacade.loading;
   readonly failed = this.filmFacade.failed;
   readonly mobileOpen = input(false);
   readonly closeMenu = output<void>();
-  readonly mobile = toSignal(inject(BreakpointObserver).observe("(max-width: 640px)"), {
-    initialValue: { matches: window.matchMedia("(max-width: 640px)").matches, breakpoints: {} },
-  });
+  readonly isMobile = inject(ViewportService).isMobile;
 
   @HostListener("keydown.escape", ["$event"])
   onEscape(event: Event): void {
@@ -61,6 +59,10 @@ export class Sidebar {
       event.stopPropagation();
       this.closeMenu.emit();
     }
+  }
+
+  retryLoading(): void {
+    void this.filmFacade.loadFilms();
   }
 
   viewingCount(episodeId: number): number {
@@ -72,7 +74,7 @@ export class Sidebar {
     this.modal.open(ViewingLog, {
       data: film,
       ariaLabel: film.title,
-      restoreFocus: this.mobile().matches ? ".layout__menu-toggle button" : true,
+      restoreFocus: this.isMobile() ? ".layout__menu-toggle button" : true,
     });
   }
 }

@@ -1,19 +1,19 @@
-@if (mobile().matches && mobileOpen()) {
+@if (isMobile() && mobileOpen()) {
 <div class="sidebar__backdrop" (click)="closeMenu.emit()" aria-hidden="true"></div>
-} @if (!mobile().matches || mobileOpen()) {
+} @if (!isMobile() || mobileOpen()) {
 <aside
   class="sidebar"
   id="film-sidebar"
-  [attr.role]="mobile().matches ? 'dialog' : null"
-  [attr.aria-modal]="mobile().matches ? 'true' : null"
+  [attr.role]="isMobile() ? 'dialog' : null"
+  [attr.aria-modal]="isMobile() ? 'true' : null"
   aria-label="Film navigation"
-  [cdkTrapFocus]="mobile().matches"
-  [cdkTrapFocusAutoCapture]="mobile().matches"
+  [cdkTrapFocus]="isMobile()"
+  [cdkTrapFocusAutoCapture]="isMobile()"
 >
   <div class="sidebar__header">
     <a
       class="sidebar__brand"
-      routerLink="/dashboard"
+      routerLink="/films"
       aria-label="DataSpartan home"
       (click)="closeMenu.emit()"
     >
@@ -25,7 +25,7 @@
         height="498"
       />
     </a>
-    @if (mobile().matches) {
+    @if (isMobile()) {
     <app-button
       icon="x"
       [iconOnly]="true"
@@ -37,16 +37,17 @@
     ></app-button>
     }
   </div>
-  <div aria-live="polite">
+  <div>
     @if (loading()) {
     <p class="sidebar__nav-message" role="status">Loading films…</p>
     } @if (failed()) {
     <p class="sidebar__nav-message" role="alert">We couldn't load the films.</p>
-    <button class="sidebar__retry" type="button" (click)="filmFacade.loadFilms()">Try again</button>
+    <button class="sidebar__retry" type="button" (click)="retryLoading()">Try again</button>
     }
   </div>
   <nav id="film-navigation" aria-label="Films">
-    films @for (film of films(); track film.episodeId) {
+    @for (film of films(); track film.episodeId) { @let count = viewingCount(film.episodeId); @let
+    viewingLabel = count + (count === 1 ? ' viewing' : ' viewings');
     <div class="sidebar__film-row" [class.sidebar__film-row--active-row]="activeFilm.isActive">
       <a
         class="sidebar__film-link"
@@ -54,7 +55,6 @@
         routerLinkActive="active"
         #activeFilm="routerLinkActive"
         (click)="closeMenu.emit()"
-        [attr.aria-label]="film.title"
         ariaCurrentWhenActive="page"
       >
         <svg
@@ -66,25 +66,22 @@
         ></svg>
         <span class="sidebar__film-title">{{ film.title }}</span>
       </a>
-      <div
-        class="sidebar__viewing-action"
-        [title]="'Viewing log · ' + viewingCount(film.episodeId) + (viewingCount(film.episodeId) === 1 ? ' viewing' : ' viewings')"
-      >
+      <div class="sidebar__viewing-action" [title]="'Viewing log · ' + viewingLabel">
         <app-button
           [iconOnly]="true"
           icon="eye"
           variant="ghost"
           size="small"
           ariaHasPopup="dialog"
-          [ariaLabel]="'Viewing log for ' + film.title + ', ' + viewingCount(film.episodeId) + ' viewings'"
+          [ariaLabel]="'Viewing log for ' + film.title + ', ' + viewingLabel"
           (clicked)="openViewingLog(film)"
         ></app-button>
-        @if (viewingCount(film.episodeId) > 0) {
+        @if (count > 0) {
         <app-badge
           type="number"
           variant="default"
           class="sidebar__viewing-count"
-          [value]="viewingCount(film.episodeId)"
+          [value]="count"
           aria-hidden="true"
         ></app-badge>
         }

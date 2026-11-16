@@ -14,7 +14,7 @@ export class PeopleService {
     return this.http.get<People>(this.apiUrl);
   }
 
-  @Cacheable({ maxCacheCount: 200 })
+  @Cacheable({ maxCacheCount: 500 })
   getById(id: number): Observable<Person> {
     return this.http.get<Person>(`${this.apiUrl}/${id}`);
   }

@@ -1,5 +1,6 @@
 import flatpickr from "flatpickr";
-import { DatePipe, NgTemplateOutlet } from "@angular/common";
+import { NgTemplateOutlet } from "@angular/common";
+import { DisplayDatePipe } from "@shared/shared-pipe";
 import { Modal } from "../modal/modal";
 import { InputPicker } from "@shared/shared-ui";
 import {
@@ -35,12 +36,22 @@ const initialFormState = {
 
 @Component({
   selector: "app-viewing-log",
+  providers: [DisplayDatePipe],
   host: { class: "viewing-log" },
-  imports: [DatePipe, Modal, InputPicker, InputTextarea, Button, NgTemplateOutlet, LucideCalendar],
+  imports: [
+    DisplayDatePipe,
+    Modal,
+    InputPicker,
+    InputTextarea,
+    Button,
+    NgTemplateOutlet,
+    LucideCalendar,
+  ],
   templateUrl: "./viewing-log.html",
   styleUrl: "./viewing-log.scss",
 })
 export class ViewingLog {
+  private readonly displayDate = inject(DisplayDatePipe);
   readonly today = flatpickr.formatDate(new Date(), "Y-m-d");
   readonly film = inject<Film>(DIALOG_DATA);
   private readonly filmFacade = inject(FilmFacade);
@@ -85,7 +96,7 @@ export class ViewingLog {
     if (!viewing || this.confirming) return;
 
     this.confirming = true;
-    const date = flatpickr.formatDate(flatpickr.parseDate(viewing.date, "Y-m-d")!, "M j, Y");
+    const date = this.displayDate.transform(viewing.date);
     this.modal
       .open<boolean, ConfirmModalData>(ConfirmModal, {
         data: {

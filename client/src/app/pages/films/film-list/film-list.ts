@@ -4,7 +4,7 @@ import {
   LucideChevronRight,
   provideLucideIcons,
 } from "@lucide/angular";
-import { DatePipe } from "@angular/common";
+import { DisplayDatePipe } from "@shared/shared-pipe";
 import { Badge } from "@shared/shared-ui";
 import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { RouterLink } from "@angular/router";
@@ -13,7 +13,7 @@ import { FilmFacade } from "@core/store";
 @Component({
   selector: "app-film-list",
   host: { class: "film-list" },
-  imports: [RouterLink, Badge, DatePipe, LucideDynamicIcon],
+  imports: [RouterLink, Badge, DisplayDatePipe, LucideDynamicIcon],
   providers: [provideLucideIcons(LucideFilm, LucideChevronRight)],
   templateUrl: "./film-list.html",
   styleUrl: "./film-list.scss",

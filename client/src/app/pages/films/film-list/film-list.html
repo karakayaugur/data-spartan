@@ -12,7 +12,7 @@
       <h2>{{ film.title }}</h2>
       <app-badge
         class="film-list__release"
-        [label]="(film.releaseDate | date: 'MMM d, yyyy') ?? ''"
+        [label]="film.releaseDate | displayDate"
         variant="default"
       ></app-badge>
       <span class="film-list__film-action"
