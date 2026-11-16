@@ -1,5 +1,7 @@
 # Data Spartan
 
+Live application: [Data Spartan](http://ec2-34-246-168-123.eu-west-1.compute.amazonaws.com/)
+
 A Star Wars film browser built with Angular 20, Express 5, and Node.js 24. Browse films and characters from SWAPI, record viewing history, and switch between light and dark themes.
 
 ```text
